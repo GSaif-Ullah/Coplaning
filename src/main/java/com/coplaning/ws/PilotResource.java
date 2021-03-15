@@ -1,4 +1,4 @@
-package com.example.jetty_jersey.ws;
+package com.coplaning.ws;
 
 import java.util.List;
 
@@ -11,46 +11,44 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import dao.Flight;
+import dao.Pilot;
 
-@Path("/flight")
-public class FlightResource {
-	Flight F = new Flight();
+@Path("/pilot")
+public class PilotResource {
+	Pilot F=new Pilot();
 
+	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Flight> getLF() {
-		System.out.println(F.listFlight());
-		return F.listFlight();
+	public List<Pilot> getLF() {
+		return  F.ListPilot();
 	}
-
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public Flight getF(String ID_Flight) {
-		return F.getFlight(ID_Flight);
+	public Pilot getF(String ID_Pilot) {
+		return F.getPilot(ID_Pilot);
 	}
-
 	@PUT
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}")
 	public void addF(@PathParam("id") String id) {
-		Flight G = F.getFlight(id);
-		F.putFlight(G);
+		Pilot G=F.getPilot(id);
+		F.PutPilot(G);
 	}
-
+	
 	@DELETE
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}")
 	public void DeleteF(@PathParam("id") String id) {
-		Flight G = F.getFlight(id);
-		F.deleteFlight(G);
+		Pilot G=F.getPilot(id);
+		F.DeletePilot(G);
 	}
-
+	
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}")
 	public void PostF(@PathParam("id") String id) {
-		Flight G = F.getFlight(id);
-		F.postFlight(G);
+		Pilot G=F.getPilot(id);
+		F.PostPilot(G);
 	}
 }

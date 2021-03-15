@@ -1,4 +1,4 @@
-package com.example.jetty_jersey;
+package com.coplaning;
 
 import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.Server;
@@ -28,7 +28,7 @@ public class JettyMain {
 
 		// Configure Jersey
 		ResourceConfig rc = new ResourceConfig();
-		rc.packages(true, "com.example.jetty_jersey.ws");
+		rc.packages(true, "com.coplaning.ws");
 		rc.register(JacksonFeature.class);
 		rc.register(LoggingFilter.class);
 
