@@ -15,40 +15,41 @@ import dao.Passenger;
 
 @Path("/passenger")
 public class PassengerResource {
-	Passenger F=new Passenger();
+	Passenger F = new Passenger();
 
-	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Passenger> getLF() {
-		return  F.ListPassenger();
+		return F.listPassenger();
 	}
+
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Passenger getF(String ID_Passenger) {
 		return F.getPassenger(ID_Passenger);
 	}
+
 	@PUT
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}")
 	public void addF(@PathParam("id") String id) {
-		Passenger G=F.getPassenger(id);
-		F.PutPassenger(G);
+		Passenger G = F.getPassenger(id);
+		F.putPassenger(G);
 	}
-	
+
 	@DELETE
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}")
-	public void DeleteF(@PathParam("id") String id) {
-		Passenger G=F.getPassenger(id);
-		F.DeletePassenger(G);
+	public void deleteF(@PathParam("id") String id) {
+		Passenger G = F.getPassenger(id);
+		F.deletePassenger(G);
 	}
-	
+
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}")
-	public void PostF(@PathParam("id") String id) {
-		Passenger G=F.getPassenger(id);
-		F.PostPassenger(G);
+	public void postF(@PathParam("id") String id) {
+		Passenger G = F.getPassenger(id);
+		F.postPassenger(G);
 	}
 }

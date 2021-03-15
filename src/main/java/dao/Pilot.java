@@ -21,27 +21,27 @@ public class Pilot implements PilotDAO{
 		// TODO Auto-generated method stub
 		return null;
 	}
-	public void PutPilot(Pilot p) {
+	public void putPilot(Pilot p) {
 		// TODO Auto-generated method stub
 		
 	}
-	public void DeletePilot(Pilot P) {
+	public void deletePilot(Pilot P) {
 		// TODO Auto-generated method stub
 		
 	}
-	public void PostPilot(Pilot P) {
+	public void postPilot(Pilot P) {
 		// TODO Auto-generated method stub
 		
 	}
-	public void PutFlight(Flight F) {
+	public void putFlight(Flight F) {
 		// TODO Auto-generated method stub
 		
 	}
-	public void PostFlight(Flight F) {
+	public void postFlight(Flight F) {
 		// TODO Auto-generated method stub
 		
 	}
-	public void DeleteFlight(Flight F) {
+	public void deleteFlight(Flight F) {
 		// TODO Auto-generated method stub
 		
 	}

@@ -9,17 +9,17 @@ public interface PilotDAO{
 	
 	Pilot getPilot_ID(String ID_Pilot);	
 	
-	void PutPilot(Pilot p);
+	void putPilot(Pilot p);
 	
-	void DeletePilot(Pilot P);
+	void deletePilot(Pilot P);
 	
-	void PostPilot(Pilot P);
+	void postPilot(Pilot P);
 	
 	// L'avion attribué au pilote 
-	void PutFlight(Flight F);
+	void putFlight(Flight F);
 	
-	void PostFlight(Flight F);
+	void postFlight(Flight F);
 	
-	void DeleteFlight(Flight F);
+	void deleteFlight(Flight F);
 
 }

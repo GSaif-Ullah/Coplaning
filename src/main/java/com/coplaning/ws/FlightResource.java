@@ -41,7 +41,7 @@ public class FlightResource {
 	@DELETE
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}")
-	public void DeleteF(@PathParam("id") String id) {
+	public void deleteF(@PathParam("id") String id) {
 		Flight G = F.getFlight(id);
 		F.deleteFlight(G);
 	}
@@ -49,7 +49,7 @@ public class FlightResource {
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}")
-	public void PostF(@PathParam("id") String id) {
+	public void postF(@PathParam("id") String id) {
 		Flight G = F.getFlight(id);
 		F.postFlight(G);
 	}

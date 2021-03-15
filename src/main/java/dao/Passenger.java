@@ -8,7 +8,7 @@ public class Passenger implements PassengerDAO {
 	public String Email;
 	public String ID_passenger;
 	public List<Passenger> AllPassenger;
-	public List<Passenger> ListPassenger() {
+	public List<Passenger> listPassenger() {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -20,15 +20,15 @@ public class Passenger implements PassengerDAO {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	public void PutPassenger(Passenger NewPassenger) {
+	public void putPassenger(Passenger NewPassenger) {
 		// TODO Auto-generated method stub
 		
 	}
-	public void DeletePassenger(Passenger P) {
+	public void deletePassenger(Passenger P) {
 		// TODO Auto-generated method stub
 		
 	}
-	public void PostPassenger(Passenger P) {
+	public void postPassenger(Passenger P) {
 		// TODO Auto-generated method stub
 		
 	}

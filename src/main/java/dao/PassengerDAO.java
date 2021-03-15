@@ -6,7 +6,7 @@ public interface PassengerDAO {
 	/**
 	 * @return this list of Passenger
 	 */
-	List<Passenger> ListPassenger();
+	List<Passenger> listPassenger();
 	
 	/**
 	 * @param Username
@@ -21,16 +21,16 @@ public interface PassengerDAO {
 	 * Add a new Passenger
 	 * @param Passenger
 	 */
-	void PutPassenger(Passenger P);
+	void putPassenger(Passenger P);
 	/**
 	 * Delete the passenger 
 	 * @param Passenger
 	 */
-	void DeletePassenger(Passenger P);
+	void deletePassenger(Passenger P);
 	/**
 	 * Modify a passenger
 	 * @param Passenger
 	 */
-	void PostPassenger(Passenger P);
+	void postPassenger(Passenger P);
 	
 }

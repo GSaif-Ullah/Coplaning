@@ -15,40 +15,41 @@ import dao.Pilot;
 
 @Path("/pilot")
 public class PilotResource {
-	Pilot F=new Pilot();
+	Pilot F = new Pilot();
 
-	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Pilot> getLF() {
-		return  F.ListPilot();
+		return F.ListPilot();
 	}
+
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Pilot getF(String ID_Pilot) {
 		return F.getPilot(ID_Pilot);
 	}
+
 	@PUT
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}")
 	public void addF(@PathParam("id") String id) {
-		Pilot G=F.getPilot(id);
-		F.PutPilot(G);
+		Pilot G = F.getPilot(id);
+		F.putPilot(G);
 	}
-	
+
 	@DELETE
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}")
-	public void DeleteF(@PathParam("id") String id) {
-		Pilot G=F.getPilot(id);
-		F.DeletePilot(G);
+	public void deleteF(@PathParam("id") String id) {
+		Pilot G = F.getPilot(id);
+		F.deletePilot(G);
 	}
-	
+
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}")
-	public void PostF(@PathParam("id") String id) {
-		Pilot G=F.getPilot(id);
-		F.PostPilot(G);
+	public void postF(@PathParam("id") String id) {
+		Pilot G = F.getPilot(id);
+		F.postPilot(G);
 	}
 }
