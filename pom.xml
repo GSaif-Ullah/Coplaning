@@ -56,6 +56,29 @@
     		<version>3.1-rc1</version>
 		</dependency>
 
+		<!-- DataNucleus -->
+		<dependency>
+			<groupId>org.datanucleus</groupId>
+			<artifactId>datanucleus-core</artifactId>
+			<version>4.0.3</version>
+		</dependency>
+		<dependency>
+			<groupId>org.datanucleus</groupId>
+			<artifactId>datanucleus-api-jdo</artifactId>
+			<version>4.0.3</version>
+		</dependency>
+		<dependency>
+			<groupId>org.datanucleus</groupId>
+			<artifactId>datanucleus-jodatime</artifactId>
+			<version>4.0.3</version>
+		</dependency>
+		<dependency>
+			<groupId>org.datanucleus</groupId>
+			<artifactId>datanucleus-rdbms</artifactId>
+			<version>4.0.3</version>
+		</dependency>
+
+
 		<!-- HSQLDB -->
 		<dependency>
 			<groupId>hsqldb</groupId>
@@ -70,8 +93,30 @@
 			<scope>test</scope>
 		</dependency>
 
-	</dependencies>	
+	</dependencies>
 	
-
-
+	
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.datanucleus</groupId>
+				<artifactId>datanucleus-maven-plugin</artifactId>
+                <version>4.0.0-release</version>
+				<configuration>
+					<api>JDO</api>
+					<props>${basedir}/datanucleus.properties</props>
+					<log4jConfiguration>${basedir}/src/main/resources/log4j.properties</log4jConfiguration>
+					<verbose>true</verbose>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>process-classes</phase>
+						<goals>
+							<goal>enhance</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
 </project>
