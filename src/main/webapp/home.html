@@ -1,21 +1,36 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
-	<body>
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<title>Accueil</title>
+</head>
+<body>
+	<button><a href="connexion.html">Connexion</a></button>
+	<button><a href="inscription.html">Inscription</a></button>
+	<h1>Coplaning</h1>
+	<img src="avions.jpg">
+	<p>Coplaning vous souhaite la bienvenue sur son site !</p>
 
-		<script id="templateExample" type="text/template">
-			<div>
-				<%= attribute %>
-			</div>
-		</script>
-
-		<h1>It works !</h1>
+	<p class="form">Rechercher un vol <br>
+		<input type="text" value="" placeholder="localisation"><br><br>
+		<label for="Nb_Passager">Nombre de passagers </label>
+		 <select id="Nb_Passager">
+		 	<option value=""> Choisir un nombre de passagers</option>
+		 	<option value="1"> 1</option>
+		 	<option value="2"> 2</option>
+		 	<option value="3"> 3</option>
+		 	<option value="4"> 4</option>
+		 	<option value="5"> 5</option>
+		 	<option value="6"> 6</option>
+		 	<option value="7"> 7</option>
+		 	<option value="8"> 8</option>
+		 	</select> <br><br>	
+		<button><a href="search.html"> recherche</a></button></p>
+	<p>Vous souhaiter consulter vos réservations ? Connectez vous <a href="connexion.html"> ici</a></p>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+	<script type="text/javascript" src="home.js"></script>
 	
-		<button id="button">Call webservice</button>
-		
-		<div id="result"></div>
-		
-	    <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
-	    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
-		<script type="text/javascript" src="home.js"></script>
-	</body>
+</body>
 </html>

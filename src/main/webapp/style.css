@@ -1,0 +1,44 @@
+h1
+{
+	text-align: center;
+	color: black;
+}
+
+p
+{
+	text-align: center;
+}
+
+img 
+{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+input
+{
+	color: gray;
+
+}
+
+.recherche
+{
+	border: solid black;
+	padding: 2px 2px;
+	margin: 0px 450px; 
+}
+
+.connexion
+{
+	border: solid black;
+	padding: 6px 2px;
+	margin: 0px 450px; 
+}
+
+.inscription
+{
+	border: solid black;
+	padding: 6px 2px;
+	margin: 0px 500px; 
+}

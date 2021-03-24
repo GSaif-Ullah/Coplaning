@@ -1,36 +1,35 @@
 package dao;
 
-import java.util.List;
+import javax.jdo.annotations.PersistenceCapable;
 
-public class Passenger implements PassengerDAO {
+@PersistenceCapable
+public class Passenger {
 	public String Username;
 	public String Password;
 	public String Email;
-	public String ID_passenger;
-	public List<Passenger> AllPassenger;
-	public List<Passenger> listPassenger() {
-		// TODO Auto-generated method stub
-		return null;
+	
+	public Passenger(String username) {
+		super();
+		Username = username;
 	}
-	public Passenger getPassenger(String Username) {
-		// TODO Auto-generated method stub
-		return null;
+	public String getUsername() {
+		return Username;
 	}
-	public Passenger getPassenger_ID(String ID_passenger) {
-		// TODO Auto-generated method stub
-		return null;
+	public void setUsername(String username) {
+		Username = username;
 	}
-	public void putPassenger(Passenger NewPassenger) {
-		// TODO Auto-generated method stub
-		
+	public String getPassword() {
+		return Password;
 	}
-	public void deletePassenger(Passenger P) {
-		// TODO Auto-generated method stub
-		
+	public void setPassword(String password) {
+		Password = password;
 	}
-	public void postPassenger(Passenger P) {
-		// TODO Auto-generated method stub
-		
+	public String getEmail() {
+		return Email;
 	}
+	public void setEmail(String email) {
+		Email = email;
+	}
+
 
 }

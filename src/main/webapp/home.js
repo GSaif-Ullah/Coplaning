@@ -18,6 +18,6 @@ function callDone(result){
 
 $(function(){
 	$("#button").click(function(){
-		getServerData("ws/example/aircraft",callDone);
+		getServerData("ws/flight",callDone);
 	});
 });

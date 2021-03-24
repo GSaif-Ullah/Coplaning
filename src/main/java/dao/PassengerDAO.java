@@ -3,34 +3,19 @@ package dao;
 import java.util.List;
 
 public interface PassengerDAO {
-	/**
-	 * @return this list of Passenger
-	 */
-	List<Passenger> listPassenger();
+
 	
 	/**
-	 * @param Username
-	 * @param ID_passenger
-	 * @return the passenger to a specific Username or ID_passenger
+	 * Add a nes action to the database
+	 * 
+	 * @param action
 	 */
-	Passenger getPassenger(String Username);
-	
-	Passenger getPassenger_ID(String ID_passenger);
+	long addPassenger(PassengerContainer container);
 
 	/**
-	 * Add a new Passenger
-	 * @param Passenger
+	 * @param username
+	 * @return the list of actions assigned to a specific user.
 	 */
-	void putPassenger(Passenger P);
-	/**
-	 * Delete the passenger 
-	 * @param Passenger
-	 */
-	void deletePassenger(Passenger P);
-	/**
-	 * Modify a passenger
-	 * @param Passenger
-	 */
-	void postPassenger(Passenger P);
-	
+	PassengerContainer getPassenger(long id);
+
 }
