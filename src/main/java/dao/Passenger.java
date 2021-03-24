@@ -27,6 +27,7 @@ public class Passenger {
 	public String getEmail() {
 		return Email;
 	}
+	//test
 	public void setEmail(String email) {
 		Email = email;
 	}
