@@ -5,7 +5,7 @@
 
     <!-- Test configuration -->
     <persistence-unit name="Example">
-    	<class>com.example.datanucleus.dao.Action</class>
+    	<class>com.example.datanucleus.dao.Passenger</class>
         <exclude-unlisted-classes/>
         
         <properties>

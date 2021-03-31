@@ -16,7 +16,7 @@ function ButtonInscription(){
             "Date de naissance":$("#txt_naissance").val().trim()
             
         };
-        putServerData("/ws/passenger/93120",user,function(){
+        putServerData("/ws/passenger/"+ id",user,function(){
             if($("#txt_prenom").val.length==0){
                 $("#txt_prenom").after("<span>Merci de remplir ce champ</span>");
 
