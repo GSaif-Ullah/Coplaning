@@ -4,18 +4,20 @@ import java.util.List;
 
 public interface PassengerDAO {
 
-	
 	/**
 	 * Add a nes action to the database
 	 * 
 	 * @param action
 	 */
-	long addPassenger(PassengerContainer container);
+	void addPassenger(Passenger passenger);
 
 	/**
 	 * @param username
 	 * @return the list of actions assigned to a specific user.
 	 */
-	PassengerContainer getPassenger(long id);
+	List<Passenger> getPassengers(String username);
 
+	PassengerContainer getPassengerContainer(long id);
+
+	long addPassengerContainer(PassengerContainer container);
 }
