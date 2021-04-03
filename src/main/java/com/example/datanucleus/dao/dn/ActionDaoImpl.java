@@ -3,12 +3,14 @@ package com.example.datanucleus.dao.dn;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.jdo.JDOObjectNotFoundException;
 import javax.jdo.PersistenceManager;
 import javax.jdo.PersistenceManagerFactory;
 import javax.jdo.Query;
 import javax.jdo.Transaction;
 
 import com.example.datanucleus.dao.Action;
+import com.example.datanucleus.dao.ActionContainer;
 import com.example.datanucleus.dao.ActionDao;
 
 public class ActionDaoImpl implements ActionDao {
@@ -59,6 +61,32 @@ public class ActionDaoImpl implements ActionDao {
 			}
 			pm.close();
 		}
+	}
+
+	public ActionContainer getActionContainer(long id) {
+		PersistenceManager pm = pmf.getPersistenceManager();
+
+		try {
+			ActionContainer container = pm.getObjectById(ActionContainer.class, id);
+			ActionContainer detached = pm.detachCopy(container);
+
+			return detached;
+		} catch (JDOObjectNotFoundException e) {
+			return null;
+		} finally {
+			pm.close();
+		}
+
+	}
+
+	public long addActionContainer(ActionContainer container) {
+		PersistenceManager pm = pmf.getPersistenceManager();
+
+		container = pm.makePersistent(container);
+		long containerId = container.getId();
+		pm.close();
+
+		return containerId;
 	}
 
 }

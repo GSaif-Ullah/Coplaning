@@ -17,4 +17,8 @@ public interface ActionDao {
 	 */
 	List<Action> getActions(String username);
 
+	ActionContainer getActionContainer(long id);
+
+	long addActionContainer(ActionContainer container);
+
 }

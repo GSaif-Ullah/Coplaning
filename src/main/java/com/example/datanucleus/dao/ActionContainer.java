@@ -15,7 +15,7 @@ public class ActionContainer {
 	@Persistent(valueStrategy = IdGeneratorStrategy.NATIVE)
 	protected Long id = null;
 
-	@Persistent
+	@Persistent(defaultFetchGroup = "true")
 	protected List<Action> actions = null;
 
 	public ActionContainer() {

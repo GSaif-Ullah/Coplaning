@@ -20,7 +20,7 @@ function fillTable(container) {
     var template = _.template($('#templateRow').html());
     var result = "";
 
-    container.passengers.forEach(passenger => result += template(passenger));
+    container.actions.forEach(action => result += template(action));
 
     $("#result").html(result);
 }
@@ -29,7 +29,7 @@ $(function () {
     $("#buttonAdd").click(function () {
         var data = $("#inputAdd").val();
 
-        putServerData("ws/passenger", data, function (result) {
+        putServerData("ws/example/action", data, function (result) {
             alert("Success " + result);
         });
     });
@@ -37,6 +37,6 @@ $(function () {
     $("#buttonGet").click(function () {
         var id = $("#inputGet").val();
 
-        getServerData("ws/passenger/" + id, fillTable);
+        getServerData("ws/example/action/" + id, fillTable);
     });
 });
