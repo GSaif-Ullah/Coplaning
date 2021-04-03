@@ -3,9 +3,9 @@ package com.coplaning.dao.fake;
 
 import java.util.List;
 
-import dao.Passenger;
-import dao.PassengerContainer;
-import dao.PassengerDAO;
+import com.coplaning.dao.Passenger;
+import com.coplaning.dao.PassengerContainer;
+import com.coplaning.dao.PassengerDAO;
 
 public class PassengerDaoFakeImpl implements PassengerDAO {
 

@@ -9,21 +9,21 @@ import javax.jdo.PersistenceManagerFactory;
 import javax.jdo.Query;
 import javax.jdo.Transaction;
 
-import dao.Passenger;
-import dao.PassengerContainer;
-import dao.PassengerDAO;
+import com.coplaning.dao.Passenger;
+import com.coplaning.dao.PassengerContainer;
+import com.coplaning.dao.PassengerDAO;
 
 public class PassengerDaoImp implements PassengerDAO{
 
 	private PersistenceManagerFactory pmf;
 
-	public PassengerDaoImp(PersistenceManagerFactory pmf) {
+	public  PassengerDaoImp(PersistenceManagerFactory pmf) {
 		this.pmf = pmf;
 	}
 
 	@SuppressWarnings("unchecked")
 	public List<Passenger> getPassengers(String username) {
-		List<Passenger> passenger = null;
+		List<Passenger> passengers = null;
 		List<Passenger> detached = new ArrayList<Passenger>();
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
@@ -33,8 +33,8 @@ public class PassengerDaoImp implements PassengerDAO{
 			q.declareParameters("String user");
 			q.setFilter("username == user");
 
-			passenger = (List<Passenger>) q.execute(username);
-			detached = (List<Passenger>) pm.detachCopyAll(passenger);
+			passengers = (List<Passenger>) q.execute(username);
+			detached = (List<Passenger>) pm.detachCopyAll(passengers);
 
 			tx.commit();
 		} finally {

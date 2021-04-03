@@ -1,4 +1,4 @@
-package dao;
+package com.coplaning.dao;
 
 import java.sql.Date;
 import java.util.List;

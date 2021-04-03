@@ -11,7 +11,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import dao.Flight;
+import com.coplaning.dao.Flight;
 
 @Path("/flight")
 public class FlightResource {

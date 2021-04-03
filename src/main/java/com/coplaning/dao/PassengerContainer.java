@@ -1,4 +1,4 @@
-package com.example.datanucleus.dao;
+package com.coplaning.dao;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,19 +8,20 @@ import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
+
 @PersistenceCapable
-public class ActionContainer {
+public class PassengerContainer {
 
 	@PrimaryKey
 	@Persistent(valueStrategy = IdGeneratorStrategy.NATIVE)
 	protected Long id = null;
 
 	@Persistent(defaultFetchGroup = "true")
-	protected List<Action> actions = null;
+	protected List<Passenger> passengers = null;
 
-	public ActionContainer() {
+	public PassengerContainer() {
 		super();
-		this.actions = new ArrayList<Action>();
+		this.passengers = new ArrayList<Passenger>();
 	}
 
 	public Long getId() {
@@ -31,12 +32,12 @@ public class ActionContainer {
 		this.id = id;
 	}
 
-	public List<Action> getActions() {
-		return actions;
+	public List<Passenger> getPassengers() {
+		return passengers;
 	}
 
-	public void setActions(List<Action> actions) {
-		this.actions = actions;
+	public void setPassengers(List<Passenger> passengers) {
+		this.passengers = passengers;
 	}
 
 }

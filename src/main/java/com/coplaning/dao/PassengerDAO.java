@@ -1,11 +1,11 @@
-package dao;
+package com.coplaning.dao;
 
 import java.util.List;
 
 public interface PassengerDAO {
 
 	/**
-	 * Add a nes action to the database
+	 * Add a passenger to the database
 	 * 
 	 * @param action
 	 */

@@ -29,7 +29,7 @@ $(function () {
     $("#buttonAdd").click(function () {
         var data = $("#inputAdd").val();
 
-        putServerData("ws/example/action", data, function (result) {
+        putServerData("ws/passenger", data, function (result) {
             alert("Success " + result);
         });
     });
@@ -37,6 +37,6 @@ $(function () {
     $("#buttonGet").click(function () {
         var id = $("#inputGet").val();
 
-        getServerData("ws/example/action/" + id, fillTable);
+        getServerData("ws/passenger" + id, fillTable);
     });
 });

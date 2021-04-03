@@ -1,4 +1,4 @@
-package dao;
+package com.coplaning.dao;
 
 import javax.jdo.JDOHelper;
 import javax.jdo.PersistenceManagerFactory;
