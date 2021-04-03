@@ -20,7 +20,7 @@ function fillTable(container) {
     var template = _.template($('#templateRow').html());
     var result = "";
 
-    container.actions.forEach(action => result += template(action));
+    container.passenger.forEach(action => result += template(passenger));
 
     $("#result").html(result);
 }
