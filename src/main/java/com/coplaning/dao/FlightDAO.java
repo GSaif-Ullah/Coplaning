@@ -4,16 +4,20 @@ import java.util.List;
 
 public interface FlightDAO {
 
-	List<Flight> listFlight();
+	/**
+	 * Add a flight to the database
+	 * 
+	 * @param action
+	 */
+	void addFlight(Flight flight);
 
-	Flight getFlight(String ID_Flight);
+	/**
+	 * @param username
+	 * @return the list of actions assigned to a specific user.
+	 */
+	List<Flight> getFlights(String iD_flight);
 
-	void putFlight(Flight F);
+	FlightContainer getFlightContainer(long id);
 
-	void deleteFlight(Flight F);
-
-	void postFlight(Flight F);
-
-	void putEmail(String Email);
-
+	long addFlightContainer(FlightContainer container);
 }

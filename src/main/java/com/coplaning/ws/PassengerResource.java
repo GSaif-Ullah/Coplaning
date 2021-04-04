@@ -51,14 +51,14 @@ public class PassengerResource {
 	@DELETE
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}")
-	public void deleteF(@PathParam("id") String id) {
+	public void deletePassenger(@PathParam("id") String id) {
 		
 	}
 
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}")
-	public void postF(@PathParam("id") String id) {
+	public void postPassenger(@PathParam("id") String id) {
 	
 	}
 }

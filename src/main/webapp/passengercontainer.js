@@ -20,7 +20,7 @@ function fillTable(container) {
     var template = _.template($('#templateRow').html());
     var result = "";
 
-    container.passenger.forEach(action => result += template(passenger));
+    container.passengers.forEach(passenger => result += template(passenger));
 
     $("#result").html(result);
 }
@@ -37,6 +37,6 @@ $(function () {
     $("#buttonGet").click(function () {
         var id = $("#inputGet").val();
 
-        getServerData("ws/passenger" + id, fillTable);
+        getServerData("ws/passenger/" + id, fillTable);
     });
 });
