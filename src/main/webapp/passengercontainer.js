@@ -1,4 +1,3 @@
-
 function getServerData(url, success) {
     $.ajax({
         dataType: "json",
@@ -27,8 +26,18 @@ function fillTable(container) {
 
 $(function () {
     $("#buttonAdd").click(function () {
-        var data = $("#inputAdd").val();
-
+        var passenger = {
+            "username":$("#username").val(),
+            "email":$("#email").val(),
+            "password":$("#password").val()
+            
+        };
+		var data = JSON.stringify({
+			"passengers": [
+			JSON.stringify(passenger)
+			]
+		});
+		
         putServerData("ws/passenger", data, function (result) {
             alert("Success " + result);
         });
