@@ -1,7 +1,5 @@
 package com.coplaning.ws;
 
-import java.util.List;
-
 import javax.ws.rs.BadRequestException;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -15,7 +13,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import com.coplaning.dao.DAO;
-import com.coplaning.dao.Flight;
 import com.coplaning.dao.FlightContainer;
 
 @Path("/flight")

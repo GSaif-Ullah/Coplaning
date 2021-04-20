@@ -22,7 +22,7 @@ public class PassengerDaoImp implements PassengerDAO{
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Passenger> getPassengers(String username) {
+	public List<Passenger> getPassengers(String name) {
 		List<Passenger> passengers = null;
 		List<Passenger> detached = new ArrayList<Passenger>();
 		PersistenceManager pm = pmf.getPersistenceManager();
@@ -31,9 +31,9 @@ public class PassengerDaoImp implements PassengerDAO{
 			tx.begin();
 			Query q = pm.newQuery(Passenger.class);
 			q.declareParameters("String user");
-			q.setFilter("username == user");
+			q.setFilter("name == user");
 
-			passengers = (List<Passenger>) q.execute(username);
+			passengers = (List<Passenger>) q.execute(name);
 			detached = (List<Passenger>) pm.detachCopyAll(passengers);
 
 			tx.commit();

@@ -15,15 +15,6 @@ function putServerData(url, data, success) {
     }).done(success);
 }
 
-function fillTable(container) {
-    var template = _.template($('#templateRow').html());
-    var result = "";
-
-    container.passengers.forEach(passenger => result += template(passenger));
-
-    $("#result").html(result);
-}
-
 $(function () {
     $("#buttonAdd").click(function () {
         var passenger = {
@@ -35,8 +26,14 @@ $(function () {
             "birth":$("#birth").val()                   
         };
 		var data = JSON.stringify({
-			"passengers": [
-			JSON.stringify(passenger)
+			"passengers": [{
+             "firstname":passenger.firstname,
+             "name":passenger.name,
+             "password":passenger.password,
+             "email":passenger.email,
+             "phone":passenger.phone,
+             "birth":passenger.birth             
+            }
 			]
 		});
 		
@@ -44,5 +41,4 @@ $(function () {
             alert("Success " + result);
         });
     });
-
 });

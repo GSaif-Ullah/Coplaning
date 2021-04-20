@@ -2,8 +2,6 @@ package com.coplaning.dao;
 
 import java.sql.Date;
 
-import java.util.List;
-
 import javax.jdo.annotations.PersistenceCapable;
 
 @PersistenceCapable
