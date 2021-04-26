@@ -1,5 +1,6 @@
 package com.coplaning.dao;
 
+
 import java.sql.Date;
 
 import javax.jdo.annotations.PersistenceCapable;

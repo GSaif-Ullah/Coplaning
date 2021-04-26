@@ -10,7 +10,7 @@ function putServerData(url, data, success) {
         type: 'PUT',
         contentType: "application/json; charset=utf-8",
         dataType: "json",
-        data: data,
+        data: JSON.stringify(data),
         url: url
     }).done(success);
 }
@@ -25,7 +25,7 @@ $(function () {
             "phone":$("#phone").val(),
             "birth":$("#birth").val()                   
         };
-		var data = JSON.stringify({
+		var data = ({
 			"passengers": [{
              "firstname":passenger.firstname,
              "name":passenger.name,
