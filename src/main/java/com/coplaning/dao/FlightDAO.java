@@ -15,7 +15,7 @@ public interface FlightDAO {
 	 * @param username
 	 * @return the list of actions assigned to a specific user.
 	 */
-	List<Flight> getFlights(String iD_flight);
+	List<Flight> getFlights();
 
 	FlightContainer getFlightContainer(long id);
 

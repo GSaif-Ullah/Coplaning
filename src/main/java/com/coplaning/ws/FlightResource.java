@@ -37,7 +37,7 @@ public class FlightResource {
 			throw new BadRequestException("Missing payload");
 		}
 
-		if (container.getFlights() == null) {
+		if (container.getFlight() == null) {
 			throw new BadRequestException("Missing Flights in the container");
 		}
 

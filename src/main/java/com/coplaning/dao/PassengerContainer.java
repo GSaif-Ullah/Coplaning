@@ -17,11 +17,11 @@ public class PassengerContainer {
 	protected Long id = null;
 
 	@Persistent(defaultFetchGroup = "true")
-	protected List<Passenger> passengers = null;
+	protected Passenger passenger = null;
 
 	public PassengerContainer() {
 		super();
-		this.passengers = new ArrayList<Passenger>();
+		this.passenger = new Passenger();
 	}
 
 	public Long getId() {
@@ -32,12 +32,12 @@ public class PassengerContainer {
 		this.id = id;
 	}
 
-	public List<Passenger> getPassengers() {
-		return passengers;
+	public Passenger getPassenger() {
+		return passenger;
 	}
 
-	public void setPassengers(List<Passenger> passengers) {
-		this.passengers = passengers;
+	public void setPassenger(Passenger passenger) {
+		this.passenger = passenger;
 	}
 
 }

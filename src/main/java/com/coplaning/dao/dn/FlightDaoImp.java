@@ -22,7 +22,7 @@ public class FlightDaoImp implements FlightDAO{
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Flight> getFlights(String username) {
+	public List<Flight> getFlights() {
 		List<Flight> flights = null;
 		List<Flight> detached = new ArrayList<Flight>();
 		PersistenceManager pm = pmf.getPersistenceManager();
@@ -30,10 +30,10 @@ public class FlightDaoImp implements FlightDAO{
 		try {
 			tx.begin();
 			Query q = pm.newQuery(Flight.class);
-			q.declareParameters("String user");
-			q.setFilter("username == user");
+			q.declareParameters("String dep");
+			q.setFilter("departure == dep");
 
-			flights = (List<Flight>) q.execute(username);
+			flights = (List<Flight>) q.execute("karaxchi");
 			detached = (List<Flight>) pm.detachCopyAll(flights);
 
 			tx.commit();
@@ -42,6 +42,9 @@ public class FlightDaoImp implements FlightDAO{
 				tx.rollback();
 			}
 			pm.close();
+		}
+		for(int i=0;i<detached.size();i++){
+		    System.out.println(detached.get(i));
 		}
 		return detached;
 	}
@@ -69,7 +72,10 @@ public class FlightDaoImp implements FlightDAO{
 		try {
 			FlightContainer container = pm.getObjectById(FlightContainer.class, id);
 			FlightContainer detached = pm.detachCopy(container);
-
+			/*int test = 
+			for(int i=0;i<container.getFlights().size();i++){
+			    System.out.println(container.getFlights().get(i));
+			}*/
 			return detached;
 		} catch (JDOObjectNotFoundException e) {
 			return null;
@@ -85,7 +91,8 @@ public class FlightDaoImp implements FlightDAO{
 		container = pm.makePersistent(container);
 		long containerId = container.getId();
 		pm.close();
-
+		
+		
 		return containerId;
 	}
 

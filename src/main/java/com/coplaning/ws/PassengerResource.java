@@ -41,7 +41,7 @@ public class PassengerResource {
 			throw new BadRequestException("Missing payload");
 		}
 
-		if (container.getPassengers() == null) {
+		if (container.getPassenger() == null) {
 			throw new BadRequestException("Missing Passengers in the container");
 		}
 

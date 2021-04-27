@@ -18,11 +18,11 @@ public class FlightContainer {
 	protected Long id = null;
 
 	@Persistent(defaultFetchGroup = "true")
-	protected List<Flight> flights = null;
+	protected Flight flight = null;
 
 	public FlightContainer() {
 		super();
-		this.flights = new ArrayList<Flight>();
+		this.flight = new Flight();
 	}
 
 	public Long getId() {
@@ -33,12 +33,12 @@ public class FlightContainer {
 		this.id = id;
 	}
 
-	public List<Flight> getFlights() {
-		return flights;
+	public Flight getFlight() {
+		return flight;
 	}
 
-	public void setFlights(List<Flight> flights) {
-		this.flights = flights;
+	public void setFlight(Flight flight) {
+		this.flight = flight;
 	}
 
 }

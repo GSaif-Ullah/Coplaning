@@ -15,7 +15,7 @@ public class FlightDaoFakeImpl implements FlightDAO {
 
 	public FlightContainer getFlight(long id) {
 		FlightContainer container = new FlightContainer() ;
-		container.getFlights().add(new Flight("z"));
+		container.setFlight(new Flight("z"));
 		return container;
 	}
 
@@ -24,7 +24,7 @@ public class FlightDaoFakeImpl implements FlightDAO {
 		
 	}
 
-	public List<Flight> getFlights(String username) {
+	public List<Flight> getFlights() {
 		// TODO Auto-generated method stub
 		return null;
 	}

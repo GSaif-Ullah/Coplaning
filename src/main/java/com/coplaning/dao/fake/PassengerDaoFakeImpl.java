@@ -15,7 +15,7 @@ public class PassengerDaoFakeImpl implements PassengerDAO {
 
 	public PassengerContainer getPassenger(long id) {
 		PassengerContainer container = new PassengerContainer() ;
-		container.getPassengers().add(new Passenger("GSaif"));
+		container.setPassenger(new Passenger("GSaif"));
 		return container;
 	}
 
