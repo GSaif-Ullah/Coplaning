@@ -16,7 +16,7 @@ function putServerData(url, data, success) {
 }
 
 $(function () {
-    $("#buttonAdd").click(function () {
+    $("#buttonLogin").click(function () {
         var data = {
         	"passenger":{
 	            "firstname":$("#firstname").val(),
