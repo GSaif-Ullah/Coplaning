@@ -46,4 +46,8 @@ public class PassengerContainer {
 	public void setPassenger(Passenger passenger) {
 		this.passenger = passenger;
 	}
+	@Override
+	public String toString() {
+        return String.valueOf(this.getId()) + this.getPassenger()  ;
+    }
 }
