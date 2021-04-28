@@ -95,7 +95,7 @@ public class FlightDaoImp implements FlightDAO{
 		return containerId;
 	}
 
-	//fonctionne pas
+
 	public void deleteFlightContainer(long id) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		FlightContainer container = pm.getObjectById(FlightContainer.class, id);
