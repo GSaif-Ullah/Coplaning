@@ -23,29 +23,26 @@ public class FlightDaoImp implements FlightDAO{
 
 	
 	@SuppressWarnings("unchecked")
-	public List<Flight> getFlights() {
-		List<Flight> flights = null;
-		List<Flight> detached = new ArrayList<Flight>();
+	public List<FlightContainer> getFlights() {
+		List<FlightContainer> flights = null;
+		List<FlightContainer> detached = new ArrayList<FlightContainer>();
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		try {
 			tx.begin();
-			Query q = pm.newQuery(Flight.class);
+			Query q = pm.newQuery(FlightContainer.class);
 			/*q.declareParameters("String dep");
 			q.setFilter("departure == dep");*/
 
-			flights = (List<Flight>) q.execute();
-			detached = (List<Flight>) pm.detachCopyAll(flights);
-
+			flights = (List<FlightContainer>) q.execute();
+			detached = (List<FlightContainer>) pm.detachCopyAll(flights);
+			System.out.println(detached);
 			tx.commit();
 		} finally {
 			if (tx.isActive()) {
 				tx.rollback();
 			}
 			pm.close();
-		}
-		for(int i=0;i<detached.size();i++){
-		    System.out.println(detached.get(i));
 		}
 		return detached;
 	}
@@ -98,8 +95,14 @@ public class FlightDaoImp implements FlightDAO{
 		return containerId;
 	}
 
-	public void deleteFlightContainer() {
+	//fonctionne pas
+	public void deleteFlightContainer(long id) {
 		PersistenceManager pm = pmf.getPersistenceManager();
+		FlightContainer container = pm.getObjectById(FlightContainer.class, id);
+		System.out.println(container);
+		pm.deletePersistent(container);
 		
+		pm.flush();
+		pm.close();
 	}
 }

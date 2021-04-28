@@ -41,4 +41,8 @@ public class FlightContainer {
 		this.flight = flight;
 	}
 
+	@Override
+	public String toString() {
+        return String.valueOf(this.getId()) + this.getFlight()  ;
+    }
 }

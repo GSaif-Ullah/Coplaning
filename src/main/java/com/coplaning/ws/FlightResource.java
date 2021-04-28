@@ -50,8 +50,8 @@ public class FlightResource {
 	@DELETE
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}")
-	public void deleteFlight(@PathParam("id") String id) {
-		
+	public void deleteFlight(@PathParam("id") long id) {
+		DAO.getFlightDao().deleteFlightContainer(id);
 	}
 
 	@POST
@@ -64,8 +64,8 @@ public class FlightResource {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/all")
-	public List<Flight> getFlights() {
-		List<Flight> flights = DAO.getFlightDao().getFlights();
+	public List<FlightContainer> getFlights() {
+		List<FlightContainer> flights = DAO.getFlightDao().getFlights();
 		return flights;
 	}
 	
