@@ -2,6 +2,8 @@ package com.coplaning.ws;
 
 
 
+import java.util.List;
+
 import javax.ws.rs.BadRequestException;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -15,12 +17,12 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import com.coplaning.dao.DAO;
+import com.coplaning.dao.Passenger;
 import com.coplaning.dao.PassengerContainer;
 
 
 @Path("/passenger")
 public class PassengerResource {
-
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}")
@@ -60,5 +62,13 @@ public class PassengerResource {
 	@Path("/{id}")
 	public void postPassenger(@PathParam("id") String id) {
 	
+	}
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/all")
+	public List<Passenger> getPassengers() {
+		List<Passenger> passengers = DAO.getPassengerDao().getPassengers();
+		return passengers;
 	}
 }

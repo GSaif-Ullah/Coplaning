@@ -16,7 +16,8 @@ public interface PassengerDAO {
 	 * @return the list of actions assigned to a specific user.
 	 */
 	List<Passenger> getPassengers(String name);
-
+	List<Passenger> getPassengers();
+	boolean CheckLogin(String username,String password);
 	PassengerContainer getPassengerContainer(long id);
 
 	long addPassengerContainer(PassengerContainer container);

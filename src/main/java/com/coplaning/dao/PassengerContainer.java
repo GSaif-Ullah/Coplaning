@@ -1,13 +1,11 @@
 package com.coplaning.dao;
 
-import java.util.ArrayList;
-import java.util.List;
+
 
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
-
 
 @PersistenceCapable
 public class PassengerContainer {
@@ -18,11 +16,20 @@ public class PassengerContainer {
 
 	@Persistent(defaultFetchGroup = "true")
 	protected Passenger passenger = null;
-
+	
 	public PassengerContainer() {
 		super();
 		this.passenger = new Passenger();
 	}
+
+	 
+	
+	public PassengerContainer(Passenger passenger) {
+		super();
+		this.passenger = passenger;
+	}
+
+
 
 	public Long getId() {
 		return id;
@@ -39,5 +46,4 @@ public class PassengerContainer {
 	public void setPassenger(Passenger passenger) {
 		this.passenger = passenger;
 	}
-
 }

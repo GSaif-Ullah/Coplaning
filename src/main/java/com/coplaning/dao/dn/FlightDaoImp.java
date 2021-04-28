@@ -36,7 +36,7 @@ public class FlightDaoImp implements FlightDAO{
 
 			flights = (List<FlightContainer>) q.execute();
 			detached = (List<FlightContainer>) pm.detachCopyAll(flights);
-			System.out.println(detached);
+			//System.out.println(detached);
 			tx.commit();
 		} finally {
 			if (tx.isActive()) {
