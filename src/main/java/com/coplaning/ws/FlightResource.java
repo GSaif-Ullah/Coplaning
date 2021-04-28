@@ -1,5 +1,7 @@
 package com.coplaning.ws;
 
+import java.util.List;
+
 import javax.ws.rs.BadRequestException;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -13,6 +15,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import com.coplaning.dao.DAO;
+import com.coplaning.dao.Flight;
 import com.coplaning.dao.FlightContainer;
 
 @Path("/flight")
@@ -57,4 +60,13 @@ public class FlightResource {
 	public void postFlight(@PathParam("id") String id) {
 	
 	}
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/all")
+	public List<Flight> getFlights() {
+		List<Flight> flights = DAO.getFlightDao().getFlights();
+		return flights;
+	}
+	
 }

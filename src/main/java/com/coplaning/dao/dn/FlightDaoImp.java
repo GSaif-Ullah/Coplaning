@@ -21,6 +21,7 @@ public class FlightDaoImp implements FlightDAO{
 		this.pmf = pmf;
 	}
 
+	
 	@SuppressWarnings("unchecked")
 	public List<Flight> getFlights() {
 		List<Flight> flights = null;
@@ -30,10 +31,10 @@ public class FlightDaoImp implements FlightDAO{
 		try {
 			tx.begin();
 			Query q = pm.newQuery(Flight.class);
-			q.declareParameters("String dep");
-			q.setFilter("departure == dep");
+			/*q.declareParameters("String dep");
+			q.setFilter("departure == dep");*/
 
-			flights = (List<Flight>) q.execute("karaxchi");
+			flights = (List<Flight>) q.execute();
 			detached = (List<Flight>) pm.detachCopyAll(flights);
 
 			tx.commit();
@@ -49,6 +50,7 @@ public class FlightDaoImp implements FlightDAO{
 		return detached;
 	}
 
+	//pas besoin a supprimer
 	public void addFlight(Flight flight) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
@@ -96,5 +98,8 @@ public class FlightDaoImp implements FlightDAO{
 		return containerId;
 	}
 
-
+	public void deleteFlightContainer() {
+		PersistenceManager pm = pmf.getPersistenceManager();
+		
+	}
 }
