@@ -16,8 +16,23 @@ function callDone(result){
 	$("#result").append(html);
 }
 
-$(function(){
-	$("#button").click(function(){
-		getServerData("ws/flight",callDone);
-	});
+$(function () {
+    $("#buttonSearch").click(function () {
+    
+	   var departure=$("#departure").val();
+	   
+	   var arrival=$("#arrival").val();
+	    
+	   var seat=$("#seat").val();
+	   	    
+       getServerData("ws/flight/search/" + departure +"/"+arrival+"/"+seat, function (result) {
+       
+        if (result==true){
+        	window.location.replace("home.html");
+        }
+        else{
+        		alert("Identifiants incorrect ");
+        }
+        });
+    });
 });

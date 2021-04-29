@@ -1,5 +1,6 @@
 package com.coplaning.dao.dn;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +13,8 @@ import javax.jdo.Transaction;
 import com.coplaning.dao.Flight;
 import com.coplaning.dao.FlightContainer;
 import com.coplaning.dao.FlightDAO;
+import com.coplaning.dao.PassengerContainer;
+
 
 public class FlightDaoImp implements FlightDAO{
 
@@ -19,6 +22,13 @@ public class FlightDaoImp implements FlightDAO{
 
 	public  FlightDaoImp(PersistenceManagerFactory pmf) {
 		this.pmf = pmf;
+	    FlightContainer F1=new FlightContainer(new Flight("departure1", "arrival1", 1));
+	    FlightContainer F2=new FlightContainer(new Flight("departure2", "arrival2", 2));
+	    FlightContainer F3=new FlightContainer(new Flight("departure3", "arrival3", 5));
+	    FlightContainer F4=new FlightContainer(new Flight("departure1", "arrival1", 4));
+	    PersistenceManager pm = pmf.getPersistenceManager();
+		pm.makePersistent(F1);pm.makePersistent(F2);pm.makePersistent(F3);pm.makePersistent(F4);
+		pm.close();
 	}
 
 	
@@ -46,7 +56,37 @@ public class FlightDaoImp implements FlightDAO{
 		}
 		return detached;
 	}
+	// Renvoie le flight rechercher sinon null 
+	public List<FlightContainer> CheckFlight(String departure,String arrival,int seat) {
+		List<FlightContainer> flights = null;
+		List<FlightContainer> detached = new ArrayList<FlightContainer>();
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		try {
+			tx.begin();
+			Query q = pm.newQuery(FlightContainer.class);
+			q.declareParameters("String departure,String arrival,int seat");
+			q.setFilter("flight.departure == departure && flight.arrival==arrival && flight.seat>=seat");
+			flights = (List<FlightContainer>) q.execute(departure,arrival,seat);
+			detached = (List<FlightContainer>) pm.detachCopyAll(flights);
+			tx.commit();
+			if (detached.size()==0) {
+				System.out.println("ZERO");
 
+				return null;
+			}
+			else {	
+				System.out.println("OK");
+				return detached;
+				
+			}
+		} finally {
+			if (tx.isActive()) {
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
 	//pas besoin a supprimer
 	public void addFlight(Flight flight) {
 		PersistenceManager pm = pmf.getPersistenceManager();

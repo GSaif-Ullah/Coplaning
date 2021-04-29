@@ -122,7 +122,7 @@ public class PassengerDaoImp implements PassengerDAO{
 
 		return containerId;
 	}
-	// Renvoi true si le username et le password sont la base de donnee
+	// Renvoie true si le username et le password sont dans la base de donnee
 	public boolean CheckLogin(String username, String passwrd) {
 		List<PassengerContainer> passengers = null;
 		List<PassengerContainer> detached = new ArrayList<PassengerContainer>();
@@ -130,9 +130,9 @@ public class PassengerDaoImp implements PassengerDAO{
 		Transaction tx = pm.currentTransaction();
 		try {
 			tx.begin();
-			Query q = pm.newQuery(Passenger.class);
+			Query q = pm.newQuery(PassengerContainer.class);
 			q.declareParameters("String username,String passwrd");
-			q.setFilter("email == username && password==passwrd");
+			q.setFilter("passenger.email == username && passenger.password==passwrd");
 			passengers = (List<PassengerContainer>) q.execute(username, passwrd);
 			detached = (List<PassengerContainer>) pm.detachCopyAll(passengers);
 			tx.commit();
