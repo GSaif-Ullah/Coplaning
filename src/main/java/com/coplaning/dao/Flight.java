@@ -18,6 +18,13 @@ public class Flight {
 		super();
 	}
 
+	public Flight(String departure, String arrival, int seat) {
+		super();
+		this.departure = departure;
+		this.arrival = arrival;
+		this.seat = seat;
+	}
+
 	public Flight(String id_flight) {
 		super();
 		this.id_flight = id_flight;

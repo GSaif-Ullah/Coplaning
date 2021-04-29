@@ -27,8 +27,6 @@ public class PassengerResource {
 	@Path("/{id}")
 	public PassengerContainer getPassengerContainer(@PathParam("id") long id) {
 		PassengerContainer container = DAO.getPassengerDao().getPassengerContainer(id);
-		boolean passenger1 = DAO.getPassengerDao().CheckLogin("G.Saif-Ullah@outlook.fr", "0781981435");
-		System.out.println(passenger1);
 		if (container == null) {
 			throw new NotFoundException("Invalid container id");
 		}
@@ -70,5 +68,15 @@ public class PassengerResource {
 	public List<PassengerContainer> getPassengers() {
 		List<PassengerContainer> passengers = DAO.getPassengerDao().getPassengers();
 		return passengers;
+	}
+	
+
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/login/{username}/{password}")
+	public boolean CheckLogin1(@PathParam("username") String username,@PathParam("password") String password) {
+		boolean Login = DAO.getPassengerDao().CheckLogin(username, password);
+		return Login;
 	}
 }

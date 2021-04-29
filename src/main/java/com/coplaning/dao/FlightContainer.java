@@ -17,6 +17,11 @@ public class FlightContainer {
 	@Persistent(defaultFetchGroup = "true")
 	protected Flight flight = null;
 
+	public FlightContainer(Flight flight) {
+		super();
+		this.flight = flight;
+	}
+
 	public FlightContainer() {
 		super();
 		this.flight = new Flight();
