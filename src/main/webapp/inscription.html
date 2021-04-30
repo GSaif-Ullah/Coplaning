@@ -27,114 +27,155 @@
 
 	<div class="container">
 		<div class="card-deck mb-3 text-center">
+			<form>
+
+				<div class="card mb-4 box-shadow">
+					<div class="card-header" style="text-decoration-color: rgb(2, 105, 207);">
+						<h4 class="my-0 font-weight-normal">Saissiser vos informations</h4><br>
+						<div class="card-body"><div class="form-group" style=""></div>
 
 
-			<div class="card mb-4 box-shadow">
-				<div class="card-header" style="text-decoration-color: rgb(2, 105, 207);">
-					<h4 class="my-0 font-weight-normal">Saissiser vos informations</h4><br>
-					<div class="card-body"><div class="form-group" style=""></div>
-					
-					<div class="form-group row">
-						<label class="col-2 col-form-label left"
-						style="text-align: left;">Nom</label>
-						<div class="col-10">
-							<input class="form-control" type="text" placeholder="Dupont" id="firstname">
-						</div>
-					</div><br>
+						<div class="form-group row">
+							<label class="col-2 col-form-label left"
+							style="text-align: left;">Nom</label>
+							<div class="col-10">
+								<input class="form-control" 
+								type="text" 
+								placeholder="Dupont" 
+								id="firstname" 
+								pattern="[A-Za-z]{1,30}" 
+								title="Entrez un nom valide" 
+								required>
+							</div>
+						</div><br>
 
-					<div class="form-group row">
-						<label class="col-2 col-form-label"
-						style="text-align: left;">Prénom</label>
-						<div class="col-10">
-							<input class="form-control" type="text" placeholder="Jean" id="name">
-						</div>
-					</div><br>
+						<div class="form-group row">
+							<label class="col-2 col-form-label"
+							style="text-align: left;">Prénom</label>
+							<div class="col-10">
+								<input class="form-control" 
+								type="text" 
+								placeholder="Jean" 
+								id="name" 
+								pattern="[A-Za-z]{1,30}" 
+								title="Entrez un prénom valide"
+								required>
+							</div>
+						</div><br>
 
-					<div class="form-group row">
-						<label class="col-2 col-form-label"
-						style="text-align: left;" >Date de naissance</label>
-						<div class="col-10">
-							<input class="form-control" type="Date" id="birth">
-						</div>
-					</div><br>
+						<div class="form-group row">
+							<label class="col-2 col-form-label"
+							style="text-align: left;" >Date de naissance</label>
+							<div class="col-10">
+								<input class="form-control" 
+								type="Date" 
+								id="birth"
+								title="Veuillez renseignez votre date de naissance" 
+								required>
+							</div>
+						</div><br>
 
-					<div class="form-group row">
-						<label class="col-2 col-form-label"
-						style="text-align: left;">Téléphone</label>
-						<div class="col-10">
-							<input class="form-control" type="tel" placeholder="00 00 00 00 00" id="phone">
-						</div>
-					</div><br>	
+						<div class="form-group row">
+							<label class="col-2 col-form-label"
+							style="text-align: left;">Téléphone</label>
+							<div class="col-10">
+								<input class="form-control" 
+								type="tel" 
+								placeholder="00 00 00 00 00" 
+								id="phone"
+								pattern="[0-9]{10}"
+								title="Veuillez entrer un numéro valide (10 chiffres)" 
+								required>
+							</div>
+						</div><br>	
 
-					<div class="form-group row">
-						<label class="col-2 col-form-label"
-						style="text-align: left;">Email</label>
-						<div class="col-10">
-							<input class="form-control" type="email" placeholder="name@example.com" pattern=".+@+." id="email">
-						</div>
-					</div><br>
+						<div class="form-group row">
+							<label class="col-2 col-form-label"
+							style="text-align: left;">Email</label>
+							<div class="col-10">
+								<input class="form-control" 
+								type="email" 
+								placeholder="name@example.com" 
+								title="Veuillez entrez une adresse mail valide" 
+								id="email"
+								required>
+							</div>
+						</div><br>
 
-					<div class="form-group row">
-						<label class="col-2 col-form-label"
-						style="text-align: left;">Mot de passe</label>
-						<div class="col-10">
-							<input class="form-control" type="password" id="password">
-						</div>
-					</div><br>	
+						<div class="form-group row">
+							<label class="col-2 col-form-label"
+							style="text-align: left;">Mot de passe</label>
+							<div class="col-10">
+								<input class="form-control" 
+								type="password" 
+								id="password"
+								title="Veuillez choisir un mot de passe d'au moins 8 caratères sans caratère spécial"
+								pattern="[A-Za-z0-9]{8,}" 
+								required>
+							</div>
+						</div><br>	
 
-					<div class="form-group row">
-						<div class="col-10">
-							<input class="form-check-input" type="checkbox" id="gridCheck">
-							<label class="form-check-label" for="gridCheck">
-								J'accepte les conditions d'utilisations
-							</label>
-						</div>
-					</div><br>
-									
-				</div></div>
+						<div class="form-group row">
+							<div class="col-10">
+								<input class="form-check-input" 
+								type="checkbox" 
+								title="Veuiller accepter les conditions d'utilisations" 
+								id="gridCheck" 
+								required>
+								<label class="form-check-label" for="gridCheck">
+									J'accepte les conditions d'utilisations
+								</label>
+							</div>
+						</div><br>
 
-			</div>
-			<button type="button" class="btn btn-lg btn-block btn-primary" id="buttonAdd">Soumettre</button></div>
+					</div></div>
 
-			<footer class="pt-4 my-md-5 pt-md-5 border-top">
-				<div class="row">
-
-					<div class="col-6 col-md">
-						<h5>Informations</h5>
-						<ul class="list-unstyled text-small">
-							<li><a class="text-muted" href="#">Foire aux questions</a></li>
-							<li><a class="text-muted" href="#">Réglementation</a></li>
-							<li><a class="text-muted" href="#">Assurances</a></li>
-							<li><a class="text-muted" href="#">Contact</a></li>
-							<li></li>
-							<li></li>
-						</ul>
-					</div>
-					<div class="col-6 col-md">
-						<h5>Nos réseaux</h5>
-						<ul class="list-unstyled text-small">
-							<li><a class="text-muted" href="https://twitter.com/home">Twitter</a></li>
-							<li><a class="text-muted" href="https://www.instagram.com/coplaning_officiel/">Instagram</a></li>
-							<li><a class="text-muted" href="https://www.facebook.com/coplaning.dupont/">Facebook</a></li>
-							<li></li>
-						</ul>
-					</div>
-					<div class="col-6 col-md">
-						<h5>Découvrir</h5>
-						<ul class="list-unstyled text-small">
-							<li><a class="text-muted" href="#">Liste des avions</a></li>
-							<li><a class="text-muted" href="#">Nos pilotes</a></li>
-							<li><a class="text-muted" href="#">Liste des aérodromes</a></li>
-							<li><a class="text-muted" href="#">Offres exclusives</a></li>
-						</ul>
-					</div>
 				</div>
-			</footer>
+				<button type="submit" class="btn btn-lg btn-block btn-primary" id="buttonAdd">Soumettre</button>
+			</form>
+
 		</div>
 
-    <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
-    <script type="text/javascript" src="inscriptions.js"></script>
-    
-	</body>
-	</html>
+
+		<footer class="pt-4 my-md-5 pt-md-5 border-top">
+			<div class="row">
+
+				<div class="col-6 col-md">
+					<h5>Informations</h5>
+					<ul class="list-unstyled text-small">
+						<li><a class="text-muted" href="#">Foire aux questions</a></li>
+						<li><a class="text-muted" href="#">Réglementation</a></li>
+						<li><a class="text-muted" href="#">Assurances</a></li>
+						<li><a class="text-muted" href="#">Contact</a></li>
+						<li></li>
+						<li></li>
+					</ul>
+				</div>
+				<div class="col-6 col-md">
+					<h5>Nos réseaux</h5>
+					<ul class="list-unstyled text-small">
+						<li><a class="text-muted" href="https://twitter.com/home">Twitter</a></li>
+						<li><a class="text-muted" href="https://www.instagram.com/coplaning_officiel/">Instagram</a></li>
+						<li><a class="text-muted" href="https://www.facebook.com/coplaning.dupont/">Facebook</a></li>
+						<li></li>
+					</ul>
+				</div>
+				<div class="col-6 col-md">
+					<h5>Découvrir</h5>
+					<ul class="list-unstyled text-small">
+						<li><a class="text-muted" href="#">Liste des avions</a></li>
+						<li><a class="text-muted" href="#">Nos pilotes</a></li>
+						<li><a class="text-muted" href="#">Liste des aérodromes</a></li>
+						<li><a class="text-muted" href="#">Offres exclusives</a></li>
+					</ul>
+				</div>
+			</div>
+		</footer>
+	</div>
+
+	<script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+	<script src="inscriptions.js"></script>
+
+</body>
+</html>
