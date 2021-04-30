@@ -16,8 +16,16 @@ function callDone(result){
 	$("#result").append(html);
 }
 
+
+function ListFlights(container) {
+    var template = $('#output').html();
+
+   var listFlight="";
+   container.flight.forEach(flight=> listFlight+= template(flight.departure));
+};
+
 $(function () {
-    $("#buttonSearch").click(function () {
+    $("#buttonGet").click(function () {
     
 	   var departure=$("#departure").val();
 	   
@@ -25,14 +33,7 @@ $(function () {
 	    
 	   var seat=$("#seat").val();
 	   	    
-       getServerData("ws/flight/search/" + departure +"/"+arrival+"/"+seat, function (result) {
-       
-        if (result==true){
-        	window.location.replace("home.html");
-        }
-        else{
-        		alert("Identifiants incorrect ");
-        }
-        });
+	   getServerData("ws/flight/search/" + departure +"/"+arrival+"/"+seat, function(){
+	   	console.log(result.flight);});
     });
 });

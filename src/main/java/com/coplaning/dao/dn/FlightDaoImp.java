@@ -57,7 +57,7 @@ public class FlightDaoImp implements FlightDAO{
 		return detached;
 	}
 	// Renvoie le flight rechercher sinon null 
-	public List<FlightContainer> CheckFlight(String departure,String arrival,int seat) {
+	/*public List<FlightContainer> Search(String departure,String arrival,int seat) {
 		List<FlightContainer> flights = null;
 		List<FlightContainer> detached = new ArrayList<FlightContainer>();
 		PersistenceManager pm = pmf.getPersistenceManager();
@@ -86,6 +86,36 @@ public class FlightDaoImp implements FlightDAO{
 			}
 			pm.close();
 		}
+	}*/
+	public FlightContainer Search(String departure,String arrival,int seat) {
+			List<FlightContainer> flights = null;
+			List<FlightContainer> detached = new ArrayList<FlightContainer>();
+			PersistenceManager pm = pmf.getPersistenceManager();
+			Transaction tx = pm.currentTransaction();
+			try {
+				tx.begin();
+				Query q = pm.newQuery(FlightContainer.class);
+				q.declareParameters("String departure,String arrival,int seat");
+				q.setFilter("flight.departure == departure && flight.arrival==arrival && flight.seat>=seat");
+				flights = (List<FlightContainer>) q.execute(departure,arrival,seat);
+				detached = (List<FlightContainer>) pm.detachCopyAll(flights);
+				tx.commit();
+				if (detached.size()==0) {
+					System.out.println("ZERO");
+
+					return null;
+				}
+				else {	
+					System.out.println("OK");
+					return detached.get(0);
+					
+				}
+			} finally {
+				if (tx.isActive()) {
+					tx.rollback();
+				}
+				pm.close();
+			}
 	}
 	//pas besoin a supprimer
 	public void addFlight(Flight flight) {
