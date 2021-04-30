@@ -15,7 +15,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import com.coplaning.dao.DAO;
-import com.coplaning.dao.Flight;
 import com.coplaning.dao.FlightContainer;
 
 @Path("/flight")
@@ -40,7 +39,7 @@ public class FlightResource {
 			throw new BadRequestException("Missing payload");
 		}
 
-		if (container.getFlights() == null) {
+		if (container.getFlight() == null) {
 			throw new BadRequestException("Missing Flights in the container");
 		}
 
@@ -50,8 +49,8 @@ public class FlightResource {
 	@DELETE
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}")
-	public void deleteFlight(@PathParam("id") String id) {
-		
+	public void deleteFlight(@PathParam("id") long id) {
+		DAO.getFlightDao().deleteFlightContainer(id);
 	}
 
 	@POST
@@ -60,4 +59,20 @@ public class FlightResource {
 	public void postFlight(@PathParam("id") String id) {
 	
 	}
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/all")
+	public List<FlightContainer> getFlights() {
+		List<FlightContainer> flights = DAO.getFlightDao().getFlights();
+		return flights;
+	}
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/search/{departure}/{arrival}/{seat}")
+	public List<FlightContainer> CheckLogin1(@PathParam("departure") String departure,@PathParam("arrival") String arrival,@PathParam("seat") int seat ) {
+		List<FlightContainer> flights = DAO.getFlightDao().CheckFlight(departure,arrival,seat);
+		return flights;
+	}
+	
 }

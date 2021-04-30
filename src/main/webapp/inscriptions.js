@@ -10,39 +10,26 @@ function putServerData(url, data, success) {
         type: 'PUT',
         contentType: "application/json; charset=utf-8",
         dataType: "json",
-        data: data,
+        data: JSON.stringify(data),
         url: url
     }).done(success);
 }
 
-function fillTable(container) {
-    var template = _.template($('#templateRow').html());
-    var result = "";
-
-    container.passengers.forEach(passenger => result += template(passenger));
-
-    $("#result").html(result);
-}
-
 $(function () {
     $("#buttonAdd").click(function () {
-        var passenger = {
-            "firstname":$("#firstname").val(),
-            "name":$("#name").val(),
-            "password":$("#password").val(),
-            "email":$("#email").val(),
-            "phone":$("#phone").val(),
-            "birth":$("#birth").val()                   
+        var data = {
+        	"passenger":{
+	            "firstname":$("#firstname").val(),
+	            "name":$("#name").val(),
+	            "password":$("#password").val(),
+	            "email":$("#email").val(),
+	            "phone":$("#phone").val(),
+	            "birth":$("#birth").val()
+	            }                  
         };
-		var data = JSON.stringify({
-			"passengers": [
-			JSON.stringify(passenger)
-			]
-		});
 		
         putServerData("ws/passenger", data, function (result) {
             alert("Success " + result);
         });
     });
-
 });

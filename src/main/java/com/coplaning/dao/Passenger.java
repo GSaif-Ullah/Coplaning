@@ -1,5 +1,6 @@
 package com.coplaning.dao;
 
+
 import java.sql.Date;
 
 import javax.jdo.annotations.PersistenceCapable;
@@ -94,12 +95,7 @@ public class Passenger {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getUsername() {
-		return name;
-	}
-	public void setUsername(String name) {
-		this.name = name;
-	}
+
 
 
 

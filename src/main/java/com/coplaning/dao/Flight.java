@@ -2,8 +2,6 @@ package com.coplaning.dao;
 
 import java.sql.Date;
 
-import java.util.List;
-
 import javax.jdo.annotations.PersistenceCapable;
 
 @PersistenceCapable
@@ -18,6 +16,13 @@ public class Flight {
 
 	public Flight() {
 		super();
+	}
+
+	public Flight(String departure, String arrival, int seat) {
+		super();
+		this.departure = departure;
+		this.arrival = arrival;
+		this.seat = seat;
 	}
 
 	public Flight(String id_flight) {
