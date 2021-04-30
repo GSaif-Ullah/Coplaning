@@ -20,14 +20,22 @@ function fillTable(FlightContainer) {
     var template = _.template($('#templateRow').html());
     var result = "";
 
-    result=FlightContainer.flight.toString();
-
+    FlightContainer.forEach(flight=>result+=JSON.stringify(flight))	;
     $("#result").html(result);
+}
+
+function fillTable2(container){
+    var template = _.template($('#templateRow').html());;
+    var result = "";
+    container.forEach(f=>result+=template(f));
+    $("#result").html(result);
+
 }
 
 $(function () {
 	       $("#buttonGet").click(function () {
 	   
 	   	    
-	   getServerData("ws/flight/search/departure1/arrival1/3", fillTable);
-});});
+	   getServerData("ws/flight/search/departure1/arrival1/1", fillTable2); 
+        });
+});

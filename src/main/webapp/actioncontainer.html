@@ -4,17 +4,9 @@
 <body>
 
     <script id="templateRow" type="text/template">
-        <tr><td><%= flight %></td></tr>
+        <tr><td><%= id %></td><td><%= flight.departure %></td><td><%= flight.arrival %></td><td><%= flight.id_flight %></td></tr>
     </script>
 
-    <h1>It works !</h1>
-
-    <textarea id="inputAdd" rows="10" cols="80"></textarea>
-    <button id="buttonAdd">Add to database</button>
-
-    <hr />
-
-    <input id="inputGet"></input>
     <button id="buttonGet">Get from database</button>
     <table style="border: 1px solid black" id="result"></table>
 

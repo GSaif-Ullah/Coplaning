@@ -57,7 +57,7 @@ public class FlightDaoImp implements FlightDAO{
 		return detached;
 	}
 	// Renvoie le flight rechercher sinon null 
-	/*public List<FlightContainer> Search(String departure,String arrival,int seat) {
+	public List<FlightContainer> Search(String departure,String arrival,int seat) {
 		List<FlightContainer> flights = null;
 		List<FlightContainer> detached = new ArrayList<FlightContainer>();
 		PersistenceManager pm = pmf.getPersistenceManager();
@@ -86,8 +86,8 @@ public class FlightDaoImp implements FlightDAO{
 			}
 			pm.close();
 		}
-	}*/
-	public FlightContainer Search(String departure,String arrival,int seat) {
+	}
+/*	public FlightContainer Search(String departure,String arrival,int seat) {
 			List<FlightContainer> flights = null;
 			List<FlightContainer> detached = new ArrayList<FlightContainer>();
 			PersistenceManager pm = pmf.getPersistenceManager();
@@ -116,7 +116,7 @@ public class FlightDaoImp implements FlightDAO{
 				}
 				pm.close();
 			}
-	}
+	}*/
 	//pas besoin a supprimer
 	public void addFlight(Flight flight) {
 		PersistenceManager pm = pmf.getPersistenceManager();
