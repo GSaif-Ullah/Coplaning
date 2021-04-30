@@ -24,7 +24,7 @@ $(function () {
 	   	    
        getServerData("ws/passenger/login/" + username +"/"+password, function (result) {
         if (result==true){
-        	window.location.replace("home.html");
+        	window.location.replace("user.html");
         }
         else{
         		alert("Identifiants incorrect ");

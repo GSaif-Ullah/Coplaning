@@ -104,4 +104,9 @@ public class Flight {
 		this.cost = cost;
 	}
 
+	@Override
+	public String toString() {
+	        return String.valueOf(this.getSeat()) + this.getDeparture() ;
+	}
+
 }
