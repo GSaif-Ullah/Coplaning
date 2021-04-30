@@ -26,9 +26,9 @@ public class PassengerContainerTest {
 			Passenger passenger3 = new Passenger("Username 3");
 
 			PassengerContainer container = new PassengerContainer();
-			container.getPassengers().add(passenger1);
-			container.getPassengers().add(passenger2);
-			container.getPassengers().add(passenger3);
+			container.setPassenger(passenger3);;
+			container.setPassenger(passenger2);
+			container.setPassenger(passenger1);
 
 			container = pm.makePersistent(container);
 			containerId = container.getId();
@@ -40,7 +40,8 @@ public class PassengerContainerTest {
 			PersistenceManager pm = pmf.getPersistenceManager();
 
 			PassengerContainer container = pm.getObjectById(PassengerContainer.class, containerId);
-			Assert.assertEquals(3, container.getPassengers().size());
+			//A REFAIRE
+			Assert.assertEquals(3, container.getPassenger());
 
 			pm.close();
 		}

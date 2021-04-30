@@ -2,6 +2,8 @@ package com.coplaning.ws;
 
 
 
+import java.util.List;
+
 import javax.ws.rs.BadRequestException;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -20,13 +22,11 @@ import com.coplaning.dao.PassengerContainer;
 
 @Path("/passenger")
 public class PassengerResource {
-
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}")
 	public PassengerContainer getPassengerContainer(@PathParam("id") long id) {
 		PassengerContainer container = DAO.getPassengerDao().getPassengerContainer(id);
-
 		if (container == null) {
 			throw new NotFoundException("Invalid container id");
 		}
@@ -41,7 +41,7 @@ public class PassengerResource {
 			throw new BadRequestException("Missing payload");
 		}
 
-		if (container.getPassengers() == null) {
+		if (container.getPassenger() == null) {
 			throw new BadRequestException("Missing Passengers in the container");
 		}
 
@@ -51,8 +51,8 @@ public class PassengerResource {
 	@DELETE
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}")
-	public void deletePassenger(@PathParam("id") String id) {
-		
+	public void deletePassenger(@PathParam("id") long id) {
+		DAO.getPassengerDao().deletePassengerContainer(id);
 	}
 
 	@POST
@@ -60,5 +60,23 @@ public class PassengerResource {
 	@Path("/{id}")
 	public void postPassenger(@PathParam("id") String id) {
 	
+	}
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/all")
+	public List<PassengerContainer> getPassengers() {
+		List<PassengerContainer> passengers = DAO.getPassengerDao().getPassengers();
+		return passengers;
+	}
+	
+
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/login/{username}/{password}")
+	public boolean CheckLogin1(@PathParam("username") String username,@PathParam("password") String password) {
+		boolean Login = DAO.getPassengerDao().CheckLogin(username, password);
+		return Login;
 	}
 }
