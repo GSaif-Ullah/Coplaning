@@ -10,6 +10,7 @@ import javax.jdo.PersistenceManagerFactory;
 import javax.jdo.Query;
 import javax.jdo.Transaction;
 
+import com.coplaning.dao.Flight;
 import com.coplaning.dao.FlightContainer;
 import com.coplaning.dao.Passenger;
 import com.coplaning.dao.PassengerContainer;
@@ -19,9 +20,14 @@ public class PassengerDaoImp implements PassengerDAO{
 
 	private PersistenceManagerFactory pmf;
 
-	@SuppressWarnings("deprecation")
 	public  PassengerDaoImp(PersistenceManagerFactory pmf) {
 		this.pmf = pmf;
+		this.initiatePassengers();
+	}
+	
+	//Create a Passengers database
+	@SuppressWarnings("deprecation")
+	public void initiatePassengers() {
 		PassengerContainer P1=new PassengerContainer(new Passenger("password1", "email1", "name1", "firstname1",new Date(98,7,20),"phone1"));
 		PassengerContainer P2=new PassengerContainer(new Passenger("password2", "email2", "name2", "firstname2",new Date(98,0,1),"phone2"));
 		PassengerContainer P3=new PassengerContainer(new Passenger("password3", "email3", "name3", "firstname3",new Date(98,2,2),"phone3"));
