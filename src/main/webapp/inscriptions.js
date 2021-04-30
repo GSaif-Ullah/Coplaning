@@ -29,7 +29,7 @@ $(function () {
         };
 		
         putServerData("ws/passenger", data, function (result) {
-            alert("Success " + result);
+            alert("Inscription réussi voici votre id :  " + result);
         });
     });
 });
