@@ -10,6 +10,7 @@ import javax.jdo.PersistenceManagerFactory;
 import javax.jdo.Query;
 import javax.jdo.Transaction;
 
+import com.coplaning.dao.FlightContainer;
 import com.coplaning.dao.Passenger;
 import com.coplaning.dao.PassengerContainer;
 import com.coplaning.dao.PassengerDAO;
@@ -22,12 +23,9 @@ public class PassengerDaoImp implements PassengerDAO{
 	public  PassengerDaoImp(PersistenceManagerFactory pmf) {
 		this.pmf = pmf;
 		PassengerContainer P1=new PassengerContainer(new Passenger("password1", "email1", "name1", "firstname1",new Date(98,7,20),"phone1"));
-		PassengerContainer P2=new PassengerContainer(new Passenger("password2", "email2", "name2", "firstname2",new Date(98,0,1),"phone3"));
-		@Deprecated
-		PassengerContainer P3=new PassengerContainer(new Passenger("password3", "email3", "name3", "firstname3",new Date(98,2,2),"phone4"));
-		@Deprecated
-		PassengerContainer P4=new PassengerContainer(new Passenger("password4", "email4", "name4", "firstname4",new Date(98,3,30),"phone5"));
-		@Deprecated
+		PassengerContainer P2=new PassengerContainer(new Passenger("password2", "email2", "name2", "firstname2",new Date(98,0,1),"phone2"));
+		PassengerContainer P3=new PassengerContainer(new Passenger("password3", "email3", "name3", "firstname3",new Date(98,2,2),"phone3"));
+		PassengerContainer P4=new PassengerContainer(new Passenger("password4", "email4", "name4", "firstname4",new Date(98,3,30),"phone4"));
 		PassengerContainer P5=new PassengerContainer(new Passenger("password5", "email5", "name5", "firstname5",new Date(98,4,5),"phone5"));
 		PersistenceManager pm = pmf.getPersistenceManager();
 		pm.makePersistent(P1);pm.makePersistent(P2);pm.makePersistent(P3);pm.makePersistent(P4);pm.makePersistent(P5);
@@ -35,19 +33,19 @@ public class PassengerDaoImp implements PassengerDAO{
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Passenger> getPassengers(String name) {
-		List<Passenger> passengers = null;
-		List<Passenger> detached = new ArrayList<Passenger>();
+	public List<PassengerContainer> getPassengers(String name) {
+		List<PassengerContainer> passengers = null;
+		List<PassengerContainer> detached = new ArrayList<PassengerContainer>();
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		try {
 			tx.begin();
-			Query q = pm.newQuery(Passenger.class);
+			Query q = pm.newQuery(PassengerContainer.class);
 			q.declareParameters("String user");
 			q.setFilter("name == user");
 
-			passengers = (List<Passenger>) q.execute(name);
-			detached = (List<Passenger>) pm.detachCopyAll(passengers);
+			passengers = (List<PassengerContainer>) q.execute(name);
+			detached = (List<PassengerContainer>) pm.detachCopyAll(passengers);
 
 			tx.commit();
 		} finally {
@@ -76,19 +74,19 @@ public class PassengerDaoImp implements PassengerDAO{
 		}
 	}
 	@SuppressWarnings("unchecked")
-	public List<Passenger> getPassengers() {
-		List<Passenger> passengers = null;
-		List<Passenger> detached = new ArrayList<Passenger>();
+	public List<PassengerContainer> getPassengers() {
+		List<PassengerContainer> passengers = null;
+		List<PassengerContainer> detached = new ArrayList<PassengerContainer>();
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		try {
 			tx.begin();
-			Query q = pm.newQuery(Passenger.class);
+			Query q = pm.newQuery(PassengerContainer.class);
 			/*q.declareParameters("String dep");
 			q.setFilter("departure == dep");*/
 
-			passengers = (List<Passenger>) q.execute();
-			detached = (List<Passenger>) pm.detachCopyAll(passengers);
+			passengers = (List<PassengerContainer>) q.execute();
+			detached = (List<PassengerContainer>) pm.detachCopyAll(passengers);
 
 			tx.commit();
 		} finally {
@@ -124,29 +122,41 @@ public class PassengerDaoImp implements PassengerDAO{
 
 		return containerId;
 	}
-
-	public boolean CheckLogin(String username, String password) {
-		List<Passenger> passengers = null;
-		List<Passenger> detached = new ArrayList<Passenger>();
+	// Renvoie true si le username et le password sont dans la base de donnee
+	public boolean CheckLogin(String username, String passwrd) {
+		List<PassengerContainer> passengers = null;
+		List<PassengerContainer> detached = new ArrayList<PassengerContainer>();
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		try {
 			tx.begin();
-			Query q = pm.newQuery(Passenger.class);
-			q.declareParameters("String username");
-			q.setFilter("email == username");
-			passengers = (List<Passenger>) q.execute(username);
-			detached = (List<Passenger>) pm.detachCopyAll(passengers);
+			Query q = pm.newQuery(PassengerContainer.class);
+			q.declareParameters("String username,String passwrd");
+			q.setFilter("passenger.email == username && passenger.password==passwrd");
+			passengers = (List<PassengerContainer>) q.execute(username, passwrd);
+			detached = (List<PassengerContainer>) pm.detachCopyAll(passengers);
 			tx.commit();
-			System.out.println();
+			if (detached.size()==0) {
+				return false;
+			}
+			else {						
+				return true;
+			}
 		} finally {
 			if (tx.isActive()) {
 				tx.rollback();
 			}
 			pm.close();
 		}
-		return false;
 	}
-
+	public void deletePassengerContainer(long id) {
+		PersistenceManager pm = pmf.getPersistenceManager();
+		PassengerContainer container = pm.getObjectById(PassengerContainer.class, id);
+		System.out.println(container);
+		pm.deletePersistent(container);
+		
+		pm.flush();
+		pm.close();
+	}
 
 }

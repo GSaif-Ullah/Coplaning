@@ -67,5 +67,12 @@ public class FlightResource {
 		List<FlightContainer> flights = DAO.getFlightDao().getFlights();
 		return flights;
 	}
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/search/{departure}/{arrival}/{seat}")
+	public List<FlightContainer> CheckLogin1(@PathParam("departure") String departure,@PathParam("arrival") String arrival,@PathParam("seat") int seat ) {
+		List<FlightContainer> flights = DAO.getFlightDao().CheckFlight(departure,arrival,seat);
+		return flights;
+	}
 	
 }

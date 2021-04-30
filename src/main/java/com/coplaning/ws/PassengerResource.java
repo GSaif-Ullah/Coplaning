@@ -17,7 +17,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import com.coplaning.dao.DAO;
-import com.coplaning.dao.Passenger;
 import com.coplaning.dao.PassengerContainer;
 
 
@@ -28,7 +27,6 @@ public class PassengerResource {
 	@Path("/{id}")
 	public PassengerContainer getPassengerContainer(@PathParam("id") long id) {
 		PassengerContainer container = DAO.getPassengerDao().getPassengerContainer(id);
-
 		if (container == null) {
 			throw new NotFoundException("Invalid container id");
 		}
@@ -53,8 +51,8 @@ public class PassengerResource {
 	@DELETE
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}")
-	public void deletePassenger(@PathParam("id") String id) {
-		
+	public void deletePassenger(@PathParam("id") long id) {
+		DAO.getPassengerDao().deletePassengerContainer(id);
 	}
 
 	@POST
@@ -67,8 +65,18 @@ public class PassengerResource {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/all")
-	public List<Passenger> getPassengers() {
-		List<Passenger> passengers = DAO.getPassengerDao().getPassengers();
+	public List<PassengerContainer> getPassengers() {
+		List<PassengerContainer> passengers = DAO.getPassengerDao().getPassengers();
 		return passengers;
+	}
+	
+
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/login/{username}/{password}")
+	public boolean CheckLogin1(@PathParam("username") String username,@PathParam("password") String password) {
+		boolean Login = DAO.getPassengerDao().CheckLogin(username, password);
+		return Login;
 	}
 }

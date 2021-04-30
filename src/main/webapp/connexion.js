@@ -17,19 +17,18 @@ function putServerData(url, data, success) {
 
 $(function () {
     $("#buttonLogin").click(function () {
-        var data = {
-        	"passenger":{
-	            "firstname":$("#firstname").val(),
-	            "name":$("#name").val(),
-	            "password":$("#password").val(),
-	            "email":$("#email").val(),
-	            "phone":$("#phone").val(),
-	            "birth":$("#birth").val()
-	            }                  
-        };
-		
-        putServerData("ws/passenger", data, function (result) {
-            alert("Success " + result);
+    
+	   var username=$("#username").val();
+	   
+	   var password=$("#password").val();
+	   	    
+       getServerData("ws/passenger/login/" + username +"/"+password, function (result) {
+        if (result==true){
+        	window.location.replace("home.html");
+        }
+        else{
+        		alert("Identifiants incorrect ");
+        }
         });
     });
 });

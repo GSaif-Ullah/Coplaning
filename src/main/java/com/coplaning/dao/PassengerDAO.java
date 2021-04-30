@@ -15,10 +15,13 @@ public interface PassengerDAO {
 	 * @param username
 	 * @return the list of actions assigned to a specific user.
 	 */
-	List<Passenger> getPassengers(String name);
-	List<Passenger> getPassengers();
+	List<PassengerContainer> getPassengers(String name);
+	List<PassengerContainer> getPassengers();
 	boolean CheckLogin(String username,String password);
 	PassengerContainer getPassengerContainer(long id);
 
 	long addPassengerContainer(PassengerContainer container);
+	
+	void deletePassengerContainer(long id);
+
 }
