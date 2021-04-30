@@ -106,7 +106,9 @@ public class Flight {
 
 	@Override
 	public String toString() {
-	        return String.valueOf(this.getSeat()) + this.getDeparture() ;
+		String s = "Flight id :"+this.getId_flight()+" |departure : "+this.getDeparture()+" |arrival : "+this.getArrival()+
+				" |date : "+this.getDate()+" |seat available : "+String.valueOf(this.getSeat())+" |price : "+String.valueOf(this.getCost());
+	        return s  ;
 	}
 
 }
