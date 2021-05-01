@@ -57,7 +57,7 @@ $(function () {
             }
          }
         else{
-            alert("Erreur ! Vérifier les champs vides");
+            alert("Veuillez vérifier les champs vides ");
         }
         
     });
