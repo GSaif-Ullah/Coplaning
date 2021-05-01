@@ -67,18 +67,49 @@ public class FlightResource {
 		List<FlightContainer> flights = DAO.getFlightDao().getFlights();
 		return flights;
 	}
+	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{departure}/{arrival}/{seat}")
 	public List<FlightContainer> Search(@PathParam("departure") String departure,@PathParam("arrival") String arrival,@PathParam("seat") int seat ) {
 		List<FlightContainer> flights = DAO.getFlightDao().Search(departure,arrival,seat);
+		System.out.println(flights.toString());
 		return flights;
 	}
+	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{departure}/{arrival}/{seat}/{cost}")
-	public List<FlightContainer> Search(@PathParam("departure") String departure,@PathParam("arrival") String arrival,@PathParam("seat") int seat ,@PathParam("cost") int cost) {
-		List<FlightContainer> flights = DAO.getFlightDao().Search1(departure,arrival,seat,cost);
+	public List<FlightContainer> Search(@PathParam("departure") String departure,@PathParam("arrival") String arrival,@PathParam("seat") int seat,@PathParam("cost") int cost ) {
+		List<FlightContainer> flights = DAO.getFlightDao().Search(departure,arrival,seat,cost);
+		System.out.println(flights.toString()+"ok");
 		return flights;
 	}
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/{departure}/{arrival}/{seat}/{cost}/{cost1}")
+	public List<FlightContainer> Search(@PathParam("departure") String departure,@PathParam("arrival") String arrival,@PathParam("seat") int seat,@PathParam("cost") int cost ,@PathParam("cost1") int cost1) {
+		List<FlightContainer> flights = DAO.getFlightDao().Search(departure,arrival,seat,cost,cost1);
+		return flights;
+	}
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/{departure}/{arrival}/{seat}/{cost}/{cost1}/{date1}/{date2}")
+	public List<FlightContainer> Search(@PathParam("departure") String departure,@PathParam("arrival") String arrival,@PathParam("seat") int seat,@PathParam("cost") int cost ,@PathParam("cost1") int cost1,
+			@PathParam("date1") String date1,@PathParam("date2") String date2) {
+		List<FlightContainer> flights = DAO.getFlightDao().Search(departure,arrival,seat,cost,cost1,date1,date2);
+		return flights;
+	}
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/{cas}/{word}")
+	public List<FlightContainer> Search(@PathParam("cas") String cas,@PathParam("word") String word ) {
+		List<FlightContainer> flights = DAO.getFlightDao().Search(cas, word);
+		System.out.println(flights.toString());
+		return flights;
+	}
+	
 }

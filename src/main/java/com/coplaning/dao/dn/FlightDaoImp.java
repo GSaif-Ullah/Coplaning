@@ -13,7 +13,6 @@ import javax.jdo.Transaction;
 import com.coplaning.dao.Flight;
 import com.coplaning.dao.FlightContainer;
 import com.coplaning.dao.FlightDAO;
-import com.coplaning.dao.PassengerContainer;
 
 
 public class FlightDaoImp implements FlightDAO{
@@ -22,15 +21,20 @@ public class FlightDaoImp implements FlightDAO{
 
 	public  FlightDaoImp(PersistenceManagerFactory pmf) {
 		this.pmf = pmf;
-	    FlightContainer F1=new FlightContainer(new Flight("departure1", "arrival1", 1,100));
-	    FlightContainer F2=new FlightContainer(new Flight("departure2", "arrival2", 2,200));
-	    FlightContainer F3=new FlightContainer(new Flight("departure3", "arrival3", 5,300));
-	    FlightContainer F4=new FlightContainer(new Flight("departure1", "arrival1", 4,150));
+	    this.initiateFlights();
+	}
+
+	//Create a Flight database
+	@SuppressWarnings("deprecation")
+	public void initiateFlights() {
+		FlightContainer F1=new FlightContainer(new Flight("departure1", "arrival1","BG587","aircraft1",new Date(121,4,8), 4, 52));
+	    FlightContainer F2=new FlightContainer(new Flight("departure2", "arrival2","AF147","aircraft2",new Date(121,4,10), 2, 74));
+	    FlightContainer F3=new FlightContainer(new Flight("departure3", "arrival3", "TF547","aircraft3",new Date(121,4,8), 7, 45));
+	    FlightContainer F4=new FlightContainer(new Flight("departure1", "arrival1", "AB123","aircraft4",new Date(121,4,7), 2, 112));
 	    PersistenceManager pm = pmf.getPersistenceManager();
 		pm.makePersistent(F1);pm.makePersistent(F2);pm.makePersistent(F3);pm.makePersistent(F4);
 		pm.close();
 	}
-
 	
 	@SuppressWarnings("unchecked")
 	public List<FlightContainer> getFlights() {
@@ -54,9 +58,56 @@ public class FlightDaoImp implements FlightDAO{
 			}
 			pm.close();
 		}
+		/*for (int i=0 ; i<detached.size() ;i++) {
+			System.out.println(detached.get(i).getFlight().getDate());
+		}*/
 		return detached;
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<FlightContainer> Search(String cas, String word) {
+		List<FlightContainer> flights = null;
+		List<FlightContainer> detached = new ArrayList<FlightContainer>();
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		try {
+			tx.begin();
+			Query q = pm.newQuery(FlightContainer.class);
+			
+			if(cas.equals("seat") || cas.equals("cost")) {
+				q.declareParameters("int word");
+				q.setFilter("flight."+cas+" == word");
+				int num = Integer.parseInt(word);
+				flights = (List<FlightContainer>) q.execute(num);
+			}
+			else if(cas.equals("date")) {
+				q.declareParameters("java.sql.Date word");
+				q.setFilter("flight."+cas+" == word");
+				
+				Date date =Date.valueOf(word);
+				System.out.println(date);
+				flights = (List<FlightContainer>) q.execute(date);
+			}
+			else {
+				q.declareParameters("String word");
+				q.setFilter("flight."+cas+" == word");
+				flights = (List<FlightContainer>) q.execute(word);
+			
+			}
+
+			detached = (List<FlightContainer>) pm.detachCopyAll(flights);
+			tx.commit();
+		} finally {
+			if (tx.isActive()) {
+				tx.rollback();
+			}
+			pm.close();
+		}
+		return detached;
+	}
+	
 	// Renvoie le flight rechercher sinon null 
+	@SuppressWarnings("unchecked")
 	public List<FlightContainer> Search(String departure,String arrival,int seat) {
 		List<FlightContainer> flights = null;
 		List<FlightContainer> detached = new ArrayList<FlightContainer>();
@@ -87,37 +138,141 @@ public class FlightDaoImp implements FlightDAO{
 			pm.close();
 		}
 	}
-	public List<FlightContainer> Search1(String departure,String arrival,int seat,int cost) {
+	
+	//ne fonctionne pas
+	@SuppressWarnings("unchecked")
+	public List<FlightContainer> Search(String departure,String arrival,int seat,int cost) {
+        List<FlightContainer> flights = null;
+        List<FlightContainer> detached = new ArrayList<FlightContainer>();
+        PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx = pm.currentTransaction();
+        try {
+            tx.begin();
+            Query q = pm.newQuery(FlightContainer.class);
+            q.declareParameters("String departure,String arrival, int seat,int cost");
+            q.setFilter("flight.departure == departure && flight.arrival==arrival && flight.seat>=seat && flight.cost<=cost");
+            flights = (List<FlightContainer>) q.executeWithArray((new Object[]{departure, arrival,seat,cost}));
+
+            detached = (List<FlightContainer>) pm.detachCopyAll(flights);
+            tx.commit();
+            if (detached.size()==0) {
+                System.out.println("ZERO");
+
+                return null;
+            }
+            else {    
+                System.out.println("OK");
+                return detached;
+                
+            }
+        } finally {
+            if (tx.isActive()) {
+                tx.rollback();
+            }
+            pm.close();
+        }
+    }
+	
+	@SuppressWarnings("unchecked")
+	public List<FlightContainer> Search(String departure, String arrival, int seat, int cost, int cost1) {
 		List<FlightContainer> flights = null;
-		List<FlightContainer> detached = new ArrayList<FlightContainer>();
-		PersistenceManager pm = pmf.getPersistenceManager();
-		Transaction tx = pm.currentTransaction();
-		try {
-			tx.begin();
-			Query q = pm.newQuery(FlightContainer.class);
-			q.declareParameters("String departure,String arrival, int seat,int cost");
-			q.setFilter("flight.departure == departure && flight.arrival==arrival && flight.seat>=seat && flight.cost<=cost");
-			flights = (List<FlightContainer>) q.executeWithArray((new Object[]{departure, arrival,seat,cost}));
+        List<FlightContainer> detached = new ArrayList<FlightContainer>();
+        PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx = pm.currentTransaction();
+        try {
+            tx.begin();
+            Query q = pm.newQuery(FlightContainer.class);
+            q.declareParameters("String departure,String arrival, int seat,int cost, int cost1");
+            q.setFilter("flight.departure == departure && flight.arrival==arrival && flight.seat>=seat && cost<=flight.cost && flight.cost<=cost1");
+            flights = (List<FlightContainer>) q.executeWithArray((new Object[]{departure, arrival,seat,cost,cost1}));
 
-			detached = (List<FlightContainer>) pm.detachCopyAll(flights);
-			tx.commit();
-			if (detached.size()==0) {
-				System.out.println("ZERO");
+            detached = (List<FlightContainer>) pm.detachCopyAll(flights);
+            tx.commit();
+            if (detached.size()==0) {
+                System.out.println("ZERO");
 
-				return null;
-			}
-			else {	
-				System.out.println("OK");
-				return detached;
-				
-			}
-		} finally {
-			if (tx.isActive()) {
-				tx.rollback();
-			}
-			pm.close();
-		}
+                return null;
+            }
+            else {    
+                System.out.println("OK1");
+                return detached;
+                
+            }
+        } finally {
+            if (tx.isActive()) {
+                tx.rollback();
+            }
+            pm.close();
+        }
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<FlightContainer> Search(String departure,String arrival,int seat,int cost,int cost1,String d1,String d2){
+		List<FlightContainer> flights = null;
+        List<FlightContainer> detached = new ArrayList<FlightContainer>();
+        PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx = pm.currentTransaction();
+        try {
+            tx.begin();
+            Query q = pm.newQuery(FlightContainer.class);
+            q.declareParameters("String departure,String arrival, int seat,int cost, int cost1,java.sql.Date date1, java.sql.Date date2");
+            q.setFilter("flight.departure == departure && flight.arrival==arrival && flight.seat>=seat && cost<=flight.cost && flight.cost<=cost1 && date1<=flight.date && flight.date<=date2");
+            
+            //transforme les string en date 
+            Date date1 =Date.valueOf(d1);
+            Date date2 =Date.valueOf(d2);
+            
+            flights = (List<FlightContainer>) q.executeWithArray((new Object[]{departure, arrival,seat,cost,cost1,date1,date2}));
+
+            detached = (List<FlightContainer>) pm.detachCopyAll(flights);
+            tx.commit();
+            if (detached.size()==0) {
+                System.out.println("ZERO");
+
+                return null;
+            }
+            else {    
+                System.out.println("OK1");
+                return detached;
+                
+            }
+        } finally {
+            if (tx.isActive()) {
+                tx.rollback();
+            }
+            pm.close();
+        }
+	}
+	/*public FlightContainer Search(String departure,String arrival,int seat) {
+			List<FlightContainer> flights = null;
+			List<FlightContainer> detached = new ArrayList<FlightContainer>();
+			PersistenceManager pm = pmf.getPersistenceManager();
+			Transaction tx = pm.currentTransaction();
+			try {
+				tx.begin();
+				Query q = pm.newQuery(FlightContainer.class);
+				q.declareParameters("String departure,String arrival,int seat");
+				q.setFilter("flight.departure == departure && flight.arrival==arrival && flight.seat>=seat");
+				flights = (List<FlightContainer>) q.execute(departure,arrival,seat);
+				detached = (List<FlightContainer>) pm.detachCopyAll(flights);
+				tx.commit();
+				if (detached.size()==0) {
+					System.out.println("ZERO");
+
+					return null;
+				}
+				else {	
+					System.out.println("OK");
+					return detached.get(0);
+					
+				}
+			} finally {
+				if (tx.isActive()) {
+					tx.rollback();
+				}
+				pm.close();
+			}
+	}*/
 	
 	//pas besoin a supprimer
 	public void addFlight(Flight flight) {
@@ -167,7 +322,7 @@ public class FlightDaoImp implements FlightDAO{
 		return containerId;
 	}
 
-	//fonctionne pas
+
 	public void deleteFlightContainer(long id) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		FlightContainer container = pm.getObjectById(FlightContainer.class, id);
@@ -177,4 +332,6 @@ public class FlightDaoImp implements FlightDAO{
 		pm.flush();
 		pm.close();
 	}
+
+	
 }
