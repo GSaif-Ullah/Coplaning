@@ -6,6 +6,7 @@ import javax.jdo.annotations.PersistenceCapable;
 
 @PersistenceCapable
 public class Flight {
+	
 	protected String departure;
 	protected String arrival;
 	protected String id_flight;
@@ -13,6 +14,7 @@ public class Flight {
 	protected Date date;
 	protected int seat;
 	protected int cost;
+	protected int test;
 
 	public Flight() {
 		super();
