@@ -27,10 +27,10 @@ public class FlightDaoImp implements FlightDAO{
 	//Create a Flight database
 	@SuppressWarnings("deprecation")
 	public void initiateFlights() {
-		FlightContainer F1=new FlightContainer(new Flight("departure1", "arrival1","BG587","aircraft1",new Date(121,4,8), 4, 52));
+		FlightContainer F1=new FlightContainer(new Flight("departure1", "arrival1","BG587","aircraft1",new Date(121,4,8), 4, 52,"images/avions.jpg"));
 	    FlightContainer F2=new FlightContainer(new Flight("departure2", "arrival2","AF147","aircraft2",new Date(121,4,10), 2, 74));
 	    FlightContainer F3=new FlightContainer(new Flight("departure3", "arrival3", "TF547","aircraft3",new Date(121,4,8), 7, 45));
-	    FlightContainer F4=new FlightContainer(new Flight("departure1", "arrival1", "AB123","aircraft4",new Date(121,4,7), 2, 112));
+	    FlightContainer F4=new FlightContainer(new Flight("departure1", "arrival1", "AB123","aircraft4",new Date(121,4,7), 2, 112,"images/aerodrome.jpg"));
 	    PersistenceManager pm = pmf.getPersistenceManager();
 		pm.makePersistent(F1);pm.makePersistent(F2);pm.makePersistent(F3);pm.makePersistent(F4);
 		pm.close();

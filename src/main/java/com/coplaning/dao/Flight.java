@@ -14,7 +14,7 @@ public class Flight {
 	protected Date date;
 	protected int seat;
 	protected int cost;
-	protected int test;
+	protected String image;
 
 	public Flight() {
 		super();
@@ -56,6 +56,27 @@ public class Flight {
 		this.date = date;
 		this.seat = seat;
 		this.cost = cost;
+	}
+
+	public Flight(String departure, String arrival, String id_flight, String plane, Date date, int seat, int cost,
+			String image) {
+		super();
+		this.departure = departure;
+		this.arrival = arrival;
+		this.id_flight = id_flight;
+		this.plane = plane;
+		this.date = date;
+		this.seat = seat;
+		this.cost = cost;
+		this.image = image;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
 	}
 
 	public String getDeparture() {
