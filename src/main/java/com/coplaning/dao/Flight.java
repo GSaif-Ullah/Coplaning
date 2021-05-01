@@ -37,6 +37,14 @@ public class Flight {
 		this.id_flight = id_flight;
 	}
 
+	public Flight(String departure, String arrival, int seat, int cost) {
+		super();
+		this.departure = departure;
+		this.arrival = arrival;
+		this.seat = seat;
+		this.cost = cost;
+	}
+
 	public Flight(String departure, String arrival, String id_flight, String plane, Date date, int seat, int cost) {
 		super();
 		this.departure = departure;

@@ -5,6 +5,7 @@ function getServerData(url, success) {
     }).done(success);
 }
 
+
 function putServerData(url, data, success) {
     $.ajax({
         type: 'PUT',
@@ -27,9 +28,37 @@ $(function () {
 	            "birth":$("#birth").val()
 	            }                  
         };
-		
-        putServerData("ws/passenger", data, function (result) {
-            alert("Inscription réussi voici votre id :  " + result);
-        });
+        
+        var password2=$("#password2").val();
+
+         if (data.passenger.firstname!="" && data.passenger.name!=""  && data.passenger.password!=""  && data.passenger.email!=""  && data.passenger.phone!=""  && data.passenger.birth!=""){
+            if(data.passenger.email.indexOf("@")<1 ||data.passenger.email.lastIndexOf(".")<data.passenger.email.indexOf("@")+2 ){
+                              alert("Veuillez entrer une adresse mail valide");
+              }
+              else if (data.passenger.password.length<8){
+                   alert("Erreur !Le mot de passe doit faire au moins 8 caractères ");
+              } 
+             else if (data.passenger.password!=password2){
+                alert("Erreur !Les mots de passe ne correspondent pas ");
+             }
+             else{
+                getServerData("ws/passenger/login/" + data.passenger.email, function (result) {
+                if (result==true){
+                    alert("Adresse mail déjà utilisée");
+                }
+                else {
+                    putServerData("ws/passenger", data, function (result) {           
+            		alert("Inscription réussie, bonne réservation ! ");
+                    window.location.replace("home.html");
+
+                });
+                }    
+                });
+            }
+         }
+        else{
+            alert("Erreur ! Vérifier les champs vides");
+        }
+        
     });
 });
