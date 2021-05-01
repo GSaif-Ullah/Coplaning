@@ -79,9 +79,10 @@ public class PassengerResource {
 		boolean Login = DAO.getPassengerDao().CheckLogin(username, password);
 		return Login;
 	}
+	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/{username}")
+	@Path("/check/{username}")
 	public boolean CheckEmail(@PathParam("username") String username) {
 		boolean CheckEmail = DAO.getPassengerDao().CheckEmail(username);
 		return CheckEmail;

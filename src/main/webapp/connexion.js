@@ -22,7 +22,7 @@ $(function () {
 	   
 	   var password=$("#password").val();
 	   	    
-       getServerData("ws/passenger/login/" + username +"/"+-, function (result) {
+       getServerData("ws/passenger/" + username +"/"+ password, function (result) {
         if (result==true){
         	window.location.replace("home.html");
         }
