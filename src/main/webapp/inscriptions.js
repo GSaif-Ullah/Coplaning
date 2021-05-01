@@ -42,7 +42,7 @@ $(function () {
                 alert("Erreur !Les mots de passe ne correspondent pas ");
              }
              else{
-                getServerData("ws/passenger/login/" + data.passenger.email, function (result) {
+                getServerData("ws/passenger/check/" + data.passenger.email, function (result) {
                 if (result==true){
                     alert("Adresse mail déjà utilisée");
                 }

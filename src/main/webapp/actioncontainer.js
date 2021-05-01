@@ -36,6 +36,6 @@ $(function () {
 	       $("#buttonGet").click(function () {
 	   
 	   	    
-	   getServerData("ws/flight/search/departure1/arrival1/1", fillTable2); 
+	   getServerData("ws/flight/departure1/arrival1/1", fillTable2); 
         });
 });
