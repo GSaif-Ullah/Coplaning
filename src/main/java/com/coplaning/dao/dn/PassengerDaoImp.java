@@ -155,6 +155,33 @@ public class PassengerDaoImp implements PassengerDAO{
 			pm.close();
 		}
 	}
+	// Renvoie true si le username  est dans la base de donnee
+		public boolean CheckEmail(String username) {
+			List<PassengerContainer> passengers = null;
+			List<PassengerContainer> detached = new ArrayList<PassengerContainer>();
+			PersistenceManager pm = pmf.getPersistenceManager();
+			Transaction tx = pm.currentTransaction();
+			try {
+				tx.begin();
+				Query q = pm.newQuery(PassengerContainer.class);
+				q.declareParameters("String username");
+				q.setFilter("passenger.email == username");
+				passengers = (List<PassengerContainer>) q.execute(username);
+				detached = (List<PassengerContainer>) pm.detachCopyAll(passengers);
+				tx.commit();
+				if (detached.size()==0) {
+					return false;
+				}
+				else {						
+					return true;
+				}
+			} finally {
+				if (tx.isActive()) {
+					tx.rollback();
+				}
+				pm.close();
+			}
+		}
 	public void deletePassengerContainer(long id) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		PassengerContainer container = pm.getObjectById(PassengerContainer.class, id);

@@ -22,9 +22,9 @@ $(function () {
 	   
 	   var password=$("#password").val();
 	   	    
-       getServerData("ws/passenger/login/" + username +"/"+password, function (result) {
+       getServerData("ws/passenger/login/" + username +"/"+-, function (result) {
         if (result==true){
-        	window.location.replace("user.html");
+        	window.location.replace("home.html");
         }
         else{
         		alert("Identifiants incorrect ");

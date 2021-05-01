@@ -24,7 +24,7 @@ public interface FlightDAO {
 	public List<FlightContainer> Search(String departure,String arrival,int seat,int cost);
 	public List<FlightContainer> Search(String departure,String arrival,int seat,int cost,int cost1);
 	public List<FlightContainer> Search(String departure,String arrival,int seat,int cost,int cost1,String d1,String d2);
-	
+  
 	long addFlightContainer(FlightContainer container);
 	
 	void deleteFlightContainer(long id);

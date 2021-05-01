@@ -112,5 +112,4 @@ public class FlightResource {
 		return flights;
 	}
 	
-	
 }

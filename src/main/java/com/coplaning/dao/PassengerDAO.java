@@ -18,6 +18,8 @@ public interface PassengerDAO {
 	List<PassengerContainer> getPassengers(String name);
 	List<PassengerContainer> getPassengers();
 	boolean CheckLogin(String username,String password);
+	boolean CheckEmail(String username);
+
 	PassengerContainer getPassengerContainer(long id);
 
 	long addPassengerContainer(PassengerContainer container);

@@ -6,23 +6,13 @@ function getServerData(url, success){
     }).done(success);
 }
 
-function callDone(result){
-	var templateExample = _.template($('#templateExample').html());
 
-	var html = templateExample({
-		"attribute":JSON.stringify(result)
-	});
-
-	$("#result").append(html);
+function fillTable(FlightContainer) {
+    var template = _.template($('#templateRow').html());;
+    var result = "";
+    FlightContainer.forEach(f=>result+=template(f));
+    $("#result").html(result);
 }
-
-
-function ListFlights(container) {
-    var template = $('#output').html();
-
-   var listFlight="";
-   container.flight.forEach(flight=> listFlight+= template(flight.departure));
-};
 
 $(function () {
     $("#buttonGet").click(function () {
@@ -33,7 +23,6 @@ $(function () {
 	    
 	   var seat=$("#seat").val();
 	   	    
-	   getServerData("ws/flight/search/" + departure +"/"+arrival+"/"+seat, function(){
-	   	console.log(result.flight);});
+	   getServerData("ws/flight/search/" + departure +"/"+arrival+"/"+seat, fillTable());
     });
 });
