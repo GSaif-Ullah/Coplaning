@@ -28,11 +28,11 @@ public class PassengerDaoImp implements PassengerDAO{
 	//Create a Passengers database
 	@SuppressWarnings("deprecation")
 	public void initiatePassengers() {
-		PassengerContainer P1=new PassengerContainer(new Passenger("password1", "email1", "kathawala", "maaz",new Date(98,1,5),"phone1"));
-		PassengerContainer P2=new PassengerContainer(new Passenger("password2", "email2", "ghulam", "saif",new Date(98,7,20),"phone2"));
-		PassengerContainer P3=new PassengerContainer(new Passenger("password3", "email3", "guignard", "fabrice",new Date(98,2,2),"phone3"));
-		PassengerContainer P4=new PassengerContainer(new Passenger("password4", "email4", "phanvilay", "kevin",new Date(98,11,12),"phone4"));
-		PassengerContainer P5=new PassengerContainer(new Passenger("password5", "email5", "rezig", "mounir",new Date(98,2,18),"phone5"));
+		PassengerContainer P1=new PassengerContainer(new Passenger("password1", "maaz@gmail.com", "kathawala", "maaz",new Date(98,1,5),"phone1"));
+		PassengerContainer P2=new PassengerContainer(new Passenger("password2", "saif@outlook.fr", "ghulam", "saif",new Date(98,7,20),"phone2"));
+		PassengerContainer P3=new PassengerContainer(new Passenger("password3", "fabrice@yahoo.fr", "guignard", "fabrice",new Date(98,2,2),"phone3"));
+		PassengerContainer P4=new PassengerContainer(new Passenger("password4", "kevin@gmail.com", "phanvilay", "kevin",new Date(98,11,12),"phone4"));
+		PassengerContainer P5=new PassengerContainer(new Passenger("password5", "mounir@live.fr", "rezig", "mounir",new Date(98,2,18),"phone5"));
 		PersistenceManager pm = pmf.getPersistenceManager();
 		pm.makePersistent(P1);pm.makePersistent(P2);pm.makePersistent(P3);pm.makePersistent(P4);pm.makePersistent(P5);
 		pm.close();
@@ -105,6 +105,7 @@ public class PassengerDaoImp implements PassengerDAO{
 		return containerId;
 	}
 	// Renvoie true si le username et le password sont dans la base de donnee
+	@SuppressWarnings("unchecked")
 	public boolean CheckLogin(String username, String passwrd) {
 		List<PassengerContainer> passengers = null;
 		List<PassengerContainer> detached = new ArrayList<PassengerContainer>();
@@ -132,6 +133,7 @@ public class PassengerDaoImp implements PassengerDAO{
 		}
 	}
 	// Renvoie true si le username  est dans la base de donnee
+		@SuppressWarnings("unchecked")
 		public boolean CheckEmail(String username) {
 			List<PassengerContainer> passengers = null;
 			List<PassengerContainer> detached = new ArrayList<PassengerContainer>();
