@@ -23,16 +23,7 @@
 	</div>
 	
 
-    <script id="templateRow" type="text/template">
-        <tr>
-			<td>				
-					<img class="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" alt="Thumbnail [100%x225]" src=<%= flight.image %> data-holder-rendered="true" style="height: 225px; width: 100%; display: block;" >Image : </small></td>			
-<td> <small class="text-muted">ID : </small><%= id %> </td>
-			<td><small class="text-muted">Lieu de départ : </small> <%= flight.departure %></td>
-			<td><small class="text-muted">Lieu d'arrivé : </small><%= flight.arrival %></td>
-			<td><small class="text-muted">Prix : </small><%= flight.cost %></td>
-	</tr>
-    </script>
+
 
     
 	<div class="container">
@@ -44,13 +35,16 @@
 					<div class="card-body">
 						<p class="card-text">Réserver votre vol dès maintenant</p>
 						<div class="d-flex justify-content-between align-items-center">
-							<div class="btn-group">
-								<button type="button" id="buttonGet" class="btn btn-sm btn-outline-secondary">Afficher</button>
-							</div>
-							<small class="text-muted" id="result">Lieu</small>
-							<small class="text-muted">Avis</small>
-							<small class="text-muted">Tarif</small>
-							<small class="text-muted">Durée</small>
+							<small class="row" id="result"></small>
+    <script id="templateRow" type="text/template">
+        <tr>
+			<td><img class="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" alt="Thumbnail [100%x225]" src=<%= flight.image %> data-holder-rendered="true" style="height: 225px; width: 100%; display: block;" ></small></td>
+			<td><small class="text-muted">ID :	    </small><%= id %></td>			
+			<td><small class="text-muted">Lieu de départ : </small> <%= flight.departure %></td>
+			<td><small class="text-muted">Lieu d'arrivé : </small><%= flight.arrival %></td>
+			<td><small class="text-muted">Prix : </small><%= flight.cost %>€</td>
+	</tr>
+    </script>
 						</div>
 					</div>
 				</div>

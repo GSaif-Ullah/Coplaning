@@ -32,12 +32,14 @@ function fillTable2(container){
 
 }
 
-$(function () {
-	       $("#buttonGet").click(function () {
-	   
+$(function fonction() {
+	var searchParams=new URLSearchParams(window.location.search)
+	var departure=searchParams.get('Departure')
+	var arrival=searchParams.get('Arrival')
+	var seat=searchParams.get('Seat')
+
 	   	    
-	   getServerData("ws/flight/departure1/arrival1/1", fillTable2); 
+	   getServerData("ws/flight/" + departure +"/"+arrival+"/"+seat, fillTable2);
 	    console.log(result);
 
         });
-});

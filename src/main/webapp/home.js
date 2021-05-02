@@ -15,14 +15,19 @@ function fillTable(FlightContainer) {
 }
 
 $(function () {
-    $("#buttonGet").click(function () {
+    $("#buttonSearch").click(function () {
     
 	   var departure=$("#departure").val();
 	   
 	   var arrival=$("#arrival").val();
 	    
 	   var seat=$("#seat").val();
-	   	    
-	   getServerData("ws/flight/search/" + departure +"/"+arrival+"/"+seat, fillTable());
+	   
+		if(departure.length > 0 && arrival.length>0 && seat.length>0) {
+		      document.location.href='recherche.html?Departure='+departure + '&Arrival='+arrival + '&Seat='+seat;
+
+		
+		}
+  	    
     });
 });
