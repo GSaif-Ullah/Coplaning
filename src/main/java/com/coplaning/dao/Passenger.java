@@ -15,6 +15,23 @@ public class Passenger {
 	protected String phone;
 
 
+	public Passenger() {
+		super();
+	}
+	
+	public Passenger(String name) {
+		super();
+		this.name = name;
+	}
+
+
+	public Passenger(String password, String email, String name) {
+		super();
+		this.password = password;
+		this.email = email;
+		this.name = name;
+	}
+	
 	public Passenger(String password, String email, String name, String firstname, Date birth, String phone) {
 		super();
 		this.password = password;
@@ -65,24 +82,7 @@ public class Passenger {
 		this.phone = phone;
 	}
 
-
-	public Passenger() {
-		super();
-	}
-
-
-	public Passenger(String name) {
-		super();
-		this.name = name;
-	}
-
-
-	public Passenger(String password, String email, String name) {
-		super();
-		this.password = password;
-		this.email = email;
-		this.name = name;
-	}
+	
 	public String getPassword() {
 		return password;
 	}
@@ -96,7 +96,12 @@ public class Passenger {
 		this.email = email;
 	}
 
-
+	@Override
+	public String toString() {
+		String s = "Name :"+this.getName()+" |Firstname : "+this.getFirstname()+" |birth : "+this.getBirth()+
+				" |email : "+this.getEmail()+" |password : "+this.getPassword() +" |tel : "+this.getPhone();
+	        return s  ;
+	}
 
 
 

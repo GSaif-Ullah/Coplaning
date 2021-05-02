@@ -70,11 +70,18 @@ public class PassengerResource {
 		return passengers;
 	}
 	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/{cas}/{word}")
+	public List<PassengerContainer> Search(@PathParam("cas") String cas,@PathParam("word") String word) {
+		List<PassengerContainer> passengers = DAO.getPassengerDao().Search(cas, word);
+		return passengers;
+	}
 
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/{username}/{password}")
+	@Path("/check/{username}/{password}")
 	public boolean CheckLogin1(@PathParam("username") String username,@PathParam("password") String password) {
 		boolean Login = DAO.getPassengerDao().CheckLogin(username, password);
 		return Login;

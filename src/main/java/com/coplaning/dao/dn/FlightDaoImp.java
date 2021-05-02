@@ -27,12 +27,22 @@ public class FlightDaoImp implements FlightDAO{
 	//Create a Flight database
 	@SuppressWarnings("deprecation")
 	public void initiateFlights() {
-		FlightContainer F1=new FlightContainer(new Flight("departure1", "arrival1","BG587","aircraft1",new Date(121,4,8), 4, 52));
-	    FlightContainer F2=new FlightContainer(new Flight("departure2", "arrival2","AF147","aircraft2",new Date(121,4,10), 2, 74));
-	    FlightContainer F3=new FlightContainer(new Flight("departure3", "arrival3", "TF547","aircraft3",new Date(121,4,8), 7, 45));
-	    FlightContainer F4=new FlightContainer(new Flight("departure1", "arrival1", "AB123","aircraft4",new Date(121,4,7), 2, 112));
+		FlightContainer F1=new FlightContainer(new Flight("CDG", "Orly","BG587","aircraft1",new Date(121,4,8), 4, 52));
+	    FlightContainer F2=new FlightContainer(new Flight("Orly", "CDG","AF147","aircraft2",new Date(121,4,10), 2, 74));
+	    FlightContainer F3=new FlightContainer(new Flight("Meaux", "Pontoise", "AB547","aircraft3",new Date(121,4,8), 7, 45));
+	    FlightContainer F4=new FlightContainer(new Flight("Lognes", "Etampes", "AB123","aircraft4",new Date(121,4,7), 2, 112));
+	    FlightContainer F5=new FlightContainer(new Flight("Meaux", "Pontoise", "AB536","aircraft3",new Date(121,4,8), 1, 65));
+	    FlightContainer F6=new FlightContainer(new Flight("Meaux", "Lognes", "AB546","aircraft1",new Date(121,4,9), 8, 57));
+	    FlightContainer F7=new FlightContainer(new Flight("Pontoise", "Pontoise", "AB346","aircraft2",new Date(121,4,10), 7, 39));
+	    FlightContainer F8=new FlightContainer(new Flight("Lognes", "Meaux", "AB586","aircraft1",new Date(121,4,6), 4, 107));
+	    FlightContainer F9=new FlightContainer(new Flight("Pontoise", "Meaux", "AB516","aircraft3",new Date(121,4,14), 3, 86));
+	    FlightContainer F10=new FlightContainer(new Flight("Etampes", "Pontoise", "AB549","aircraft4",new Date(121,4,7), 5, 63));
+	    FlightContainer F11=new FlightContainer(new Flight("Etampes", "Meaux", "AB549","aircraft1",new Date(121,4,8), 5, 43));
+	    FlightContainer F12=new FlightContainer(new Flight("Lognes", "Pontoise", "AB549","aircraft2",new Date(121,4,9), 5, 83));
 	    PersistenceManager pm = pmf.getPersistenceManager();
 		pm.makePersistent(F1);pm.makePersistent(F2);pm.makePersistent(F3);pm.makePersistent(F4);
+		pm.makePersistent(F5);pm.makePersistent(F6);pm.makePersistent(F7);pm.makePersistent(F8);
+		pm.makePersistent(F9);pm.makePersistent(F10);pm.makePersistent(F11);pm.makePersistent(F12);
 		pm.close();
 	}
 	
@@ -106,7 +116,7 @@ public class FlightDaoImp implements FlightDAO{
 		return detached;
 	}
 	
-	// Renvoie le flight rechercher sinon null 
+	// Renvoie les flight rechercher sinon null 
 	@SuppressWarnings("unchecked")
 	public List<FlightContainer> Search(String departure,String arrival,int seat) {
 		List<FlightContainer> flights = null;
@@ -243,37 +253,7 @@ public class FlightDaoImp implements FlightDAO{
             pm.close();
         }
 	}
-	/*public FlightContainer Search(String departure,String arrival,int seat) {
-			List<FlightContainer> flights = null;
-			List<FlightContainer> detached = new ArrayList<FlightContainer>();
-			PersistenceManager pm = pmf.getPersistenceManager();
-			Transaction tx = pm.currentTransaction();
-			try {
-				tx.begin();
-				Query q = pm.newQuery(FlightContainer.class);
-				q.declareParameters("String departure,String arrival,int seat");
-				q.setFilter("flight.departure == departure && flight.arrival==arrival && flight.seat>=seat");
-				flights = (List<FlightContainer>) q.execute(departure,arrival,seat);
-				detached = (List<FlightContainer>) pm.detachCopyAll(flights);
-				tx.commit();
-				if (detached.size()==0) {
-					System.out.println("ZERO");
 
-					return null;
-				}
-				else {	
-					System.out.println("OK");
-					return detached.get(0);
-					
-				}
-			} finally {
-				if (tx.isActive()) {
-					tx.rollback();
-				}
-				pm.close();
-			}
-	}*/
-	
 	//pas besoin a supprimer
 	public void addFlight(Flight flight) {
 		PersistenceManager pm = pmf.getPersistenceManager();
