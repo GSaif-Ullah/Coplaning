@@ -18,7 +18,7 @@ public class PassengerDaoImplTest {
 		PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("Example");
 		PassengerDAO passengerDao = new PassengerDaoImp(pmf);
 
-		Assert.assertEquals(0, passengerDao.getPassengers("user1").size());
+		Assert.assertEquals(0, passengerDao.getPassengers().size());
 
 		Passenger passenger = new Passenger();
 		passenger.setName("user1");
@@ -27,9 +27,9 @@ public class PassengerDaoImplTest {
 
 		passengerDao.addPassenger(passenger);
 
-		Assert.assertEquals(1, passengerDao.getPassengers("user1").size());
+		Assert.assertEquals(1, passengerDao.getPassengers().size());
 
-		DAO.getPassengerDao().getPassengers("user1");
+		DAO.getPassengerDao().getPassengers();
 	}
 
 }

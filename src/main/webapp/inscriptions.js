@@ -29,38 +29,41 @@ $(function () {
 	            }                  
         };
         var password2=$("#password2").val();
-
-         if (data.passenger.firstname!="" && data.passenger.name!=""  && data.passenger.password!=""  && data.passenger.email!=""  && data.passenger.phone!=""  && data.passenger.birth!=""){
-            if(data.passenger.email.indexOf("@")<1 ||data.passenger.email.lastIndexOf(".")<data.passenger.email.indexOf("@")+2 ){
-                              alert("Veuillez entrer une adresse mail valide");
-              }
-              else if (data.passenger.password.length<8){
-                   alert("Erreur !Le mot de passe doit faire au moins 8 caractères ");
-              } 
-             else if (data.passenger.password!=password2){
-                alert("Erreur !Les mots de passe ne correspondent pas ");
-             }
-             else if (gridCheck.checked==false){
-                 alert("Veuillez accepter les conditions d'utilisation");
-             }
-             else{
-                getServerData("ws/passenger/check/" + data.passenger.email, function (result) {
-                if (result==true){
-                    alert("Adresse mail déjà utilisée");
-                }
-                else {
-                    putServerData("ws/passenger", data, function (result) {           
-            		alert("Inscription réussie, bonne réservation ! ");
-                    window.location.replace("home.html");
-
-                });
-                }    
-                });
-            }
-         }
-        else{
+        
+        if (data.passenger.firstname=="" ||  data.passenger.name==""  || data.passenger.password==""  || data.passenger.password2=="" || data.passenger.email=="" || data.passenger.phone==""  || data.passenger.birth==""){
             alert("Veuillez vérifier les champs vides ");
         }
         
+	    else{
+			if(data.passenger.email.indexOf("@")<1 ||data.passenger.email.lastIndexOf(".")<data.passenger.email.indexOf("@")+2 ){
+				alert("Veuillez entrer une adresse mail valide");
+			}
+			
+			if (data.passenger.password.length<8){
+				alert("Erreur !Le mot de passe doit faire au moins 8 caractères ");
+			} 
+		    
+			if (data.passenger.password!=password2){
+				alert("Erreur !Les mots de passe ne correspondent pas ");
+			}
+				
+		    if (gridCheck.checked==false){
+		    	alert("Veuillez accepter les conditions d'utilisation");
+		    }
+		    else{				
+				getServerData("ws/passenger/check/" + data.passenger.email, function (result) {
+					if (result==true){
+					   alert("Adresse mail déjà utilisée");
+					}
+					else {
+					   putServerData("ws/passenger", data, function (result) {           
+					   alert("Inscription réussie, bonne réservation ! ");
+					   window.location.replace("home.html");
+					   }); 
+					}
+				});
+		    }
+	    }
+        	
     });
 });

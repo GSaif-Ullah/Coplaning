@@ -27,18 +27,18 @@ public class FlightDaoImp implements FlightDAO{
 	//Create a Flight database
 	@SuppressWarnings("deprecation")
 	public void initiateFlights() {
-		FlightContainer F1=new FlightContainer(new Flight("CDG", "Orly","BG587","aircraft1",new Date(121,4,8), 4, 52));
-	    FlightContainer F2=new FlightContainer(new Flight("Orly", "CDG","AF147","aircraft2",new Date(121,4,10), 2, 74));
-	    FlightContainer F3=new FlightContainer(new Flight("Meaux", "Pontoise", "AB547","aircraft3",new Date(121,4,8), 7, 45));
-	    FlightContainer F4=new FlightContainer(new Flight("Lognes", "Etampes", "AB123","aircraft4",new Date(121,4,7), 2, 112));
-	    FlightContainer F5=new FlightContainer(new Flight("Meaux", "Pontoise", "AB536","aircraft3",new Date(121,4,8), 1, 65));
-	    FlightContainer F6=new FlightContainer(new Flight("Meaux", "Lognes", "AB546","aircraft1",new Date(121,4,9), 8, 57));
-	    FlightContainer F7=new FlightContainer(new Flight("Pontoise", "Pontoise", "AB346","aircraft2",new Date(121,4,10), 7, 39));
-	    FlightContainer F8=new FlightContainer(new Flight("Lognes", "Meaux", "AB586","aircraft1",new Date(121,4,6), 4, 107));
-	    FlightContainer F9=new FlightContainer(new Flight("Pontoise", "Meaux", "AB516","aircraft3",new Date(121,4,14), 3, 86));
-	    FlightContainer F10=new FlightContainer(new Flight("Etampes", "Pontoise", "AB549","aircraft4",new Date(121,4,7), 5, 63));
-	    FlightContainer F11=new FlightContainer(new Flight("Etampes", "Meaux", "AB549","aircraft1",new Date(121,4,8), 5, 43));
-	    FlightContainer F12=new FlightContainer(new Flight("Lognes", "Pontoise", "AB549","aircraft2",new Date(121,4,9), 5, 83));
+		FlightContainer F1=new FlightContainer(new Flight("CDG", "Orly","H160","aircraft1",new Date(121,4,8), 4, 52,"images/aircraft1.jpg"));
+	    FlightContainer F2=new FlightContainer(new Flight("Orly", "CDG","FGZPA","aircraft2",new Date(121,4,10), 2, 74,"images/aircraft2.jpg"));
+	    FlightContainer F3=new FlightContainer(new Flight("Meaux", "Pontoise", "FGYPG","aircraft3",new Date(121,4,8), 7, 45,"images/aircraft3.jpg"));
+	    FlightContainer F4=new FlightContainer(new Flight("Lognes", "Etampes", "FGHLY","aircraft4",new Date(121,4,7), 2, 112,"images/aircraft4.jpg"));
+	    FlightContainer F5=new FlightContainer(new Flight("Meaux", "Pontoise", "FG536","aircraft3",new Date(121,4,8), 1, 65,"images/aircraft5.jpg"));
+	    FlightContainer F6=new FlightContainer(new Flight("Meaux", "Lognes", "FGCIX","aircraft1",new Date(121,4,9), 8, 57,"images/aircraft6.jpg"));
+	    FlightContainer F7=new FlightContainer(new Flight("Pontoise", "Pontoise", "AB346","aircraft2",new Date(121,4,10), 7, 39,"images/aircraft7.jpg"));
+	    FlightContainer F8=new FlightContainer(new Flight("Lognes", "Meaux", "AB586","aircraft1",new Date(121,4,6), 4, 107,"images/aircraft8.jpg"));
+	    FlightContainer F9=new FlightContainer(new Flight("Pontoise", "Meaux", "AB516","aircraft3",new Date(121,4,14), 3, 86,"images/aircraft9.jpg"));
+	    FlightContainer F10=new FlightContainer(new Flight("Etampes", "Pontoise", "HBYSH","aircraft4",new Date(121,4,7), 5, 63,"images/aircraft10.jpg"));
+	    FlightContainer F11=new FlightContainer(new Flight("Etampes", "Meaux", "IDUEK","aircraft1",new Date(121,4,8), 5, 43,"images/aircraft11.jpg"));
+	    FlightContainer F12=new FlightContainer(new Flight("Lognes", "Pontoise", "AB549","aircraft2",new Date(121,4,9), 5, 83,"images/aircraft12.jpg"));
 	    PersistenceManager pm = pmf.getPersistenceManager();
 		pm.makePersistent(F1);pm.makePersistent(F2);pm.makePersistent(F3);pm.makePersistent(F4);
 		pm.makePersistent(F5);pm.makePersistent(F6);pm.makePersistent(F7);pm.makePersistent(F8);
