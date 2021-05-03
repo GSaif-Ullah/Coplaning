@@ -18,10 +18,10 @@ function putServerData(url, data, success) {
 $(function () {
     $("#buttonLogin").click(function () {
     
-	   var username=$("#username").val();
+	   var username=$("#mail").val();
 	   
-	   var password=$("#password").val();
-	   	    
+	   var password=$("#psswrd").val();
+	   	           	 	   
        getServerData("ws/passenger/check/" + username +"/"+ password, function (result) {
         if (result==true){
         	window.location.replace("home.html");
