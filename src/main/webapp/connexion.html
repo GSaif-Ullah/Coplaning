@@ -42,9 +42,10 @@
 
 						<div class="form-group row">
 							<label class="col-2 col-form-label"
-							style="text-align: left;">Email</label>
+							style="text-align: left;" >Email</label>
 							<div class="col-10">
-								<input class="form-control" 
+								<input class="form-control"
+								id="mail" 
 								type="email" 
 								placeholder="name@example.com"
 								required>
@@ -53,20 +54,21 @@
 
 						<div class="form-group row">
 							<label class="col-2 col-form-label"
-							style="text-align: left;">Mot de passe</label>
+							style="text-align: left;" >Mot de passe</label>
 							<div class="col-10">
 								<input class="form-control" 
+								id="psswrd"
 								type="password"
 								pattern="[A-Za-z0-9]{8,}"
 								title="Veuillez entrer votre mot de passe d'au moins 8 caratères"
-								required>
+								required> 
 							</div>
 						</div><br>	
 
 					</div></div>
 
 				</div>
-				<button type="submit" class="btn btn-lg btn-block btn-primary">Se connecter</button>
+				<button type="submit" class="btn btn-lg btn-block btn-primary" id="buttonLogin" >Se connecter</button>
 				
 			</form>
 			
@@ -108,6 +110,8 @@
 			</div>
 		</footer>
 	</div>
-
+	<script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+	<script src="connexion.js"></script>
 </body>
 </html>

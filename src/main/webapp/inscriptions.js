@@ -28,7 +28,6 @@ $(function () {
 	            "birth":$("#birth").val()
 	            }                  
         };
-        
         var password2=$("#password2").val();
 
          if (data.passenger.firstname!="" && data.passenger.name!=""  && data.passenger.password!=""  && data.passenger.email!=""  && data.passenger.phone!=""  && data.passenger.birth!=""){
@@ -40,6 +39,9 @@ $(function () {
               } 
              else if (data.passenger.password!=password2){
                 alert("Erreur !Les mots de passe ne correspondent pas ");
+             }
+             else if (gridCheck.checked==false){
+                 alert("Veuillez accepter les conditions d'utilisation");
              }
              else{
                 getServerData("ws/passenger/check/" + data.passenger.email, function (result) {
