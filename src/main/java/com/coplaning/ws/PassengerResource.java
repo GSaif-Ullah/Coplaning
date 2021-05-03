@@ -70,6 +70,13 @@ public class PassengerResource {
 		return passengers;
 	}
 	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/{cas}/{word}")
+	public List<PassengerContainer> Search(@PathParam("cas") String cas,@PathParam("word") String word) {
+		List<PassengerContainer> passengers = DAO.getPassengerDao().Search(cas, word);
+		return passengers;
+	}
 
 	
 	@GET

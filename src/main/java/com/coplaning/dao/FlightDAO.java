@@ -19,11 +19,12 @@ public interface FlightDAO {
 	List<FlightContainer> getFlights();
 
 	FlightContainer getFlightContainer(long id);
-	public List<FlightContainer> Search(String cas, String word);
-	public List<FlightContainer> Search(String departure,String arrival,int seat);
-	public List<FlightContainer> Search(String departure,String arrival,int seat,int cost);
-	public List<FlightContainer> Search(String departure,String arrival,int seat,int cost,int cost1);
-	public List<FlightContainer> Search(String departure,String arrival,int seat,int cost,int cost1,String d1,String d2);
+	
+	List<FlightContainer> Search(String cas, String word);
+	List<FlightContainer> Search(String departure,String arrival,int seat);
+	List<FlightContainer> Search(String departure,String arrival,int seat,int cost);
+	List<FlightContainer> Search(String departure,String arrival,int seat,int cost,int cost1);
+ 	List<FlightContainer> Search(String departure,String arrival,int seat,int cost,int cost1,String d1,String d2);
   
 	long addFlightContainer(FlightContainer container);
 	

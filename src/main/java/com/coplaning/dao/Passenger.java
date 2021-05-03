@@ -2,6 +2,8 @@ package com.coplaning.dao;
 
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.jdo.annotations.PersistenceCapable;
 
@@ -13,8 +15,26 @@ public class Passenger {
 	protected String firstname;
 	protected Date birth;
 	protected String phone;
+	protected List<FlightContainer> flights;
 
 
+	public Passenger() {
+		super();
+	}
+	
+	public Passenger(String name) {
+		super();
+		this.name = name;
+	}
+
+
+	public Passenger(String password, String email, String name) {
+		super();
+		this.password = password;
+		this.email = email;
+		this.name = name;
+	}
+	
 	public Passenger(String password, String email, String name, String firstname, Date birth, String phone) {
 		super();
 		this.password = password;
@@ -25,6 +45,33 @@ public class Passenger {
 		this.phone = phone;
 	}
 
+
+	public Passenger(String password, String email, String name, String firstname, Date birth, String phone,
+			FlightContainer flight) {
+		super();
+		this.password = password;
+		this.email = email;
+		this.name = name;
+		this.firstname = firstname;
+		this.birth = birth;
+		this.phone = phone;
+		this.flights = new ArrayList<FlightContainer>();
+		this.flights.add(flight);
+	}
+
+	
+	public Passenger(String password, String email, String name, String firstname, Date birth, String phone,
+			List<FlightContainer> flights) {
+		super();
+		this.password = password;
+		this.email = email;
+		this.name = name;
+		this.firstname = firstname;
+		this.birth = birth;
+		this.phone = phone;
+		this.flights = flights;
+		System.out.println(getFlights());
+	}
 
 	public String getName() {
 		return name;
@@ -65,24 +112,7 @@ public class Passenger {
 		this.phone = phone;
 	}
 
-
-	public Passenger() {
-		super();
-	}
-
-
-	public Passenger(String name) {
-		super();
-		this.name = name;
-	}
-
-
-	public Passenger(String password, String email, String name) {
-		super();
-		this.password = password;
-		this.email = email;
-		this.name = name;
-	}
+	
 	public String getPassword() {
 		return password;
 	}
@@ -96,7 +126,20 @@ public class Passenger {
 		this.email = email;
 	}
 
+	public List<FlightContainer> getFlights() {
+		return flights;
+	}
 
+	public void setFlights(List<FlightContainer> flights) {
+		this.flights = flights;
+	}
+
+	@Override
+	public String toString() {
+		String s = "Name :"+this.getName()+" |Firstname : "+this.getFirstname()+" |birth : "+this.getBirth()+
+				" |email : "+this.getEmail()+" |password : "+this.getPassword() +" |tel : "+this.getPhone();
+	        return s  ;
+	}
 
 
 

@@ -28,41 +28,17 @@ public class PassengerDaoImp implements PassengerDAO{
 	//Create a Passengers database
 	@SuppressWarnings("deprecation")
 	public void initiatePassengers() {
-		PassengerContainer P1=new PassengerContainer(new Passenger("password1", "email1", "name1", "firstname1",new Date(98,7,20),"phone1"));
-		PassengerContainer P2=new PassengerContainer(new Passenger("password2", "email2", "name2", "firstname2",new Date(98,0,1),"phone2"));
-		PassengerContainer P3=new PassengerContainer(new Passenger("password3", "email3", "name3", "firstname3",new Date(98,2,2),"phone3"));
-		PassengerContainer P4=new PassengerContainer(new Passenger("password4", "email4", "name4", "firstname4",new Date(98,3,30),"phone4"));
-		PassengerContainer P5=new PassengerContainer(new Passenger("password5", "email5", "name5", "firstname5",new Date(98,4,5),"phone5"));
+		PassengerContainer P1=new PassengerContainer(new Passenger("password1", "maaz@gmail.com", "kathawala", "maaz",new Date(98,1,5),"phone1"));
+		PassengerContainer P2=new PassengerContainer(new Passenger("password2", "saif@outlook.fr", "ghulam", "saif",new Date(98,7,20),"phone2"));
+		PassengerContainer P3=new PassengerContainer(new Passenger("password3", "fabrice@yahoo.fr", "guignard", "fabrice",new Date(98,2,2),"phone3"));
+		PassengerContainer P4=new PassengerContainer(new Passenger("password4", "kevin@gmail.com", "phanvilay", "kevin",new Date(98,11,12),"phone4"));
+		PassengerContainer P5=new PassengerContainer(new Passenger("password5", "mounir@live.fr", "rezig", "mounir",new Date(98,2,18),"phone5"));
 		PersistenceManager pm = pmf.getPersistenceManager();
 		pm.makePersistent(P1);pm.makePersistent(P2);pm.makePersistent(P3);pm.makePersistent(P4);pm.makePersistent(P5);
 		pm.close();
 	}
 
-	@SuppressWarnings("unchecked")
-	public List<PassengerContainer> getPassengers(String name) {
-		List<PassengerContainer> passengers = null;
-		List<PassengerContainer> detached = new ArrayList<PassengerContainer>();
-		PersistenceManager pm = pmf.getPersistenceManager();
-		Transaction tx = pm.currentTransaction();
-		try {
-			tx.begin();
-			Query q = pm.newQuery(PassengerContainer.class);
-			q.declareParameters("String user");
-			q.setFilter("name == user");
-
-			passengers = (List<PassengerContainer>) q.execute(name);
-			detached = (List<PassengerContainer>) pm.detachCopyAll(passengers);
-
-			tx.commit();
-		} finally {
-			if (tx.isActive()) {
-				tx.rollback();
-			}
-			pm.close();
-		}
-		return detached;
-	}
-
+	// pas besoin a supprimer
 	public void addPassenger(Passenger passenger) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
@@ -129,6 +105,7 @@ public class PassengerDaoImp implements PassengerDAO{
 		return containerId;
 	}
 	// Renvoie true si le username et le password sont dans la base de donnee
+	@SuppressWarnings("unchecked")
 	public boolean CheckLogin(String username, String passwrd) {
 		List<PassengerContainer> passengers = null;
 		List<PassengerContainer> detached = new ArrayList<PassengerContainer>();
@@ -156,6 +133,7 @@ public class PassengerDaoImp implements PassengerDAO{
 		}
 	}
 	// Renvoie true si le username  est dans la base de donnee
+		@SuppressWarnings("unchecked")
 		public boolean CheckEmail(String username) {
 			List<PassengerContainer> passengers = null;
 			List<PassengerContainer> detached = new ArrayList<PassengerContainer>();
@@ -182,6 +160,42 @@ public class PassengerDaoImp implements PassengerDAO{
 				pm.close();
 			}
 		}
+	
+	@SuppressWarnings("unchecked")
+	public List<PassengerContainer> Search(String cas, String word) {
+		List<PassengerContainer> passengers = null;
+		List<PassengerContainer> detached = new ArrayList<PassengerContainer>();
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		try {
+			tx.begin();
+			Query q = pm.newQuery(PassengerContainer.class);
+			if(cas.equals("birth")) {
+				q.declareParameters("java.sql.Date word");
+				q.setFilter("passenger."+cas+" == word");
+				
+				Date date =Date.valueOf(word);
+				System.out.println(date);
+				passengers = (List<PassengerContainer>) q.execute(date);
+			}
+			else {
+				q.declareParameters("String word");
+				q.setFilter("passenger."+cas+" == word");
+				passengers = (List<PassengerContainer>) q.execute(word);
+			}
+			
+			detached = (List<PassengerContainer>) pm.detachCopyAll(passengers);
+			tx.commit();
+		} finally {
+			if (tx.isActive()) {
+				tx.rollback();
+			}
+			pm.close();
+		}
+		return detached;
+				
+	}
+
 	public void deletePassengerContainer(long id) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		PassengerContainer container = pm.getObjectById(PassengerContainer.class, id);
