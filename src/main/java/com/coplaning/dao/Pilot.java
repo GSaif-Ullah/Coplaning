@@ -18,7 +18,7 @@ public class Pilot {
 	protected String phone;
 	protected String permis;
 	protected String id_card;
-	protected List<FlightContainer> flights;
+	protected List<Integer> flights;
 	
 	
 	public Pilot() {
@@ -132,15 +132,15 @@ public class Pilot {
 		this.id_card = id_card;
 	}
 
-	public List<FlightContainer> getFlights() {
+	public List<Integer> getFlights() {
 		return flights;
 	}
 
-	public void setFlights(List<FlightContainer> flights) {
+	public void setFlights(List<Integer> flights) {
 		this.flights = flights;
 	}
 	
-	public void setaFlight(FlightContainer flight) {
+	public void setaFlight(int flight) {
 		this.flights.add(flight);
 	}
 }
