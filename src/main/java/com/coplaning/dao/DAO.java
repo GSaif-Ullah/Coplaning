@@ -5,12 +5,13 @@ import javax.jdo.PersistenceManagerFactory;
 
 import com.coplaning.dao.dn.FlightDaoImp;
 import com.coplaning.dao.dn.PassengerDaoImp;
+import com.coplaning.dao.dn.PilotDaoImp;
 
 public class DAO {
 
 	private static PassengerDAO passengerDao = null;
 	private static FlightDAO flightDao = null;
-	
+	private static PilotDAO pilotDao = null;
 	
 	public static PassengerDAO getPassengerDao() {
 		if (passengerDao == null) {
@@ -28,6 +29,15 @@ public class DAO {
 		}
 
 		return flightDao;
+	}
+	
+	public static PilotDAO getPilotDao() {
+		if (pilotDao == null) {
+			PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("Example");
+			pilotDao = new PilotDaoImp(pmf);
+		}
+
+		return pilotDao;
 	}
 
 }

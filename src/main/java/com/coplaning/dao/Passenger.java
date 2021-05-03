@@ -134,6 +134,10 @@ public class Passenger {
 		this.flights = flights;
 	}
 
+	public void setaFlight(FlightContainer flight) {
+		this.flights.add(flight);
+	}
+	
 	@Override
 	public String toString() {
 		String s = "Name :"+this.getName()+" |Firstname : "+this.getFirstname()+" |birth : "+this.getBirth()+

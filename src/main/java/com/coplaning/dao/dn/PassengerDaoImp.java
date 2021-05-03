@@ -10,8 +10,6 @@ import javax.jdo.PersistenceManagerFactory;
 import javax.jdo.Query;
 import javax.jdo.Transaction;
 
-import com.coplaning.dao.Flight;
-import com.coplaning.dao.FlightContainer;
 import com.coplaning.dao.Passenger;
 import com.coplaning.dao.PassengerContainer;
 import com.coplaning.dao.PassengerDAO;
