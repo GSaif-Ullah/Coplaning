@@ -30,7 +30,7 @@ public class PilotDaoImp implements PilotDAO {
 	//Create a Passengers database
 	@SuppressWarnings("deprecation")
 	public void initiatePilots() {
-		PilotContainer P1=new PilotContainer(new Pilot("password1", "maaz@gmail.com", "kathawala", "maaz",new Date(98,1,5),"phone1"));
+		PilotContainer P1=new PilotContainer(new Pilot("password1", "jean@gmail.com", "test", "jean",new Date(95,1,5),"phone1"));
 		PersistenceManager pm = pmf.getPersistenceManager();
 		pm.makePersistent(P1);
 		pm.close();

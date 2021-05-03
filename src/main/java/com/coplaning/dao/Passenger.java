@@ -15,7 +15,7 @@ public class Passenger {
 	protected String firstname;
 	protected Date birth;
 	protected String phone;
-	protected List<FlightContainer> flights;
+	protected List<Integer> flights;
 
 
 	public Passenger() {
@@ -47,7 +47,7 @@ public class Passenger {
 
 
 	public Passenger(String password, String email, String name, String firstname, Date birth, String phone,
-			FlightContainer flight) {
+			int flight) {
 		super();
 		this.password = password;
 		this.email = email;
@@ -55,13 +55,13 @@ public class Passenger {
 		this.firstname = firstname;
 		this.birth = birth;
 		this.phone = phone;
-		this.flights = new ArrayList<FlightContainer>();
+		this.flights = new ArrayList<Integer>();
 		this.flights.add(flight);
 	}
 
 	
 	public Passenger(String password, String email, String name, String firstname, Date birth, String phone,
-			List<FlightContainer> flights) {
+			List<Integer> flights) {
 		super();
 		this.password = password;
 		this.email = email;
@@ -126,15 +126,15 @@ public class Passenger {
 		this.email = email;
 	}
 
-	public List<FlightContainer> getFlights() {
+	public List<Integer> getFlights() {
 		return flights;
 	}
 
-	public void setFlights(List<FlightContainer> flights) {
+	public void setFlights(List<Integer> flights) {
 		this.flights = flights;
 	}
 
-	public void setaFlight(FlightContainer flight) {
+	public void setaFlight(int flight) {
 		this.flights.add(flight);
 	}
 	
