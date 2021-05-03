@@ -39,8 +39,7 @@ $(function fonction() {
 	var seat=searchParams.get('Seat')
 
 	   	    
-	  // getServerData("ws/flight/" + departure +"/"+arrival+"/"+seat, fillTable2);
-	getServerData("ws/flight/all",fillTable2);
+	  getServerData("ws/flight/" + departure +"/"+arrival+"/"+seat, fillTable2);
 	    console.log(result);
 
         });

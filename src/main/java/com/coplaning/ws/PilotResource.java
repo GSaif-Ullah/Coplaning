@@ -46,4 +46,15 @@ public class PilotResource {
 
 		return DAO.getPilotDao().addPilotContainer(container);
 	}
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/all")
+	public List<PilotContainer> getPassengerContainer() {
+		List<PilotContainer> container = DAO.getPilotDao().getPilots();
+		if (container == null) {
+			throw new NotFoundException("Invalid container id");
+		}
+
+		return container;
+	}
 }
