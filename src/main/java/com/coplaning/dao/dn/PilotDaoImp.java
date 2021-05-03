@@ -10,6 +10,8 @@ import javax.jdo.PersistenceManagerFactory;
 import javax.jdo.Query;
 import javax.jdo.Transaction;
 
+import com.coplaning.dao.Flight;
+import com.coplaning.dao.FlightContainer;
 import com.coplaning.dao.Passenger;
 import com.coplaning.dao.PassengerContainer;
 import com.coplaning.dao.Pilot;
@@ -26,13 +28,11 @@ public class PilotDaoImp implements PilotDAO {
 	
 
 	//Create a Passengers database
-		@SuppressWarnings("deprecation")
+	@SuppressWarnings("deprecation")
 	public void initiatePilots() {
-		PilotContainer P1 = new PilotContainer(new Pilot(new PassengerContainer(new Passenger("password1", "jean@gmail.com", "test", "jean",new Date(84,3,5),"phone1"))));
-		PilotContainer P2 = new PilotContainer(new Pilot(new PassengerContainer(new Passenger("password1", "pierre@gmail.com", "test", "pierre",new Date(86,8,5),"phone1"))));
-
+		PilotContainer P1=new PilotContainer(new Pilot("password1", "maaz@gmail.com", "kathawala", "maaz",new Date(98,1,5),"phone1"));
 		PersistenceManager pm = pmf.getPersistenceManager();
-		pm.makePersistent(P1);pm.makePersistent(P2);
+		pm.makePersistent(P1);
 		pm.close();
 	}
 		
