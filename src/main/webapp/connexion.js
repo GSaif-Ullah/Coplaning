@@ -21,10 +21,9 @@ $(function () {
 	   var username=$("#mail").val();
 	   
 	   var password=$("#psswrd").val();
-	   	    
+	   	           	 	   
        getServerData("ws/passenger/check/" + username +"/"+ password, function (result) {
         if (result==true){
-        	console.log("CA MARCHE PAS");
         	window.location.replace("home.html");
         }
         else{
