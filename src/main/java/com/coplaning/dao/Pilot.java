@@ -1,58 +1,119 @@
 package com.coplaning.dao;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.jdo.annotations.PersistenceCapable;
+
+@PersistenceCapable
 public class Pilot {
-	protected PassengerContainer user;
+	
+	protected int id_passenger;
+	protected String password;
+	protected String email;
+	protected String name;
+	protected String firstname;
+	protected Date birth;
+	protected String phone;
 	protected String permis;
 	protected String id_card;
 	protected List<FlightContainer> flights;
-	
-	
 	
 	
 	public Pilot() {
 		super();
 	}
 
-	public Pilot(PassengerContainer user) {
+	public Pilot(int id_passenger, String password, String email, String name, String firstname, Date birth,
+			String phone) {
 		super();
-		this.user = user;
+		this.id_passenger = id_passenger;
+		this.password = password;
+		this.email = email;
+		this.name = name;
+		this.firstname = firstname;
+		this.birth = birth;
+		this.phone = phone;
 	}
 
-
-	public Pilot(PassengerContainer user, String permis, String id_card) {
+	public Pilot(String password, String email, String name, String firstname, Date birth, String phone, String permis,
+			String id_card) {
 		super();
-		this.user = user;
+		this.password = password;
+		this.email = email;
+		this.name = name;
+		this.firstname = firstname;
+		this.birth = birth;
+		this.phone = phone;
 		this.permis = permis;
 		this.id_card = id_card;
-		this.flights = new ArrayList<FlightContainer>();
 	}
 
-	public Pilot(PassengerContainer user, String permis, String id_card,FlightContainer flight) {
+	public Pilot(String password, String email, String name, String firstname, Date birth, String phone) {
 		super();
-		this.user = user;
-		this.permis = permis;
-		this.id_card = id_card;
-		this.flights = new ArrayList<FlightContainer>();
-		this.flights.add(flight);
+		this.password = password;
+		this.email = email;
+		this.name = name;
+		this.firstname = firstname;
+		this.birth = birth;
+		this.phone = phone;
 	}
 
-	public Pilot(PassengerContainer user, String permis, String id_card, List<FlightContainer> flights) {
-		super();
-		this.user = user;
-		this.permis = permis;
-		this.id_card = id_card;
-		this.flights = flights;
+	public int getId_passenger() {
+		return id_passenger;
 	}
 
-	public PassengerContainer getUser() {
-		return user;
+	public void setId_passenger(int id_passenger) {
+		this.id_passenger = id_passenger;
 	}
 
-	public void setUser(PassengerContainer user) {
-		this.user = user;
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getFirstname() {
+		return firstname;
+	}
+
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
+	}
+
+	public Date getBirth() {
+		return birth;
+	}
+
+	public void setBirth(Date birth) {
+		this.birth = birth;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 
 	public String getPermis() {
