@@ -15,6 +15,13 @@ function putServerData(url, data, success) {
         url: url
     }).done(success);
 }
+function postServerData(url, success) {
+    $.ajax({
+        type: 'POST',
+        dataType: "json",
+        url: url
+    }).done(success);
+}
 
 $(function () {
     $("#buttonAdd").click(function () {
@@ -25,7 +32,9 @@ $(function () {
 	            "password":$("#password").val(),
 	            "email":$("#email").val(),
 	            "phone":$("#phone").val(),
-	            "birth":$("#birth").val()
+	            "birth":$("#birth").val(),
+	            "id_pilot":999
+
 	            }                  
         };
         var data2 = {
@@ -35,7 +44,7 @@ $(function () {
     	            "password":$("#password").val(),
     	            "email":$("#email").val(),
     	            "phone":$("#phone").val(),
-    	            "id_passenger":27,
+    	            "id_passenger":999,   	            
     	            "birth":$("#birth").val()   	       
     	            }                  
             };
@@ -74,7 +83,8 @@ $(function () {
 					if (!a && !b && !c && !d && !e && result==false) {
 					   putServerData("ws/passenger", data, function (result){
 						   data2.pilot.id_passenger=result;
-						   putServerData("ws/pilot", data2, function (result) {           
+						   putServerData("ws/pilot", data2, function (result) {
+							   postServerData("ws/passenger/addpilot/"+data2.pilot.id_passenger+"/"+result,function (){});
 							   alert("Inscription réussie ! ");
 							   window.location.replace("pilote.html");
 							   }); 
