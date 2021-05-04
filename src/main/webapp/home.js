@@ -14,6 +14,16 @@ function fillTable(FlightContainer) {
     $("#result").html(result);
 }
 
+
+
+
+$(function () {
+    $("#deconnexion").click(function () {
+		localStorage.removeItem("Mail");
+		location.reload();   	
+	});
+});	
+    
 $(function () {
     $("#buttonSearch").click(function () {
     
@@ -31,3 +41,13 @@ $(function () {
   	    
     });
 });
+    if(localStorage.getItem("Mail") === null){
+        document.getElementById("connexion").style.display='block';
+        document.getElementById("inscription").style.display='block';        
+        document.getElementById("deconnexion").style.display='none';
+
+    }else{ 
+        document.getElementById("connexion").style.display='none';
+        document.getElementById("inscription").style.display=	'none';  
+        document.getElementById("deconnexion").style.display='block';
+    }

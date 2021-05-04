@@ -64,7 +64,7 @@ $(function () {
 					if (!a && !b && !c && !d && !e && result==false) {
 					   putServerData("ws/passenger", data, function (result) {						
 					   alert("Inscription réussie, bonne réservation ! ");
-					   window.location.replace("home.html");
+					   window.location.replace("user.html");
 					   }); 
 					}
 				});
