@@ -13,6 +13,7 @@ import javax.jdo.Transaction;
 import com.coplaning.dao.Flight;
 import com.coplaning.dao.FlightContainer;
 import com.coplaning.dao.FlightDAO;
+import com.coplaning.dao.PassengerContainer;
 
 
 public class FlightDaoImp implements FlightDAO{
@@ -313,5 +314,11 @@ public class FlightDaoImp implements FlightDAO{
 		pm.close();
 	}
 
+	public void BookFlight(int id_flight,int id_passager) {
+		PersistenceManager pm = pmf.getPersistenceManager();
+		FlightContainer container = pm.getObjectById(FlightContainer.class, id_flight);
+		container.getFlight().setPassenger(id_passager);
+		pm.close();
+	}
 	
 }

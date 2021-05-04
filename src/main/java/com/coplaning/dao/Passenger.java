@@ -15,12 +15,12 @@ public class Passenger {
 	protected String firstname;
 	protected Date birth;
 	protected String phone;
-	protected List<Integer> flights;
+	protected int flights;
 
 
 	public Passenger() {
 		super();
-		this.flights = new ArrayList<Integer>();
+		//this.flights = new ArrayList<Integer>();
 	}
 	
 	public Passenger(String name) {
@@ -56,12 +56,12 @@ public class Passenger {
 		this.firstname = firstname;
 		this.birth = birth;
 		this.phone = phone;
-		this.flights = new ArrayList<Integer>();
-		this.flights.add(flight);
+		//this.flights = new ArrayList<Integer>();
+		this.flights= flight;
 	}
 
 	
-	public Passenger(String password, String email, String name, String firstname, Date birth, String phone,
+	/*public Passenger(String password, String email, String name, String firstname, Date birth, String phone,
 			List<Integer> flights) {
 		super();
 		this.password = password;
@@ -72,7 +72,7 @@ public class Passenger {
 		this.phone = phone;
 		this.flights = flights;
 		System.out.println(getFlights());
-	}
+	}*/
 
 	public String getName() {
 		return name;
@@ -127,18 +127,20 @@ public class Passenger {
 		this.email = email;
 	}
 
-	public List<Integer> getFlights() {
+
+
+	/*public void setaFlight(int flight) {
+		this.flights.add(flight);
+	}*/
+	
+	public int getFlights() {
 		return flights;
 	}
 
-	public void setFlights(List<Integer> flights) {
+	public void setFlights(int flights) {
 		this.flights = flights;
 	}
 
-	public void setaFlight(int flight) {
-		this.flights.add(flight);
-	}
-	
 	@Override
 	public String toString() {
 		String s = "Name :"+this.getName()+" |Firstname : "+this.getFirstname()+" |birth : "+this.getBirth()+

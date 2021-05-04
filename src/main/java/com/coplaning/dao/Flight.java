@@ -15,6 +15,7 @@ public class Flight {
 	protected int seat;
 	protected int cost;
 	protected String image;
+	protected int passenger;
 
 	public Flight() {
 		super();
@@ -133,6 +134,14 @@ public class Flight {
 
 	public void setCost(int cost) {
 		this.cost = cost;
+	}
+
+	public int getPassenger() {
+		return passenger;
+	}
+
+	public void setPassenger(int passenger) {
+		this.passenger = passenger;
 	}
 
 	@Override
