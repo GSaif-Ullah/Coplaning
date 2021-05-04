@@ -70,7 +70,7 @@ public class FlightResource {
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/{departure}/{arrival}/{seat}")
+	@Path("/seat/{departure}/{arrival}/{seat}")
 	public List<FlightContainer> Search(@PathParam("departure") String departure,@PathParam("arrival") String arrival,@PathParam("seat") int seat ) {
 		List<FlightContainer> flights = DAO.getFlightDao().Search(departure,arrival,seat);
 		System.out.println(flights.toString());
@@ -83,6 +83,14 @@ public class FlightResource {
 	public List<FlightContainer> Search(@PathParam("departure") String departure,@PathParam("arrival") String arrival,@PathParam("seat") int seat,@PathParam("cost") int cost ) {
 		List<FlightContainer> flights = DAO.getFlightDao().Search(departure,arrival,seat,cost);
 		System.out.println(flights.toString()+"ok");
+		return flights;
+	}
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/{departure}/{date1}/{date2}")
+	public List<FlightContainer> Search(@PathParam("departure") String departure,@PathParam("date1") String date1,@PathParam("date2") String date2 ) {
+		List<FlightContainer> flights = DAO.getFlightDao().Search(departure,date1,date2);
 		return flights;
 	}
 	

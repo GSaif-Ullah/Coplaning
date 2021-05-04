@@ -160,6 +160,46 @@ public class FlightDaoImp implements FlightDAO{
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
+	public List<FlightContainer> Search(String departure,String d1,String d2){
+		List<FlightContainer> flights = null;
+        List<FlightContainer> detached = new ArrayList<FlightContainer>();
+        PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx = pm.currentTransaction();
+        try {
+            tx.begin();
+            Query q = pm.newQuery(FlightContainer.class);
+            q.declareParameters("String departure,java.sql.Date date1, java.sql.Date date2");
+            q.setFilter("flight.departure == departure && date1<=flight.date && flight.date<=date2");
+            
+            //transforme les string en date 
+            Date date1 =Date.valueOf(d1);
+            Date date2 =Date.valueOf(d2);
+            
+            flights = (List<FlightContainer>) q.executeWithArray((new Object[]{departure,date1,date2}));
+            for(int i=0; i<flights.size(); i++) {
+				flights.get(i).getFlight().getPassengers();
+			}
+            detached = (List<FlightContainer>) pm.detachCopyAll(flights);
+            tx.commit();
+            if (detached.size()==0) {
+                System.out.println("ZERO");
+
+                return null;
+            }
+            else {    
+                System.out.println("OK1");
+                return detached;
+                
+            }
+        } finally {
+            if (tx.isActive()) {
+                tx.rollback();
+            }
+            pm.close();
+        }
+	}
+	
 	//ne fonctionne pas
 	@SuppressWarnings("unchecked")
 	public List<FlightContainer> Search(String departure,String arrival,int seat,int cost) {
