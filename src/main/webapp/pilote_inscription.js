@@ -76,7 +76,7 @@ $(function () {
 						   data2.pilot.id_passenger=result;
 						   putServerData("ws/pilot", data2, function (result) {           
 							   alert("Inscription réussie ! ");
-							   window.location.replace("home.html");
+							   window.location.replace("pilote.html");
 							   }); 
 					   });
 					   

@@ -94,4 +94,31 @@ public class PassengerResource {
 		boolean CheckEmail = DAO.getPassengerDao().CheckEmail(username);
 		return CheckEmail;
 	}
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/add/{mail}")
+	public PassengerContainer getPassengerID(@PathParam("mail") String mail) {
+		List<PassengerContainer> container = DAO.getPassengerDao().Search("email", mail);
+		if (container == null) {
+			throw new NotFoundException("Invalid container id");
+		}
+
+		return container.get(0);
+	}
+	
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("/{id}")
+	public long addFlighttoPassenger(PassengerContainer container) {
+		if (container == null) {
+			throw new BadRequestException("Missing payload");
+		}
+
+		if (container.getPassenger() == null) {
+			throw new BadRequestException("Missing Passengers in the container");
+		}
+
+		return DAO.getPassengerDao().addPassengerContainer(container);
+	}
 }

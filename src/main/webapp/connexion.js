@@ -25,6 +25,8 @@ $(function () {
        getServerData("ws/passenger/check/" + username +"/"+ password, function (result) {
         if (result==true){
         	window.location.replace("home.html");
+        	storage=localStorage;
+        	localStorage.setItem('Mail',username);
         }
         else{
         		alert("Identifiants incorrect ");
