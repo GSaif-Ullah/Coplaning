@@ -32,6 +32,7 @@ function fillTable2(container){
 
 }
 
+
 $(function fonction() {
 	var searchParams=new URLSearchParams(window.location.search)
 	var departure=searchParams.get('Departure')
@@ -40,6 +41,17 @@ $(function fonction() {
 
 	   	    
 	   getServerData("ws/flight/" + departure +"/"+arrival+"/"+seat, fillTable2);
-	    console.log(result);
-
-        });
+	  });
+$(function () {
+    $("#buttonBook").click(function () {
+        if(localStorage.getItem("Mail") === null){
+          alert("Veuillez vous connecter pour pouvoir réserver");
+        }
+        else{
+            getServerData("ws/passenger/add/"+localStorage.getItem("Mail"),function (result) {
+            	postServerData("ws/passenger/add/"+result.id,result, function (result2) {});							
+					   alert("Réservation faite! ");
+            });
+        }
+    });
+});

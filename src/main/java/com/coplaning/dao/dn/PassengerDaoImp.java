@@ -94,6 +94,22 @@ public class PassengerDaoImp implements PassengerDAO{
 		}
 
 	}
+	public PassengerContainer getPassengerID(String email) {
+		PersistenceManager pm = pmf.getPersistenceManager();
+
+		try {
+			PassengerContainer container = pm.getObjectById(PassengerContainer.class, email);
+			PassengerContainer detached = pm.detachCopy(container);
+			System.out.println("DETACHED"+detached);
+			return detached;
+		} catch (JDOObjectNotFoundException e) {
+			return null;
+		} finally {
+			pm.close();
+		}
+		
+	}
+
 
 	public int addPassengerContainer(PassengerContainer container) {
 		PersistenceManager pm = pmf.getPersistenceManager();

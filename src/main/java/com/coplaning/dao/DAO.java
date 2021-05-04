@@ -2,6 +2,7 @@ package com.coplaning.dao;
 
 import javax.jdo.JDOHelper;
 import javax.jdo.PersistenceManagerFactory;
+import javax.jdo.annotations.PersistenceCapable;
 
 import com.coplaning.dao.dn.FlightDaoImp;
 import com.coplaning.dao.dn.PassengerDaoImp;
