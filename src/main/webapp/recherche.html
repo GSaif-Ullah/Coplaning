@@ -27,43 +27,176 @@
 
 
 
-
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 	<div class="container">
-		<h1 class="display-4 text-center">Vols disponibles<br></h1>
-
-
 		<div class="row">
-			<div class="col-md-4">
-				
-					<div class="card" style="width: 18rem;">
-						<img class="card-img-top" src="..." alt="Card image cap">
-						<div class="card-body">
-							<h5 class="card-title">Réserver votre vol dès maintenant</h5>
-							<script id="templateRow" type="text/template">
-								<tr>
-									<td><img class="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" alt="Thumbnail [100%x225]" src=<%= flight.image %> data-holder-rendered="true" style="height: 225px; width: 100%; display: block;" ></small></td>
-									<td><small class="text-muted">ID :        </small><%= id %></td>
-									<td><small class="text-muted">Lieu de départ : </small> <%= flight.departure %></td>
-									<td><small class="text-muted">Lieu d'arrivé : </small><%= flight.arrival %></td>
-									<td><small class="text-muted">Prix : </small><%= flight.cost %>€</td>
-								</tr>
-							</script>
-							<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-						</div>
-						<ul class="list-group list-group-flush">
-							<li class="list-group-item">Cras justo odio</li>
-							<li class="list-group-item">Dapibus ac facilisis in</li>
-							<li class="list-group-item">Vestibulum at eros</li>
-						</ul>
-						<div class="card-body">
-							<a href="#" class="card-link">Card link</a>
-							<a href="#" class="card-link">Another link</a>
+			<!-- BEGIN SEARCH RESULT -->
+			<div class="col-md-12">
+				<div class="grid search">
+					<div class="grid-body">
+						<div class="row">
+							<!-- BEGIN FILTERS -->
+							<div class="col-md-3">
+								<h2 class="grid-title"><i class="fa fa-filter"></i> Filtres</h2>
+								<hr>
+
+								<!-- BEGIN FILTER BY CATEGORY -->
+								<h4>Type de vol:</h4>
+								<div class="checkbox">
+									<label><input type="checkbox" class="icheck"> Balade aérienne</label>
+								</div>
+								<div class="checkbox">
+									<label><input type="checkbox" class="icheck"> Aller simple </label>
+								</div><br>
+								<!-- END FILTER BY CATEGORY -->
+
+								<div class="padding"></div>
+
+								<!-- BEGIN FILTER BY DATE -->
+								<h4>Par date:</h4>
+								Aller
+								<div class="input-group date form_date">
+									<input type="datetime-local" class="form-control">
+								</div><br>
+
+								Retour
+								<div class="input-group date form_date">
+									<input type="datetime-local" class="form-control">
+								</div><br>
+
+								<!-- END FILTER BY DATE -->
+
+								<div class="padding"></div>
+
+								<!-- BEGIN FILTER BY PRICE -->
+								<h4>Par prix:</h4>
+								Minimum
+								<div class="input-group date form_date">
+									<input type="number" class="form-control">
+								</div><br>
+
+								Maximum
+								<div class="input-group date form_date">
+									<input type="number" class="form-control">
+								</div>
+								<!-- END FILTER BY PRICE -->
+							</div>
+							<!-- END FILTERS -->
+							<!-- BEGIN RESULT -->
+							<div class="col-md-9">
+								<h2><i class="icon-plane"></i> Vols disponibles</h2>
+								<hr>
+								<!-- BEGIN SEARCH INPUT -->
+								<div class="input-group">
+									<input type="text" class="form-control" value="CDG">
+									<span class="input-group-btn">
+										<button class="btn btn-primary" type="button"><i class="fa fa-search"></i></button>
+									</span>
+								</div>
+								<!-- END SEARCH INPUT -->
+								<p>Résultats trouvés pour "CDG"</p>
+
+								<div class="padding"></div>
+
+								<div class="row">
+									<!-- Trier par-->
+									<div class="col-sm-6">
+										<div class="btn-group">
+											<div class="dropdown">
+												<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+													Trier par
+												</button>
+												<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+													<a class="dropdown-item" href="#">Nom</a>
+													<a class="dropdown-item" href="#">Date</a>
+													<a class="dropdown-item" href="#">Prix</a>
+													<a class="dropdown-item" href="#">Note</a>
+												</div>
+											</div>
+										</div>
+									</div>
+
+
+									<!-- Résultats -->
+									<div class="table-responsive">
+										<table class="table table-hover">
+											<tbody><tr>
+												<td class="number text-center">1</td>
+												<td class="image"><img src="https://via.placeholder.com/400x300/FF8C00" alt=""></td>
+												<td class="product"><strong>Product 1</strong><br>This is the product description.</td>
+												<td class="rate text-right"><span><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></span></td>
+												<td class="price text-right">$350</td>
+												<td><button type="button" class="btn btn-dark">Reserver</button></td>
+
+											</tr>
+											<tr>
+												<td class="number text-center">2</td>
+												<td class="image"><img src="https://via.placeholder.com/400x300/5F9EA0" alt=""></td>
+												<td class="product"><strong>Product 2</strong><br>This is the product description.</td>
+												<td class="rate text-right"><span><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></span></td>
+												<td class="price text-right">$1,050</td>
+												<td><button type="button" class="btn btn-dark">Reserver</button></td>
+											</tr>
+											<tr>
+												<td class="number text-center">3</td>
+												<td class="image"><img src="https://via.placeholder.com/400x300" alt=""></td>
+												<td class="product"><strong>Product 3</strong><br>This is the product description.</td>
+												<td class="rate text-right"><span><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star-o"></i></span></td>
+												<td class="price text-right">$550</td>
+												<td><button type="button" class="btn btn-dark">Reserver</button></td>
+											</tr>
+											<tr>
+												<td class="number text-center">4</td>
+												<td class="image"><img src="https://via.placeholder.com/400x300/8A2BE2" alt=""></td>
+												<td class="product"><strong>Product 4</strong><br>This is the product description.</td>
+												<td class="rate text-right"><span><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i></span></td>
+												<td class="price text-right">$330</td>
+												<td><button type="button" class="btn btn-dark">Reserver</button></td>
+											</tr>
+											<tr>
+												<td class="number text-center">5</td>
+												<td class="image"><img src="https://via.placeholder.com/400x300" alt=""></td>
+												<td class="product"><strong>Product 5</strong><br>This is the product description.</td>
+												<td class="rate text-right"><span><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></span></td>
+												<td class="price text-right">$540</td>
+												<td><button type="button" class="btn btn-dark">Reserver</button></td>
+											</tr>
+											<tr>
+												<td class="number text-center">6</td>
+												<td class="image"><img src="https://via.placeholder.com/400x300/6495ED" alt=""></td>
+												<td class="product"><strong>Product 6</strong><br>This is the product description.</td>
+												<td class="rate text-right"><span><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></span></td>
+												<td class="price text-right">$870</td>
+												<td><button type="button" class="btn btn-dark">Reserver</button></td>
+											</tr>
+											<tr>
+												<td class="number text-center">7</td>
+												<td class="image"><img src="https://via.placeholder.com/400x300/DC143C" alt=""></td>
+												<td class="product"><strong>Product 7</strong><br>This is the product description.</td>
+												<td class="rate text-right"><span><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></span></td>
+												<td class="price text-right">$620</td>
+												<td><button type="button" class="btn btn-dark">Reserver</button></td>
+											</tr>
+											<tr>
+												<td class="number text-center">8</td>
+												<td class="image"><img src="https://via.placeholder.com/400x300/9932CC" alt=""></td>
+												<td class="product"><strong>Product 8</strong><br>This is the product description.</td>
+												<td class="rate text-right"><span><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></span></td>
+												<td class="price text-right">$1,550</td>
+												<td><button type="button" class="btn btn-dark">Reserver</button></td>
+											</tr>
+										</tbody></table>
+									</div>
+									<!-- END TABLE RESULT -->
+								</div>
+								<!-- END RESULT -->
+							</div>
 						</div>
 					</div>
 				</div>
-			
+				<!-- END SEARCH RESULT -->
+			</div>
 		</div>
-		
 
 
 		<footer class="pt-4 my-md-5 pt-md-5 border-top">
@@ -102,8 +235,9 @@
 		</footer>
 	</div>
 
-	<script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 	<script src="recherche.js"></script>
 </body>
 </html>
