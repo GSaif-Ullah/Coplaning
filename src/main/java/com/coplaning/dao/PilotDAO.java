@@ -3,9 +3,15 @@ package com.coplaning.dao;
 import java.util.List;
 
 public interface PilotDAO{
-
-	long addPilotContainer(PilotContainer container);
+	//permet d'ajouter un pilote 
+	int addPilotContainer(PilotContainer container);
+	
+	//recuperer la liste de tous les pilotes
 	List<PilotContainer> getPilots();
 	
-	PilotContainer getPilotContainer(long id);
+	//recuperer l'id d'un pilote
+	PilotContainer getPilotContainer(int id);
+	
+	//recherche une liste de pilote avec un mot specifique
+	List<PilotContainer> Search(String cas, String word);
 }

@@ -10,7 +10,7 @@ public class PilotContainer{
 	
 	@PrimaryKey
 	@Persistent(valueStrategy = IdGeneratorStrategy.NATIVE)
-	protected Long id = null;
+	protected Integer id = null;
 
 	@Persistent(defaultFetchGroup = "true")
 	protected Pilot pilot = null;
@@ -27,19 +27,19 @@ public class PilotContainer{
 	}
 
 
-	public PilotContainer(Long id, Pilot pilot) {
+	public PilotContainer(Integer id, Pilot pilot) {
 		super();
 		this.id = id;
 		this.pilot = pilot;
 	}
 
 
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
 
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

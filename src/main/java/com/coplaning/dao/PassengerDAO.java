@@ -17,7 +17,7 @@ public interface PassengerDAO {
 	 */
 	List<PassengerContainer> getPassengers();
 	
-	PassengerContainer getPassengerContainer(long id);
+	PassengerContainer getPassengerContainer(int id);
 	
 	boolean CheckLogin(String username,String password);
 	boolean CheckEmail(String username);
@@ -25,8 +25,8 @@ public interface PassengerDAO {
 	List<PassengerContainer> Search(String cas, String word);
 
 
-	long addPassengerContainer(PassengerContainer container);
+	int addPassengerContainer(PassengerContainer container);
 	
-	void deletePassengerContainer(long id);
+	void deletePassengerContainer(int id);
 
 }

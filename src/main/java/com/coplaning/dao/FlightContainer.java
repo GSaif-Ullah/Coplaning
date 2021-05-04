@@ -12,7 +12,7 @@ public class FlightContainer {
 
 	@PrimaryKey
 	@Persistent(valueStrategy = IdGeneratorStrategy.NATIVE)
-	protected Long id = null;
+	protected Integer id = null;
 
 	@Persistent(defaultFetchGroup = "true")
 	protected Flight flight = null;
@@ -27,11 +27,11 @@ public class FlightContainer {
 		this.flight = new Flight();
 	}
 
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

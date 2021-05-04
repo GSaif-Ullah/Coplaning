@@ -25,7 +25,7 @@ public class PassengerResource {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}")
-	public PassengerContainer getPassengerContainer(@PathParam("id") long id) {
+	public PassengerContainer getPassengerContainer(@PathParam("id") int id) {
 		PassengerContainer container = DAO.getPassengerDao().getPassengerContainer(id);
 		if (container == null) {
 			throw new NotFoundException("Invalid container id");
@@ -36,7 +36,7 @@ public class PassengerResource {
 
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
-	public long addPassengerContainer(PassengerContainer container) {
+	public int addPassengerContainer(PassengerContainer container) {
 		if (container == null) {
 			throw new BadRequestException("Missing payload");
 		}
@@ -51,7 +51,7 @@ public class PassengerResource {
 	@DELETE
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}")
-	public void deletePassenger(@PathParam("id") long id) {
+	public void deletePassenger(@PathParam("id") int id) {
 		DAO.getPassengerDao().deletePassengerContainer(id);
 	}
 
