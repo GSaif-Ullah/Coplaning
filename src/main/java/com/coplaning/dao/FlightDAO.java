@@ -1,5 +1,6 @@
 package com.coplaning.dao;
 
+import java.sql.Date;
 import java.util.List;
 
 public interface FlightDAO {
@@ -17,10 +18,15 @@ public interface FlightDAO {
 	 */
 	List<FlightContainer> getFlights();
 
-	FlightContainer getFlightContainer(long id);
-	public List<FlightContainer> CheckFlight(String departure,String arrival,int seat);
-
-	long addFlightContainer(FlightContainer container);
+	FlightContainer getFlightContainer(int id);
 	
-	void deleteFlightContainer(long id);
+	List<FlightContainer> Search(String cas, String word);
+	List<FlightContainer> Search(String departure,String arrival,int seat);
+	List<FlightContainer> Search(String departure,String arrival,int seat,int cost);
+	List<FlightContainer> Search(String departure,String arrival,int seat,int cost,int cost1);
+ 	List<FlightContainer> Search(String departure,String arrival,int seat,int cost,int cost1,String d1,String d2);
+  
+	int addFlightContainer(FlightContainer container);
+	
+	void deleteFlightContainer(int id);
 }

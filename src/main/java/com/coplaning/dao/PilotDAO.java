@@ -3,23 +3,15 @@ package com.coplaning.dao;
 import java.util.List;
 
 public interface PilotDAO{
-	List<Pilot> ListPilot();	
+	//permet d'ajouter un pilote 
+	int addPilotContainer(PilotContainer container);
 	
-	Pilot getPilot(String Username);	
+	//recuperer la liste de tous les pilotes
+	List<PilotContainer> getPilots();
 	
-	Pilot getPilot_ID(String ID_Pilot);	
+	//recuperer l'id d'un pilote
+	PilotContainer getPilotContainer(int id);
 	
-	void putPilot(Pilot p);
-	
-	void deletePilot(Pilot P);
-	
-	void postPilot(Pilot P);
-	
-	// L'avion attribué au pilote 
-	void putFlight(Flight F);
-	
-	void postFlight(Flight F);
-	
-	void deleteFlight(Flight F);
-
+	//recherche une liste de pilote avec un mot specifique
+	List<PilotContainer> Search(String cas, String word);
 }

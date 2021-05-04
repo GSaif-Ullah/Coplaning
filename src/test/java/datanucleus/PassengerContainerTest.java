@@ -25,13 +25,13 @@ public class PassengerContainerTest {
 			Passenger passenger2 = new Passenger("Username 2");
 			Passenger passenger3 = new Passenger("Username 3");
 
-			PassengerContainer container = new PassengerContainer();
+			/*PassengerContainer container = new PassengerContainer();
 			container.setPassenger(passenger3);;
 			container.setPassenger(passenger2);
 			container.setPassenger(passenger1);
 
 			container = pm.makePersistent(container);
-			containerId = container.getId();
+			containerId = container.getId();*/
 			pm.close();
 		}
 

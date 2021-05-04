@@ -6,6 +6,7 @@ import javax.jdo.annotations.PersistenceCapable;
 
 @PersistenceCapable
 public class Flight {
+	
 	protected String departure;
 	protected String arrival;
 	protected String id_flight;
@@ -13,6 +14,7 @@ public class Flight {
 	protected Date date;
 	protected int seat;
 	protected int cost;
+	protected String image;
 
 	public Flight() {
 		super();
@@ -37,6 +39,14 @@ public class Flight {
 		this.id_flight = id_flight;
 	}
 
+	public Flight(String departure, String arrival, int seat, int cost) {
+		super();
+		this.departure = departure;
+		this.arrival = arrival;
+		this.seat = seat;
+		this.cost = cost;
+	}
+
 	public Flight(String departure, String arrival, String id_flight, String plane, Date date, int seat, int cost) {
 		super();
 		this.departure = departure;
@@ -46,6 +56,27 @@ public class Flight {
 		this.date = date;
 		this.seat = seat;
 		this.cost = cost;
+	}
+
+	public Flight(String departure, String arrival, String id_flight, String plane, Date date, int seat, int cost,
+			String image) {
+		super();
+		this.departure = departure;
+		this.arrival = arrival;
+		this.id_flight = id_flight;
+		this.plane = plane;
+		this.date = date;
+		this.seat = seat;
+		this.cost = cost;
+		this.image = image;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
 	}
 
 	public String getDeparture() {
@@ -102,6 +133,13 @@ public class Flight {
 
 	public void setCost(int cost) {
 		this.cost = cost;
+	}
+
+	@Override
+	public String toString() {
+		String s = "Flight id :"+this.getId_flight()+" |departure : "+this.getDeparture()+" |arrival : "+this.getArrival()+
+				" |date : "+this.getDate()+" |seat available : "+String.valueOf(this.getSeat())+" |price : "+String.valueOf(this.getCost());
+	        return s  ;
 	}
 
 }
