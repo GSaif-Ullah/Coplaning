@@ -42,15 +42,12 @@
 					<div class="card-body"><div class="form-group" style=""></div>
 					
 					<div class="form-group" style=""><div class="form-group" style=""><div class="form-group" style="">
-						<input type="text" class="form-control" placeholder="Lieu de départ"></div><br>
-						<input type="text" class="form-control" placeholder="Lieu d'arrivée"></div><br>
+						<input type="text" class="form-control" placeholder="Lieu de départ" id="departure"></div><br>
+						<input type="text" class="form-control" placeholder="Lieu d'arrivée" id="arrival"></div><br>
 						<label>Date et Heure</label>
-						<input type="datetime-local" class="form-control"></div><br>
+						<input type="date" class="form-control" id="date"></div><br>
 
 					</div></div>
-					    <script id="templateRow" type="text/template">
-        <tr><td><%= id %></td><td><%= flight.departure %></td><td><%= flight.arrival %></td><td><%= flight.id_flight %></td></tr>
-    </script>
 				</div>
 					<button type="button" class="btn btn-outline-dark" id="buttonSearch">Rechercher</button></div>
 

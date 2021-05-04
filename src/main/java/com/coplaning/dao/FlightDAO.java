@@ -19,9 +19,8 @@ public interface FlightDAO {
 	List<FlightContainer> getFlights();
 
 	FlightContainer getFlightContainer(int id);
-	//r
 	List<FlightContainer> Search(String cas, String word);
-	List<FlightContainer> Search(String departure,int cost);
+	//List<FlightContainer> Search(String departure,String d1,String d2);
 	List<FlightContainer> Search(String departure,String arrival,int seat);
 	List<FlightContainer> Search(String departure,String arrival,int seat,int cost);
 	List<FlightContainer> Search(String departure,String arrival,int seat,int cost,int cost1);
