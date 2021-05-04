@@ -110,8 +110,13 @@ public class PassengerResource {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/{id_passenger}/{id_flight}")
-	public void BookFlight(@PathParam("id_passenger") int id_passager,@PathParam("id_flight") int id_flight) {
+	public void BookFlight(@PathParam("id_passenger") int id_passenger,@PathParam("id_flight") int id_flight) {
+		PassengerContainer P=DAO.getPassengerDao().getPassengerContainer(id_passenger);
 
-		DAO.getPassengerDao().BookFlight(id_passager, id_flight);;
+		System.out.println(P.getPassenger().getFlights());
+
+		DAO.getPassengerDao().BookFlight(id_passenger, id_flight);
+		
+		System.out.println(P.getPassenger().getFlights());
 	}
 }

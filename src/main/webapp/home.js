@@ -42,12 +42,18 @@ $(function () {
     });
 });
     if(localStorage.getItem("Mail") === null){
-        document.getElementById("connexion").style.display='block';
-        document.getElementById("inscription").style.display='block';        
+        document.getElementById("connexion").style.display='initial';
+        document.getElementById("inscription").style.display='initial';        
         document.getElementById("deconnexion").style.display='none';
+        document.getElementById("inscription_pilote").style.display='initial';
+        document.getElementById("pilote").style.display='none';
+
 
     }else{ 
         document.getElementById("connexion").style.display='none';
         document.getElementById("inscription").style.display=	'none';  
-        document.getElementById("deconnexion").style.display='block';
+        document.getElementById("inscription_pilote").style.display='none';
+        document.getElementById("deconnexion").style.display='initial';
+        document.getElementById("pilote").style.display='initial';
+
     }
