@@ -47,10 +47,10 @@ $(function fonction() {
 	var searchParams=new URLSearchParams(window.location.search)
 	var departure=searchParams.get('Departure')
 	var arrival=searchParams.get('Arrival')
-	var seat=searchParams.get('Seat')
+	var date=searchParams.get('Date')
 
 	   	    
-	   getServerData("ws/flight/" + departure +"/"+arrival+"/"+seat, function(result){
+	   getServerData("ws/flight/" + departure +"/"+arrival+"/"+date, function(result){
 	   fillTable2(result);
 	   console.log(result.flight);
 //	   $(function () {

@@ -31,12 +31,11 @@ $(function () {
 	   
 	   var arrival=$("#arrival").val();
 	    
-	   var seat=$("#seat").val();
+	   var date=$("#date").val();
+        console.log(date);
 	   
-		if(departure.length > 0 && arrival.length>0 && seat.length>0) {
-		      document.location.href='recherche.html?Departure='+departure + '&Arrival='+arrival + '&Seat='+seat;
-
-		
+		if(departure.length > 0 && arrival.length>0 && date.length>0) {
+		      document.location.href='recherche.html?Departure='+departure + '&Arrival='+arrival + '&Date='+date;		
 		}
   	    
     });
