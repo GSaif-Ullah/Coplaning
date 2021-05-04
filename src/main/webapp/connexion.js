@@ -18,13 +18,15 @@ function putServerData(url, data, success) {
 $(function () {
     $("#buttonLogin").click(function () {
     
-	   var username=$("#username").val();
+	   var username=$("#mail").val();
 	   
-	   var password=$("#password").val();
-	   	    
-       getServerData("ws/passenger/login/" + username +"/"+password, function (result) {
+	   var password=$("#psswrd").val();
+	   	           	 	   
+       getServerData("ws/passenger/check/" + username +"/"+ password, function (result) {
         if (result==true){
         	window.location.replace("home.html");
+        	storage=localStorage;
+        	localStorage.setItem('Mail',username);
         }
         else{
         		alert("Identifiants incorrect ");

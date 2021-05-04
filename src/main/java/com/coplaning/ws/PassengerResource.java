@@ -25,7 +25,7 @@ public class PassengerResource {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}")
-	public PassengerContainer getPassengerContainer(@PathParam("id") long id) {
+	public PassengerContainer getPassengerContainer(@PathParam("id") int id) {
 		PassengerContainer container = DAO.getPassengerDao().getPassengerContainer(id);
 		if (container == null) {
 			throw new NotFoundException("Invalid container id");
@@ -36,7 +36,7 @@ public class PassengerResource {
 
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
-	public long addPassengerContainer(PassengerContainer container) {
+	public int addPassengerContainer(PassengerContainer container) {
 		if (container == null) {
 			throw new BadRequestException("Missing payload");
 		}
@@ -51,7 +51,7 @@ public class PassengerResource {
 	@DELETE
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}")
-	public void deletePassenger(@PathParam("id") long id) {
+	public void deletePassenger(@PathParam("id") int id) {
 		DAO.getPassengerDao().deletePassengerContainer(id);
 	}
 
@@ -70,13 +70,48 @@ public class PassengerResource {
 		return passengers;
 	}
 	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/{cas}/{word}")
+	public List<PassengerContainer> Search(@PathParam("cas") String cas,@PathParam("word") String word) {
+		List<PassengerContainer> passengers = DAO.getPassengerDao().Search(cas, word);
+		return passengers;
+	}
 
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/login/{username}/{password}")
+	@Path("/check/{username}/{password}")
 	public boolean CheckLogin1(@PathParam("username") String username,@PathParam("password") String password) {
 		boolean Login = DAO.getPassengerDao().CheckLogin(username, password);
 		return Login;
+	}
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/check/{username}")
+	public boolean CheckEmail(@PathParam("username") String username) {
+		boolean CheckEmail = DAO.getPassengerDao().CheckEmail(username);
+		return CheckEmail;
+	}
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/add/{mail}")
+	public PassengerContainer getPassengerID(@PathParam("mail") String mail) {
+		List<PassengerContainer> container = DAO.getPassengerDao().Search("email", mail);
+		if (container == null) {
+			throw new NotFoundException("Invalid container id");
+		}
+
+		return container.get(0);
+	}
+	
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("/{id_passenger}/{id_flight}")
+	public void BookFlight(@PathParam("id_passenger") int id_passager,@PathParam("id_flight") int id_flight) {
+
+		DAO.getPassengerDao().BookFlight(id_passager, id_flight);;
 	}
 }

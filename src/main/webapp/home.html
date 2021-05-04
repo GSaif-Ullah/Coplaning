@@ -47,9 +47,11 @@
 						<input type="datetime-local" class="form-control"></div><br>
 
 					</div></div>
-
+					    <script id="templateRow" type="text/template">
+        <tr><td><%= id %></td><td><%= flight.departure %></td><td><%= flight.arrival %></td><td><%= flight.id_flight %></td></tr>
+    </script>
 				</div>
-				<button type="button" class="btn btn-lg btn-block btn-primary" id="buttonSearch">Rechercher</button></div>
+					<button type="button" class="btn btn-lg btn-block btn-primary" id="buttonSearch">Rechercher</button></div>
 
 				<footer class="pt-4 my-md-5 pt-md-5 border-top">
 					<div class="row">
@@ -86,6 +88,8 @@
 					</div>
 				</footer>
 			</div>
-
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+    <script type="text/javascript" src="home.js"></script>
 	</body>
 </html>

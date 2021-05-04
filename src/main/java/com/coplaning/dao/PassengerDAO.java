@@ -15,13 +15,23 @@ public interface PassengerDAO {
 	 * @param username
 	 * @return the list of actions assigned to a specific user.
 	 */
-	List<PassengerContainer> getPassengers(String name);
 	List<PassengerContainer> getPassengers();
-	boolean CheckLogin(String username,String password);
-	PassengerContainer getPassengerContainer(long id);
-
-	long addPassengerContainer(PassengerContainer container);
 	
-	void deletePassengerContainer(long id);
+	PassengerContainer getPassengerContainer(int id);
+ /*
+  *  @param id : id du PassengerContainer 
+  *  Ajouter un flight dans le champs "fligths" de passenger
+  */
+	void BookFlight(int id_passager, int id_flight);
+	
+	boolean CheckLogin(String username,String password);
+	boolean CheckEmail(String username);
+
+	List<PassengerContainer> Search(String cas, String word);
+
+
+	int addPassengerContainer(PassengerContainer container);
+	
+	void deletePassengerContainer(int id);
 
 }

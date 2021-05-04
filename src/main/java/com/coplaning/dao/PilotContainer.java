@@ -1,50 +1,58 @@
 package com.coplaning.dao;
 
-
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
-
 @PersistenceCapable
-public class FlightContainer {
-
+public class PilotContainer{
+	
 	@PrimaryKey
 	@Persistent(valueStrategy = IdGeneratorStrategy.NATIVE)
 	protected Integer id = null;
 
 	@Persistent(defaultFetchGroup = "true")
-	protected Flight flight = null;
+	protected Pilot pilot = null;
 
-	public FlightContainer(Flight flight) {
+	
+	public PilotContainer() {
 		super();
-		this.flight = flight;
 	}
 
-	public FlightContainer() {
+
+	public PilotContainer(Pilot pilot) {
 		super();
-		this.flight = new Flight();
+		this.pilot = pilot;
 	}
+
+
+	public PilotContainer(Integer id, Pilot pilot) {
+		super();
+		this.id = id;
+		this.pilot = pilot;
+	}
+
 
 	public Integer getId() {
 		return id;
 	}
 
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	public Flight getFlight() {
-		return flight;
+
+	public Pilot getPilot() {
+		return pilot;
 	}
 
-	public void setFlight(Flight flight) {
-		this.flight = flight;
-	}
 
-	@Override
-	public String toString() {
-        return "id :"+String.valueOf(this.getId())+" -" + this.getFlight()  ;
-    }
+	public void setPilot(Pilot pilot) {
+		this.pilot = pilot;
+	}
+	
+
+
 }

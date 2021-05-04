@@ -12,7 +12,7 @@ public class PassengerContainer {
 
 	@PrimaryKey
 	@Persistent(valueStrategy = IdGeneratorStrategy.NATIVE)
-	protected Long id = null;
+	protected Integer id = null;
 
 	@Persistent(defaultFetchGroup = "true")
 	protected Passenger passenger = null;
@@ -31,11 +31,11 @@ public class PassengerContainer {
 
 
 
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -48,6 +48,6 @@ public class PassengerContainer {
 	}
 	@Override
 	public String toString() {
-        return String.valueOf(this.getId()) + this.getPassenger()  ;
+		return "id :"+String.valueOf(this.getId())+" -" + this.getPassenger()  ;
     }
 }

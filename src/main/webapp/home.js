@@ -6,16 +6,24 @@ function getServerData(url, success){
     }).done(success);
 }
 
-function callDone(result){
-	var templateExample = _.template($('#templateExample').html());
 
-	var html = templateExample({
-		"attribute":JSON.stringify(result)
-	});
-
-	$("#result").append(html);
+function fillTable(FlightContainer) {
+    var template = _.template($('#templateRow').html());;
+    var result = "";
+    FlightContainer.forEach(f=>result+=template(f));
+    $("#result").html(result);
 }
 
+
+
+
+$(function () {
+    $("#deconnexion").click(function () {
+		localStorage.removeItem("Mail");
+		location.reload();   	
+	});
+});	
+    
 $(function () {
     $("#buttonSearch").click(function () {
     
@@ -24,15 +32,22 @@ $(function () {
 	   var arrival=$("#arrival").val();
 	    
 	   var seat=$("#seat").val();
-	   	    
-       getServerData("ws/flight/search/" + departure +"/"+arrival+"/"+seat, function (result) {
-       
-        if (result==true){
-        	window.location.replace("home.html");
-        }
-        else{
-        		alert("Identifiants incorrect ");
-        }
-        });
+	   
+		if(departure.length > 0 && arrival.length>0 && seat.length>0) {
+		      document.location.href='recherche.html?Departure='+departure + '&Arrival='+arrival + '&Seat='+seat;
+
+		
+		}
+  	    
     });
 });
+    if(localStorage.getItem("Mail") === null){
+        document.getElementById("connexion").style.display='block';
+        document.getElementById("inscription").style.display='block';        
+        document.getElementById("deconnexion").style.display='none';
+
+    }else{ 
+        document.getElementById("connexion").style.display='none';
+        document.getElementById("inscription").style.display=	'none';  
+        document.getElementById("deconnexion").style.display='block';
+    }

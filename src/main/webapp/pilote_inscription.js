@@ -28,7 +28,17 @@ $(function () {
 	            "birth":$("#birth").val()
 	            }                  
         };
-        var password2=$("#password2").val();
+        var data2 = {
+            	"pilot":{
+    	            "firstname":$("#firstname").val(),
+    	            "name":$("#name").val(),
+    	            "password":$("#password").val(),
+    	            "email":$("#email").val(),
+    	            "phone":$("#phone").val(),
+    	            "id_passenger":27,
+    	            "birth":$("#birth").val()   	       
+    	            }                  
+            };
         var password2=$("#password2").val();
         var a=data.passenger.firstname=="" ||  data.passenger.name==""  || data.passenger.password==""  || data.passenger.password2=="" || data.passenger.email=="" || data.passenger.phone==""  || data.passenger.birth=="";
         var b=data.passenger.email.indexOf("@")<1 ||data.passenger.email.lastIndexOf(".")<data.passenger.email.indexOf("@")+2;
@@ -60,12 +70,16 @@ $(function () {
 				getServerData("ws/passenger/check/" + data.passenger.email, function (result) {
 					if (result==true){
 					   alert("Adresse mail déjà utilisée");
-					}				
+					}
 					if (!a && !b && !c && !d && !e && result==false) {
-					   putServerData("ws/passenger", data, function (result) {						
-					   alert("Inscription réussie, bonne réservation ! ");
-					   window.location.replace("user.html");
-					   }); 
+					   putServerData("ws/passenger", data, function (result){
+						   data2.pilot.id_passenger=result;
+						   putServerData("ws/pilot", data2, function (result) {           
+							   alert("Inscription réussie ! ");
+							   window.location.replace("pilote.html");
+							   }); 
+					   });
+					   
 					}
 				});
 		    }
