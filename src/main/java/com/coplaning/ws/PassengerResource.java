@@ -109,16 +109,9 @@ public class PassengerResource {
 	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	@Path("/{id}")
-	public long addFlighttoPassenger(PassengerContainer container) {
-		if (container == null) {
-			throw new BadRequestException("Missing payload");
-		}
+	@Path("/{id_passenger}/{id_flight}")
+	public void BookFlight(@PathParam("id_passenger") int id_passager,@PathParam("id_flight") int id_flight) {
 
-		if (container.getPassenger() == null) {
-			throw new BadRequestException("Missing Passengers in the container");
-		}
-
-		return DAO.getPassengerDao().addPassengerContainer(container);
+		DAO.getPassengerDao().BookFlight(id_passager, id_flight);;
 	}
 }

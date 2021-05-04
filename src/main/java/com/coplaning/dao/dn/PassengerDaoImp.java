@@ -222,4 +222,10 @@ public class PassengerDaoImp implements PassengerDAO{
 		pm.close();
 	}
 
+	public void BookFlight(int id_passager, int id_flight) {
+		PersistenceManager pm = pmf.getPersistenceManager();
+		PassengerContainer container = pm.getObjectById(PassengerContainer.class, id_passager);
+		container.getPassenger().setaFlight(id_flight);
+		pm.close();
+	}
 }

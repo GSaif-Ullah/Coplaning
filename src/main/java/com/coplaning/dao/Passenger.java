@@ -20,6 +20,7 @@ public class Passenger {
 
 	public Passenger() {
 		super();
+		this.flights = new ArrayList<Integer>();
 	}
 	
 	public Passenger(String name) {

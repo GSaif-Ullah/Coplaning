@@ -20,9 +20,9 @@ public interface PassengerDAO {
 	PassengerContainer getPassengerContainer(int id);
  /*
   *  @param id : id du PassengerContainer 
-  * Ajouter un flight dans le champs "fligths" de passenger
+  *  Ajouter un flight dans le champs "fligths" de passenger
   */
-	void BookFlight(long id);
+	void BookFlight(int id_passager, int id_flight);
 	
 	boolean CheckLogin(String username,String password);
 	boolean CheckEmail(String username);
