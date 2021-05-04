@@ -1,8 +1,12 @@
 package com.coplaning.dao;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.jdo.annotations.PersistenceCapable;
+import javax.jdo.annotations.Persistent;
+
 
 @PersistenceCapable
 public class Flight {
@@ -15,9 +19,13 @@ public class Flight {
 	protected int seat;
 	protected int cost;
 	protected String image;
+	
+	@Persistent
+	protected List<Integer> passengers;
 
 	public Flight() {
 		super();
+		this.passengers= new ArrayList<Integer>();
 	}
 
 	public Flight(String departure, String arrival, int seat) {
@@ -25,11 +33,13 @@ public class Flight {
 		this.departure = departure;
 		this.arrival = arrival;
 		this.seat = seat;
+		this.passengers= new ArrayList<Integer>();
 	}
 
 	public Flight(String id_flight) {
 		super();
 		this.id_flight = id_flight;
+		this.passengers= new ArrayList<Integer>();
 	}
 
 	public Flight(String departure, String arrival, String id_flight) {
@@ -37,6 +47,7 @@ public class Flight {
 		this.departure = departure;
 		this.arrival = arrival;
 		this.id_flight = id_flight;
+		this.passengers= new ArrayList<Integer>();
 	}
 
 	public Flight(String departure, String arrival, int seat, int cost) {
@@ -45,6 +56,7 @@ public class Flight {
 		this.arrival = arrival;
 		this.seat = seat;
 		this.cost = cost;
+		this.passengers= new ArrayList<Integer>();
 	}
 
 	public Flight(String departure, String arrival, String id_flight, String plane, Date date, int seat, int cost) {
@@ -56,6 +68,7 @@ public class Flight {
 		this.date = date;
 		this.seat = seat;
 		this.cost = cost;
+		this.passengers= new ArrayList<Integer>();
 	}
 
 	public Flight(String departure, String arrival, String id_flight, String plane, Date date, int seat, int cost,
@@ -69,6 +82,7 @@ public class Flight {
 		this.seat = seat;
 		this.cost = cost;
 		this.image = image;
+		this.passengers= new ArrayList<Integer>();
 	}
 
 	public String getImage() {
@@ -135,6 +149,20 @@ public class Flight {
 		this.cost = cost;
 	}
 
+	
+	public List<Integer> getPassengers() {
+		return passengers;
+	}
+
+	public void setPassengers(List<Integer> passengers) {
+		this.passengers = passengers;
+	}
+
+	public void setaPassenger(int passenger) {
+		this.passengers.add(passenger);
+		System.out.println(this.passengers.get(0));
+	}
+	
 	@Override
 	public String toString() {
 		String s = "Flight id :"+this.getId_flight()+" |departure : "+this.getDeparture()+" |arrival : "+this.getArrival()+

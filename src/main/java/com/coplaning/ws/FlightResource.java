@@ -111,5 +111,12 @@ public class FlightResource {
 		System.out.println(flights.toString());
 		return flights;
 	}
-	
+
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("/{id_flight}/{id_passenger}")
+	public void BookFlight(@PathParam("id_flight") int id_flight,@PathParam("id_passenger") int id_passager) {
+
+		DAO.getFlightDao().BookFlight(id_flight,id_passager );
+	}
 }

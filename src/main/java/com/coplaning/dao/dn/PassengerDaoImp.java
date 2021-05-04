@@ -68,6 +68,9 @@ public class PassengerDaoImp implements PassengerDAO{
 			q.setFilter("departure == dep");*/
 
 			passengers = (List<PassengerContainer>) q.execute();
+			for(int i=0; i<passengers.size(); i++) {
+				passengers.get(i).getPassenger().getFlights();
+			}
 			detached = (List<PassengerContainer>) pm.detachCopyAll(passengers);
 
 			tx.commit();
@@ -84,6 +87,7 @@ public class PassengerDaoImp implements PassengerDAO{
 
 		try {
 			PassengerContainer container = pm.getObjectById(PassengerContainer.class, id);
+			container.getPassenger().getFlights();
 			PassengerContainer detached = pm.detachCopy(container);
 
 			return detached;
@@ -99,6 +103,7 @@ public class PassengerDaoImp implements PassengerDAO{
 
 		try {
 			PassengerContainer container = pm.getObjectById(PassengerContainer.class, email);
+			container.getPassenger().getFlights();
 			PassengerContainer detached = pm.detachCopy(container);
 			System.out.println("DETACHED"+detached);
 			return detached;
@@ -133,6 +138,9 @@ public class PassengerDaoImp implements PassengerDAO{
 			q.declareParameters("String username,String passwrd");
 			q.setFilter("passenger.email == username && passenger.password==passwrd");
 			passengers = (List<PassengerContainer>) q.execute(username, passwrd);
+			for(int i=0; i<passengers.size(); i++) {
+				passengers.get(i).getPassenger().getFlights();
+			}
 			detached = (List<PassengerContainer>) pm.detachCopyAll(passengers);
 			tx.commit();
 			if (detached.size()==0) {
@@ -161,6 +169,9 @@ public class PassengerDaoImp implements PassengerDAO{
 				q.declareParameters("String username");
 				q.setFilter("passenger.email == username");
 				passengers = (List<PassengerContainer>) q.execute(username);
+				for(int i=0; i<passengers.size(); i++) {
+					passengers.get(i).getPassenger().getFlights();
+				}
 				detached = (List<PassengerContainer>) pm.detachCopyAll(passengers);
 				tx.commit();
 				if (detached.size()==0) {
@@ -200,6 +211,9 @@ public class PassengerDaoImp implements PassengerDAO{
 				passengers = (List<PassengerContainer>) q.execute(word);
 			}
 			
+			for(int i=0; i<passengers.size(); i++) {
+				passengers.get(i).getPassenger().getFlights();
+			}
 			detached = (List<PassengerContainer>) pm.detachCopyAll(passengers);
 			tx.commit();
 		} finally {
@@ -222,10 +236,19 @@ public class PassengerDaoImp implements PassengerDAO{
 		pm.close();
 	}
 
-	public void BookFlight(int id_passager, int id_flight) {
+	public void BookFlight(int id_passenger, int id_flight) {
 		PersistenceManager pm = pmf.getPersistenceManager();
-		PassengerContainer container = pm.getObjectById(PassengerContainer.class, id_passager);
+		PassengerContainer container = pm.getObjectById(PassengerContainer.class, id_passenger);
 		container.getPassenger().setaFlight(id_flight);
+		pm.close();
+	}
+	
+	public void setPilot(int id_passenger, int id_pilot) {
+		PersistenceManager pm = pmf.getPersistenceManager();
+
+		PassengerContainer container = pm.getObjectById(PassengerContainer.class, id_passenger);
+		container.getPassenger().setId_pilot(id_pilot);
+
 		pm.close();
 	}
 }

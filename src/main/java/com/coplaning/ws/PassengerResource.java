@@ -111,12 +111,15 @@ public class PassengerResource {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/{id_passenger}/{id_flight}")
 	public void BookFlight(@PathParam("id_passenger") int id_passenger,@PathParam("id_flight") int id_flight) {
-		PassengerContainer P=DAO.getPassengerDao().getPassengerContainer(id_passenger);
-
-		System.out.println(P.getPassenger().getFlights());
 
 		DAO.getPassengerDao().BookFlight(id_passenger, id_flight);
-		
-		System.out.println(P.getPassenger().getFlights());
+	}
+	
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("/addpilot/{id_passenger}/{id_pilot}")
+	public void setPilot(@PathParam("id_passenger") int id_passenger,@PathParam("id_pilot") int id_pilot) {
+
+		DAO.getPassengerDao().setPilot(id_passenger, id_pilot);
 	}
 }

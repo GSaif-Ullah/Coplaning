@@ -33,5 +33,6 @@ public interface PassengerDAO {
 	int addPassengerContainer(PassengerContainer container);
 	
 	void deletePassengerContainer(int id);
+	void setPilot(int id_passenger, int id_pilot);
 
 }

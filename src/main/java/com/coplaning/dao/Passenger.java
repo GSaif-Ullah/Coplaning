@@ -16,6 +16,7 @@ public class Passenger {
 	protected Date birth;
 	protected String phone;
 	protected List<Integer> flights;
+	protected int id_pilot;
 
 
 	public Passenger() {
@@ -26,6 +27,7 @@ public class Passenger {
 	public Passenger(String name) {
 		super();
 		this.name = name;
+		this.flights = new ArrayList<Integer>();
 	}
 
 
@@ -34,6 +36,7 @@ public class Passenger {
 		this.password = password;
 		this.email = email;
 		this.name = name;
+		this.flights = new ArrayList<Integer>();
 	}
 	
 	public Passenger(String password, String email, String name, String firstname, Date birth, String phone) {
@@ -44,6 +47,7 @@ public class Passenger {
 		this.firstname = firstname;
 		this.birth = birth;
 		this.phone = phone;
+		this.flights = new ArrayList<Integer>();
 	}
 
 
@@ -61,7 +65,7 @@ public class Passenger {
 	}
 
 	
-	public Passenger(String password, String email, String name, String firstname, Date birth, String phone,
+	/*public Passenger(String password, String email, String name, String firstname, Date birth, String phone,
 			List<Integer> flights) {
 		super();
 		this.password = password;
@@ -72,7 +76,7 @@ public class Passenger {
 		this.phone = phone;
 		this.flights = flights;
 		System.out.println(getFlights());
-	}
+	}*/
 
 	public String getName() {
 		return name;
@@ -127,6 +131,17 @@ public class Passenger {
 		this.email = email;
 	}
 
+
+
+	public void setaFlight(int flight) {
+		this.flights.add(flight);
+	}
+	
+	
+	public int getId_pilot() {
+		return id_pilot;
+	}
+
 	public List<Integer> getFlights() {
 		return flights;
 	}
@@ -135,10 +150,10 @@ public class Passenger {
 		this.flights = flights;
 	}
 
-	public void setaFlight(int flight) {
-		this.flights.add(flight);
+	public void setId_pilot(int id_pilot) {
+		this.id_pilot = id_pilot;
 	}
-	
+
 	@Override
 	public String toString() {
 		String s = "Name :"+this.getName()+" |Firstname : "+this.getFirstname()+" |birth : "+this.getBirth()+
