@@ -103,7 +103,7 @@ public class PassengerResource {
 		if (container == null) {
 			throw new NotFoundException("Invalid container id");
 		}
-
+		System.out.println(container.get(0));
 		return container.get(0);
 	}
 	

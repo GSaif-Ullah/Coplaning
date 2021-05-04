@@ -21,13 +21,14 @@ $(function () {
 	   var username=$("#mail").val();
 	   
 	   var password=$("#psswrd").val();
-	   	           	 	   
+	   getServerData("ws/passenger/add/" + username, function (result2) {
+       	storage=localStorage;
+       	localStorage.setItem('id_pilot',result2.passenger.id_pilot);
+       });
        getServerData("ws/passenger/check/" + username +"/"+ password, function (result) {
         if (result==true){
         	window.location.replace("home.html");
-        	storage=localStorage;
-        	localStorage.setItem('Mail',username);
-        		
+        	localStorage.setItem('Mail',username);                    
         	}
         
         else{
