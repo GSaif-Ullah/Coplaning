@@ -17,7 +17,7 @@ public interface PassengerDAO {
 	 */
 	List<PassengerContainer> getPassengers();
 	
-	PassengerContainer getPassengerContainer(long id);
+	PassengerContainer getPassengerContainer(int id);
  /*
   *  @param id : id du PassengerContainer 
   * Ajouter un flight dans le champs "fligths" de passenger
@@ -30,8 +30,8 @@ public interface PassengerDAO {
 	List<PassengerContainer> Search(String cas, String word);
 
 
-	long addPassengerContainer(PassengerContainer container);
+	int addPassengerContainer(PassengerContainer container);
 	
-	void deletePassengerContainer(long id);
+	void deletePassengerContainer(int id);
 
 }

@@ -272,7 +272,7 @@ public class FlightDaoImp implements FlightDAO{
 		}
 	}
 
-	public FlightContainer getFlightContainer(long id) {
+	public FlightContainer getFlightContainer(int id) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 
 		try {
@@ -291,11 +291,11 @@ public class FlightDaoImp implements FlightDAO{
 
 	}
 
-	public long addFlightContainer(FlightContainer container) {
+	public int addFlightContainer(FlightContainer container) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 
 		container = pm.makePersistent(container);
-		long containerId = container.getId();
+		int containerId = container.getId();
 		pm.close();
 		
 		
@@ -303,7 +303,7 @@ public class FlightDaoImp implements FlightDAO{
 	}
 
 
-	public void deleteFlightContainer(long id) {
+	public void deleteFlightContainer(int id) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		FlightContainer container = pm.getObjectById(FlightContainer.class, id);
 		System.out.println(container);

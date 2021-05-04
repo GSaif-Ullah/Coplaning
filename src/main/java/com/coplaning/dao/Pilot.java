@@ -59,6 +59,22 @@ public class Pilot {
 		this.birth = birth;
 		this.phone = phone;
 	}
+	
+	
+
+	public Pilot(int id_passenger, String password, String email, String name, String firstname, Date birth,
+			String phone, int flight) {
+		super();
+		this.id_passenger = id_passenger;
+		this.password = password;
+		this.email = email;
+		this.name = name;
+		this.firstname = firstname;
+		this.birth = birth;
+		this.phone = phone;
+		this.flights = new ArrayList<Integer>() ;
+		this.flights.add(flight);
+	}
 
 	public int getId_passenger() {
 		return id_passenger;

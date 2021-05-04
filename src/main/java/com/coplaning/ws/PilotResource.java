@@ -16,7 +16,6 @@ import javax.ws.rs.core.MediaType;
 
 import com.coplaning.dao.DAO;
 import com.coplaning.dao.PassengerContainer;
-import com.coplaning.dao.Pilot;
 import com.coplaning.dao.PilotContainer;
 
 @Path("/pilot")
@@ -24,7 +23,7 @@ public class PilotResource {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}")
-	public PilotContainer getPassengerContainer(@PathParam("id") long id) {
+	public PilotContainer getPassengerContainer(@PathParam("id") int id) {
 		PilotContainer container = DAO.getPilotDao().getPilotContainer(id);
 		if (container == null) {
 			throw new NotFoundException("Invalid container id");
@@ -35,7 +34,7 @@ public class PilotResource {
 
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
-	public long addPassengerContainer(PilotContainer container) {
+	public int addPassengerContainer(PilotContainer container) {
 		if (container == null) {
 			throw new BadRequestException("Missing payload");
 		}
@@ -46,15 +45,20 @@ public class PilotResource {
 
 		return DAO.getPilotDao().addPilotContainer(container);
 	}
+	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/all")
-	public List<PilotContainer> getPassengerContainer() {
-		List<PilotContainer> container = DAO.getPilotDao().getPilots();
-		if (container == null) {
-			throw new NotFoundException("Invalid container id");
-		}
-
-		return container;
+	public List<PilotContainer> getPilots() {
+		List<PilotContainer> pilots = DAO.getPilotDao().getPilots();
+		return pilots;
+	}
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/{cas}/{word}")
+	public List<PilotContainer> Search(@PathParam("cas") String cas,@PathParam("word") String word) {
+		List<PilotContainer> pilots = DAO.getPilotDao().Search(cas, word);
+		return pilots;
 	}
 }

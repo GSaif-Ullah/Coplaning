@@ -22,7 +22,7 @@ public class FlightResource {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}")
-	public FlightContainer getFlightContainer(@PathParam("id") long id) {
+	public FlightContainer getFlightContainer(@PathParam("id") int id) {
 		FlightContainer container = DAO.getFlightDao().getFlightContainer(id);
 
 		if (container == null) {
@@ -34,7 +34,7 @@ public class FlightResource {
 
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
-	public long addFlightContainer(FlightContainer container) {
+	public int addFlightContainer(FlightContainer container) {
 		if (container == null) {
 			throw new BadRequestException("Missing payload");
 		}
@@ -49,7 +49,7 @@ public class FlightResource {
 	@DELETE
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}")
-	public void deleteFlight(@PathParam("id") long id) {
+	public void deleteFlight(@PathParam("id") int id) {
 		DAO.getFlightDao().deleteFlightContainer(id);
 	}
 

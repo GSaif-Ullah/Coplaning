@@ -79,7 +79,7 @@ public class PassengerDaoImp implements PassengerDAO{
 		}
 		return detached;
 	}
-	public PassengerContainer getPassengerContainer(long id) {
+	public PassengerContainer getPassengerContainer(int id) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 
 		try {
@@ -111,11 +111,11 @@ public class PassengerDaoImp implements PassengerDAO{
 	}
 
 
-	public long addPassengerContainer(PassengerContainer container) {
+	public int addPassengerContainer(PassengerContainer container) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 
 		container = pm.makePersistent(container);
-		long containerId = container.getId();
+		int containerId = container.getId();
 		pm.close();
 
 		return containerId;
@@ -212,7 +212,7 @@ public class PassengerDaoImp implements PassengerDAO{
 				
 	}
 
-	public void deletePassengerContainer(long id) {
+	public void deletePassengerContainer(int id) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		PassengerContainer container = pm.getObjectById(PassengerContainer.class, id);
 		System.out.println(container);
