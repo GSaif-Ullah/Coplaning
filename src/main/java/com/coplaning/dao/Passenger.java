@@ -15,17 +15,19 @@ public class Passenger {
 	protected String firstname;
 	protected Date birth;
 	protected String phone;
-	protected int flights;
+	protected List<Integer> flights;
+	protected int id_pilot;
 
 
 	public Passenger() {
 		super();
-		//this.flights = new ArrayList<Integer>();
+		this.flights = new ArrayList<Integer>();
 	}
 	
 	public Passenger(String name) {
 		super();
 		this.name = name;
+		this.flights = new ArrayList<Integer>();
 	}
 
 
@@ -34,6 +36,7 @@ public class Passenger {
 		this.password = password;
 		this.email = email;
 		this.name = name;
+		this.flights = new ArrayList<Integer>();
 	}
 	
 	public Passenger(String password, String email, String name, String firstname, Date birth, String phone) {
@@ -44,6 +47,7 @@ public class Passenger {
 		this.firstname = firstname;
 		this.birth = birth;
 		this.phone = phone;
+		this.flights = new ArrayList<Integer>();
 	}
 
 
@@ -56,8 +60,8 @@ public class Passenger {
 		this.firstname = firstname;
 		this.birth = birth;
 		this.phone = phone;
-		//this.flights = new ArrayList<Integer>();
-		this.flights= flight;
+		this.flights = new ArrayList<Integer>();
+		this.flights.add(flight);
 	}
 
 	
@@ -129,16 +133,25 @@ public class Passenger {
 
 
 
-	/*public void setaFlight(int flight) {
+	public void setaFlight(int flight) {
 		this.flights.add(flight);
-	}*/
+	}
 	
-	public int getFlights() {
+	
+	public int getId_pilot() {
+		return id_pilot;
+	}
+
+	public List<Integer> getFlights() {
 		return flights;
 	}
 
-	public void setFlights(int flights) {
+	public void setFlights(List<Integer> flights) {
 		this.flights = flights;
+	}
+
+	public void setId_pilot(int id_pilot) {
+		this.id_pilot = id_pilot;
 	}
 
 	@Override

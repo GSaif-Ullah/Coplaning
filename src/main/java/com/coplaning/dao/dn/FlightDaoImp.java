@@ -60,6 +60,10 @@ public class FlightDaoImp implements FlightDAO{
 			q.setFilter("departure == dep");*/
 
 			flights = (List<FlightContainer>) q.execute();
+			for(int i=0; i<flights.size(); i++) {
+				flights.get(i).getFlight().getPassengers();
+			}
+			//System.out.println(flights.get(0).getFlight().getPassengers());
 			detached = (List<FlightContainer>) pm.detachCopyAll(flights);
 			//System.out.println(detached);
 			tx.commit();
@@ -101,11 +105,14 @@ public class FlightDaoImp implements FlightDAO{
 			}
 			else {
 				q.declareParameters("String word");
-				q.setFilter("flight."+cas+" == word");
+				q.setFilter("flight."+cas+"== word");
 				flights = (List<FlightContainer>) q.execute(word);
 			
 			}
 
+			for(int i=0; i<flights.size(); i++) {
+				flights.get(i).getFlight().getPassengers();
+			}
 			detached = (List<FlightContainer>) pm.detachCopyAll(flights);
 			tx.commit();
 		} finally {
@@ -130,6 +137,9 @@ public class FlightDaoImp implements FlightDAO{
 			q.declareParameters("String departure,String arrival,int seat");
 			q.setFilter("flight.departure == departure && flight.arrival==arrival && flight.seat>=seat");
 			flights = (List<FlightContainer>) q.execute(departure,arrival,seat);
+			for(int i=0; i<flights.size(); i++) {
+				flights.get(i).getFlight().getPassengers();
+			}
 			detached = (List<FlightContainer>) pm.detachCopyAll(flights);
 			tx.commit();
 			if (detached.size()==0) {
@@ -163,7 +173,9 @@ public class FlightDaoImp implements FlightDAO{
             q.declareParameters("String departure,String arrival, int seat,int cost");
             q.setFilter("flight.departure == departure && flight.arrival==arrival && flight.seat>=seat && flight.cost<=cost");
             flights = (List<FlightContainer>) q.executeWithArray((new Object[]{departure, arrival,seat,cost}));
-
+            for(int i=0; i<flights.size(); i++) {
+				flights.get(i).getFlight().getPassengers();
+			}
             detached = (List<FlightContainer>) pm.detachCopyAll(flights);
             tx.commit();
             if (detached.size()==0) {
@@ -196,7 +208,9 @@ public class FlightDaoImp implements FlightDAO{
             q.declareParameters("String departure,String arrival, int seat,int cost, int cost1");
             q.setFilter("flight.departure == departure && flight.arrival==arrival && flight.seat>=seat && cost<=flight.cost && flight.cost<=cost1");
             flights = (List<FlightContainer>) q.executeWithArray((new Object[]{departure, arrival,seat,cost,cost1}));
-
+            for(int i=0; i<flights.size(); i++) {
+				flights.get(i).getFlight().getPassengers();
+			}
             detached = (List<FlightContainer>) pm.detachCopyAll(flights);
             tx.commit();
             if (detached.size()==0) {
@@ -234,7 +248,9 @@ public class FlightDaoImp implements FlightDAO{
             Date date2 =Date.valueOf(d2);
             
             flights = (List<FlightContainer>) q.executeWithArray((new Object[]{departure, arrival,seat,cost,cost1,date1,date2}));
-
+            for(int i=0; i<flights.size(); i++) {
+				flights.get(i).getFlight().getPassengers();
+			}
             detached = (List<FlightContainer>) pm.detachCopyAll(flights);
             tx.commit();
             if (detached.size()==0) {
@@ -278,6 +294,8 @@ public class FlightDaoImp implements FlightDAO{
 
 		try {
 			FlightContainer container = pm.getObjectById(FlightContainer.class, id);
+			
+			container.getFlight().getPassengers();
 			FlightContainer detached = pm.detachCopy(container);
 			/*int test = 
 			for(int i=0;i<container.getFlights().size();i++){
@@ -317,7 +335,8 @@ public class FlightDaoImp implements FlightDAO{
 	public void BookFlight(int id_flight,int id_passager) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		FlightContainer container = pm.getObjectById(FlightContainer.class, id_flight);
-		container.getFlight().setPassenger(id_passager);
+
+		container.getFlight().setaPassenger(id_passager);
 		pm.close();
 	}
 	
