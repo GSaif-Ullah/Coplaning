@@ -17,7 +17,9 @@
 			<a class="btn btn-outline-primary" href="home.html">Accueil</a>
 			<a class="p-2 text-dark" href="pilote.html">Vous êtes pilotes ?</a>
 			<a class="p-2 text-dark" href="#">Aide</a>
-			
+			<a class="btn btn-outline-secondary" id="connexion">Connexion </a>
+			<a class="btn btn-outline-secondary" id="deconnexion"  >Deconnexion</a>
+
 		</nav>
 		
 	</div>
@@ -25,42 +27,43 @@
 
 
 
-    
+
 	<div class="container">
 		<h1 class="display-4 text-center">Vols disponibles<br></h1>
-				
+
+
 		<div class="row">
 			<div class="col-md-4">
-				<div class="card mb-4 box-shadow">
-					<div class="card-body">
-						<p class="card-text">Réserver votre vol dès maintenant</p>
-						<div class="d-flex justify-content-between align-items-center">
-							<small class="row" id="result"></small>
-    <script id="templateRow" type="text/template">
-        <tr>
-			<td><img class="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" alt="Thumbnail [100%x225]" src=<%= flight.image %> data-holder-rendered="true" style="height: 225px; width: 100%; display: block;" ></small></td>
-			<td><small class="text-muted">ID :	    </small><%= id %></td>			
-			<td><small class="text-muted">Lieu de départ : </small> <%= flight.departure %></td>
-			<td><small class="text-muted">Lieu d'arrivé : </small><%= flight.arrival %></td>
-			<td><small class="text-muted">Prix : </small><%= flight.cost %>€</td>
-	</tr>
-    </script>
-    							<div class="btn-group">
-								<button type="button" class="btn btn-sm btn-outline-secondary" id="buttonBook">Réserver</button>
-							</div>
+				
+					<div class="card" style="width: 18rem;">
+						<img class="card-img-top" src="..." alt="Card image cap">
+						<div class="card-body">
+							<h5 class="card-title">Réserver votre vol dès maintenant</h5>
+							<script id="templateRow" type="text/template">
+								<tr>
+									<td><img class="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" alt="Thumbnail [100%x225]" src=<%= flight.image %> data-holder-rendered="true" style="height: 225px; width: 100%; display: block;" ></small></td>
+									<td><small class="text-muted">ID :        </small><%= id %></td>
+									<td><small class="text-muted">Lieu de départ : </small> <%= flight.departure %></td>
+									<td><small class="text-muted">Lieu d'arrivé : </small><%= flight.arrival %></td>
+									<td><small class="text-muted">Prix : </small><%= flight.cost %>€</td>
+								</tr>
+							</script>
+							<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+						</div>
+						<ul class="list-group list-group-flush">
+							<li class="list-group-item">Cras justo odio</li>
+							<li class="list-group-item">Dapibus ac facilisis in</li>
+							<li class="list-group-item">Vestibulum at eros</li>
+						</ul>
+						<div class="card-body">
+							<a href="#" class="card-link">Card link</a>
+							<a href="#" class="card-link">Another link</a>
 						</div>
 					</div>
 				</div>
-			</div>
+			
 		</div>
 		
-		
-
-
-
-
-
-	
 
 
 		<footer class="pt-4 my-md-5 pt-md-5 border-top">
