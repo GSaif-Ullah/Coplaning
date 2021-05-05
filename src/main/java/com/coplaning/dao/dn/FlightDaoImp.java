@@ -110,7 +110,7 @@ public class FlightDaoImp implements FlightDAO{
 
 		container.getFlight().setId_pilot(id_pilot);
 		pm.close();
-
+	}
 	@SuppressWarnings("unchecked")
 	public List<FlightContainer> getFlights() {
 		List<FlightContainer> flights = null;
