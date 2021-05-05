@@ -96,6 +96,13 @@ public class FlightDaoImp implements FlightDAO{
 		pm.close();
 	}
 	
+	public void BookFlightSeat(int id_flight,int seat) {
+		PersistenceManager pm = pmf.getPersistenceManager();
+		FlightContainer container = pm.getObjectById(FlightContainer.class, id_flight);
+
+		container.getFlight().DecSeat(seat);
+		pm.close();
+	}
 	@SuppressWarnings("unchecked")
 	public List<FlightContainer> getFlights() {
 		List<FlightContainer> flights = null;
@@ -422,7 +429,46 @@ public class FlightDaoImp implements FlightDAO{
         }
 	}
 
+	@SuppressWarnings("unchecked")
+	public List<FlightContainer> Search(String departure,String arrival,int seat,String d1,String d2){
+		List<FlightContainer> flights = null;
+        List<FlightContainer> detached = new ArrayList<FlightContainer>();
+        PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx = pm.currentTransaction();
+        try {
+            tx.begin();
+            Query q = pm.newQuery(FlightContainer.class);
+            q.declareParameters("String departure,String arrival, int seat,java.sql.Date date1, java.sql.Date date2");
+            q.setFilter("flight.departure == departure && flight.arrival==arrival && flight.seat>=seat && date1<=flight.date && flight.date<=date2");
+            
+            //transforme les string en date 
+            Date date1 =Date.valueOf(d1);
+            Date date2 =Date.valueOf(d2);
+            
+            flights = (List<FlightContainer>) q.executeWithArray((new Object[]{departure, arrival,seat,date1,date2}));
+            for(int i=0; i<flights.size(); i++) {
+				flights.get(i).getFlight().getPassengers();
+			}
+            detached = (List<FlightContainer>) pm.detachCopyAll(flights);
+            tx.commit();
+            if (detached.size()==0) {
 
+                return null;
+            }
+            else {    
+                return detached;
+                
+            }
+        } finally {
+            if (tx.isActive()) {
+                tx.rollback();
+            }
+            pm.close();
+        }
+	}
+
+
+	
 	
 	@SuppressWarnings("unchecked")
 	public List<FlightContainer> Searchspecial(String cas, String word) {

@@ -162,7 +162,9 @@ public class Flight {
 		this.passengers.add(passenger);
 		System.out.println(this.passengers.get(0));
 	}
-	
+	public void DecSeat(int seat) {
+		this.seat=this.seat-seat;
+	}
 	@Override
 	public String toString() {
 		String s = "Flight id :"+this.getId_flight()+" |departure : "+this.getDeparture()+" |arrival : "+this.getArrival()+
