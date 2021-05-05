@@ -60,6 +60,15 @@ public class FlightResource {
 	
 	}
 	
+
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("/{id_flight}/{id_passenger}")
+	public void BookFlight(@PathParam("id_flight") int id_flight,@PathParam("id_passenger") int id_passager) {
+
+		DAO.getFlightDao().BookFlight(id_flight,id_passager );
+	}
+	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/all")
@@ -68,21 +77,28 @@ public class FlightResource {
 		return flights;
 	}
 	
+	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/seat/{departure}/{arrival}/{seat}")
-	public List<FlightContainer> Search(@PathParam("departure") String departure,@PathParam("arrival") String arrival,@PathParam("seat") int seat ) {
-		List<FlightContainer> flights = DAO.getFlightDao().Search(departure,arrival,seat);
-		System.out.println(flights.toString());
+	@Path("/location/{departure}")
+	public List<FlightContainer> Search(@PathParam("departure") String departure) {
+		List<FlightContainer> flights = DAO.getFlightDao().Search(departure);
 		return flights;
 	}
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/{departure}/{arrival}/{seat}/{cost}")
-	public List<FlightContainer> Search(@PathParam("departure") String departure,@PathParam("arrival") String arrival,@PathParam("seat") int seat,@PathParam("cost") int cost ) {
-		List<FlightContainer> flights = DAO.getFlightDao().Search(departure,arrival,seat,cost);
-		System.out.println(flights.toString()+"ok");
+	@Path("/location/{departure}/{arrival}")
+	public List<FlightContainer> SearchLieu(@PathParam("departure") String departure,@PathParam("arrival") String arrival) {
+		List<FlightContainer> flights = DAO.getFlightDao().SearchLieu(departure,arrival);
+		return flights;
+	}
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/{departure}/{date1}")
+	public List<FlightContainer> Search(@PathParam("departure") String departure,@PathParam("date1") String date1 ) {
+		List<FlightContainer> flights = DAO.getFlightDao().Search(departure,date1);
 		return flights;
 	}
 	
@@ -93,6 +109,17 @@ public class FlightResource {
 		List<FlightContainer> flights = DAO.getFlightDao().Search(departure,date1,date2);
 		return flights;
 	}
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/{departure}/{arrival}/{date1}/{date2}")
+	public List<FlightContainer> Search(@PathParam("departure") String departure,@PathParam("arrival") String arrival,@PathParam("date1") String date1,@PathParam("date2") String date2 ) {
+		List<FlightContainer> flights = DAO.getFlightDao().Search(departure,arrival,date1,date2);
+		return flights;
+	}
+	
+
+	
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
@@ -113,18 +140,33 @@ public class FlightResource {
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/{cas}/{word}")
-	public List<FlightContainer> Search(@PathParam("cas") String cas,@PathParam("word") String word ) {
-		List<FlightContainer> flights = DAO.getFlightDao().Search(cas, word);
-		System.out.println(flights.toString());
+	@Path("/special/{cas}/{word}")
+	public List<FlightContainer> Searchspecial(@PathParam("cas") String cas,@PathParam("word") String word ) {
+		List<FlightContainer> flights = DAO.getFlightDao().Searchspecial(cas, word);
 		return flights;
 	}
 
-	@POST
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Path("/{id_flight}/{id_passenger}")
-	public void BookFlight(@PathParam("id_flight") int id_flight,@PathParam("id_passenger") int id_passager) {
 
-		DAO.getFlightDao().BookFlight(id_flight,id_passager );
+	
+	
+
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/seat/{departure}/{arrival}/{seat}")
+	public List<FlightContainer> Search(@PathParam("departure") String departure,@PathParam("arrival") String arrival,@PathParam("seat") int seat ) {
+		List<FlightContainer> flights = DAO.getFlightDao().Search(departure,arrival,seat);
+		System.out.println(flights.toString());
+		return flights;
 	}
+	
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/seat/{departure}/{arrival}/{seat}/{cost}")
+	public List<FlightContainer> Search(@PathParam("departure") String departure,@PathParam("arrival") String arrival,@PathParam("seat") int seat,@PathParam("cost") int cost ) {
+		List<FlightContainer> flights = DAO.getFlightDao().Search(departure,arrival,seat,cost);
+		System.out.println(flights.toString()+"ok");
+		return flights;
+	}
+	
 }

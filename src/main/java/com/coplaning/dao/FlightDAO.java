@@ -1,30 +1,36 @@
 package com.coplaning.dao;
 
-import java.sql.Date;
 import java.util.List;
 
 public interface FlightDAO {
 
-	/**
-	 * Add a flight to the database
-	 * 
-	 * @param action
-	 */
-	void addFlight(Flight flight);
 
-	/**
-	 * @param username
-	 * @return the list of actions assigned to a specific user.
-	 */
 	List<FlightContainer> getFlights();
 
 	FlightContainer getFlightContainer(int id);
-	List<FlightContainer> Search(String cas, String word);
+
+	//recherche avec depart
+	List<FlightContainer> Search(String departure);
+	
+	//recherche avec depart et une date
+	List<FlightContainer> Search(String departure,String date1);
+	
+	//recherche avec depart et une arrivee
+	List<FlightContainer> SearchLieu(String departure,String arrival);
+	
+	//recherche avec depart entre deux dates
 	List<FlightContainer> Search(String departure,String d1,String d2);
+	
+	//recherche avec depart et une arrivee entre deux dates
+	List<FlightContainer> Search(String departure,String arrival,String d1,String d2);
+	
+	
 	List<FlightContainer> Search(String departure,String arrival,int seat);
 	List<FlightContainer> Search(String departure,String arrival,int seat,int cost);
 	List<FlightContainer> Search(String departure,String arrival,int seat,int cost,int cost1);
  	List<FlightContainer> Search(String departure,String arrival,int seat,int cost,int cost1,String d1,String d2);
+ 	
+	List<FlightContainer> Searchspecial(String cas, String word);
   
 	int addFlightContainer(FlightContainer container);
 	
