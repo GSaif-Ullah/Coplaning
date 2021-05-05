@@ -45,13 +45,13 @@ function fillTable2(container){
 
 $(function fonction() {
 	var searchParams=new URLSearchParams(window.location.search)
-	var departure=searchParams.get('Departure')
-	var arrival=searchParams.get('Arrival')
-	var datedep=searchParams.get('Date1')
-	var datedar=searchParams.get('Date2')
+	var departure=searchParams.get('Departure');
+	var arrival=searchParams.get('Arrival');
+	var datedep=searchParams.get('Date1');
+	var datedar=searchParams.get('Date2');
 
 	   if (departure!=null && arrival !=null && datedep != null && datedar !=null){    
-           getServerData("ws/flight/" + departure +"/"+arrival+"/"+date1+"/"+date2, function(result){
+           getServerData("ws/flight/" + departure +"/"+arrival+"/"+datedep+"/"+datedar, function(result){
            fillTable2(result)});
         }
  	   if (departure!=null && arrival !=null && datedep != null && datedar ==null){    
@@ -63,11 +63,11 @@ $(function fonction() {
            fillTable2(result)});
         }
  	   if (departure!=null && arrival !=null && datedep == null && datedar ==null){    
-           getServerData("ws/flight/" + departure +"/"+arrival, function(result){
+           getServerData("ws/flight/location/" + departure +"/"+arrival, function(result){
            fillTable2(result)});
         }
  	   if (departure!=null && arrival ==null && datedep == null && datedar ==null) {   
-           getServerData("ws/flight/" + departure, function(result){
+           getServerData("ws/flight/location/" + departure, function(result){
            fillTable2(result)});
         }    
 	   /*console.log(result.flight);
