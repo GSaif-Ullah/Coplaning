@@ -16,6 +16,26 @@ function putServerData(url, data, success) {
     }).done(success);
 }
 
+function fillTable2(container){
+    var template = _.template($('#templateRow').html());;
+    var result = "";
+    container.forEach(f=>result+=template(f));
+    $("#result").html(result);
+
+}
+
+	getServerData("ws/passenger/get/"+localStorage.getItem("Mail"),function(result){
+    	var id_flights=console.log(result.passenger.flights);
+
+        getServerData("ws/flight/"+"13", function(result2){
+            fillTable2(result2)});
+         });
+	
+	  	
+
+
+
+
 $(function () {
     $("#buttonInfo").click(function () {
         var data = {
