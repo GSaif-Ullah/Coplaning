@@ -15,7 +15,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import com.coplaning.dao.DAO;
-import com.coplaning.dao.PassengerContainer;
 import com.coplaning.dao.PilotContainer;
 
 @Path("/pilot")

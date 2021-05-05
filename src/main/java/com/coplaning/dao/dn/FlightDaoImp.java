@@ -13,7 +13,6 @@ import javax.jdo.Transaction;
 import com.coplaning.dao.Flight;
 import com.coplaning.dao.FlightContainer;
 import com.coplaning.dao.FlightDAO;
-import com.coplaning.dao.PassengerContainer;
 
 
 public class FlightDaoImp implements FlightDAO{
@@ -44,6 +43,56 @@ public class FlightDaoImp implements FlightDAO{
 		pm.makePersistent(F1);pm.makePersistent(F2);pm.makePersistent(F3);pm.makePersistent(F4);
 		pm.makePersistent(F5);pm.makePersistent(F6);pm.makePersistent(F7);pm.makePersistent(F8);
 		pm.makePersistent(F9);pm.makePersistent(F10);pm.makePersistent(F11);pm.makePersistent(F12);
+		pm.close();
+	}
+	
+	public FlightContainer getFlightContainer(int id) {
+		PersistenceManager pm = pmf.getPersistenceManager();
+
+		try {
+			FlightContainer container = pm.getObjectById(FlightContainer.class, id);
+			
+			container.getFlight().getPassengers();
+			FlightContainer detached = pm.detachCopy(container);
+			/*int test = 
+			for(int i=0;i<container.getFlights().size();i++){
+			    System.out.println(container.getFlights().get(i));
+			}*/
+			return detached;
+		} catch (JDOObjectNotFoundException e) {
+			return null;
+		} finally {
+			pm.close();
+		}
+
+	}
+
+	public int addFlightContainer(FlightContainer container) {
+		PersistenceManager pm = pmf.getPersistenceManager();
+
+		container = pm.makePersistent(container);
+		int containerId = container.getId();
+		pm.close();
+		
+		
+		return containerId;
+	}
+	
+	public void deleteFlightContainer(int id) {
+		PersistenceManager pm = pmf.getPersistenceManager();
+		FlightContainer container = pm.getObjectById(FlightContainer.class, id);
+		System.out.println(container);
+		pm.deletePersistent(container);
+		
+		pm.flush();
+		pm.close();
+	}
+
+	public void BookFlight(int id_flight,int id_passager) {
+		PersistenceManager pm = pmf.getPersistenceManager();
+		FlightContainer container = pm.getObjectById(FlightContainer.class, id_flight);
+
+		container.getFlight().setaPassenger(id_passager);
 		pm.close();
 	}
 	
@@ -79,8 +128,304 @@ public class FlightDaoImp implements FlightDAO{
 		return detached;
 	}
 	
+	
+	//recherche avec depart
 	@SuppressWarnings("unchecked")
-	public List<FlightContainer> Search(String cas, String word) {
+	public List<FlightContainer> Search(String departure){
+		List<FlightContainer> flights = null;
+        List<FlightContainer> detached = new ArrayList<FlightContainer>();
+        PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx = pm.currentTransaction();
+        try {
+            tx.begin();
+            Query q = pm.newQuery(FlightContainer.class);
+            q.declareParameters("String departure");
+            q.setFilter("flight.departure == departure ");
+            
+            flights = (List<FlightContainer>) q.executeWithArray((new Object[]{departure}));
+            for(int i=0; i<flights.size(); i++) {
+				flights.get(i).getFlight().getPassengers();
+			}
+            detached = (List<FlightContainer>) pm.detachCopyAll(flights);
+            tx.commit();
+            if (detached.size()==0) {
+
+                return null;
+            }
+            else {    
+                return detached;
+                
+            }
+        } finally {
+            if (tx.isActive()) {
+                tx.rollback();
+            }
+            pm.close();
+        }
+	}
+	
+	//recherche avec depart et une date
+	@SuppressWarnings("unchecked")
+	public List<FlightContainer> Search(String departure,String d){
+		List<FlightContainer> flights = null;
+        List<FlightContainer> detached = new ArrayList<FlightContainer>();
+        PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx = pm.currentTransaction();
+        try {
+            tx.begin();
+            Query q = pm.newQuery(FlightContainer.class);
+            q.declareParameters("String departure,java.sql.Date date1");
+            q.setFilter("flight.departure == departure && date1==flight.date ");
+            
+            //transforme les string en date 
+            Date date1 =Date.valueOf(d);
+            
+            flights = (List<FlightContainer>) q.executeWithArray((new Object[]{departure,date1}));
+            for(int i=0; i<flights.size(); i++) {
+				flights.get(i).getFlight().getPassengers();
+			}
+            detached = (List<FlightContainer>) pm.detachCopyAll(flights);
+            tx.commit();
+            if (detached.size()==0) {
+
+                return null;
+            }
+            else {    
+                return detached;
+                
+            }
+        } finally {
+            if (tx.isActive()) {
+                tx.rollback();
+            }
+            pm.close();
+        }
+	}
+	
+	//recherche avec depart et une arrivee	
+	@SuppressWarnings("unchecked")
+	public List<FlightContainer> SearchLieu(String departure,String arrival){
+		List<FlightContainer> flights = null;
+        List<FlightContainer> detached = new ArrayList<FlightContainer>();
+        PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx = pm.currentTransaction();
+        try {
+            tx.begin();
+            Query q = pm.newQuery(FlightContainer.class);
+            q.declareParameters("String departure,String arrival");
+            q.setFilter("flight.departure == departure && flight.arrival == arrival ");
+            
+            
+            flights = (List<FlightContainer>) q.executeWithArray((new Object[]{departure,arrival}));
+            for(int i=0; i<flights.size(); i++) {
+				flights.get(i).getFlight().getPassengers();
+			}
+            detached = (List<FlightContainer>) pm.detachCopyAll(flights);
+            tx.commit();
+            if (detached.size()==0) {
+
+                return null;
+            }
+            else {    
+                return detached;
+                
+            }
+        } finally {
+            if (tx.isActive()) {
+                tx.rollback();
+            }
+            pm.close();
+        }
+	}
+	
+	//recherche avec depart entre deux dates
+	@SuppressWarnings("unchecked")
+	public List<FlightContainer> Search(String departure,String d1,String d2){
+		List<FlightContainer> flights = null;
+        List<FlightContainer> detached = new ArrayList<FlightContainer>();
+        PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx = pm.currentTransaction();
+        try {
+            tx.begin();
+            Query q = pm.newQuery(FlightContainer.class);
+            q.declareParameters("String departure,java.sql.Date date1, java.sql.Date date2");
+            q.setFilter("flight.departure == departure && date1<=flight.date && flight.date<=date2");
+            
+            //transforme les string en date 
+            Date date1 =Date.valueOf(d1);
+            Date date2 =Date.valueOf(d2);
+            
+            flights = (List<FlightContainer>) q.executeWithArray((new Object[]{departure,date1,date2}));
+            for(int i=0; i<flights.size(); i++) {
+				flights.get(i).getFlight().getPassengers();
+			}
+            detached = (List<FlightContainer>) pm.detachCopyAll(flights);
+            tx.commit();
+            if (detached.size()==0) {
+
+                return null;
+            }
+            else {    
+                return detached;
+                
+            }
+        } finally {
+            if (tx.isActive()) {
+                tx.rollback();
+            }
+            pm.close();
+        }
+	}
+	
+	//recherche avec depart et une arrivee entre deux dates
+	@SuppressWarnings("unchecked")
+	public List<FlightContainer> Search(String departure,String arrival,String d1,String d2){
+		List<FlightContainer> flights = null;
+        List<FlightContainer> detached = new ArrayList<FlightContainer>();
+        PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx = pm.currentTransaction();
+        try {
+            tx.begin();
+            Query q = pm.newQuery(FlightContainer.class);
+            q.declareParameters("String departure,String arrival,java.sql.Date date1, java.sql.Date date2");
+            q.setFilter("flight.departure == departure && flight.arrival == arrival && date1<=flight.date && flight.date<=date2");
+            
+            //transforme les string en date 
+            Date date1 =Date.valueOf(d1);
+            Date date2 =Date.valueOf(d2);
+            
+            flights = (List<FlightContainer>) q.executeWithArray((new Object[]{departure,arrival,date1,date2}));
+            for(int i=0; i<flights.size(); i++) {
+				flights.get(i).getFlight().getPassengers();
+			}
+            detached = (List<FlightContainer>) pm.detachCopyAll(flights);
+            tx.commit();
+            if (detached.size()==0) {
+
+                return null;
+            }
+            else {    
+                return detached;
+                
+            }
+        } finally {
+            if (tx.isActive()) {
+                tx.rollback();
+            }
+            pm.close();
+        }
+	}
+	//ne fonctionne pas
+	@SuppressWarnings("unchecked")
+	public List<FlightContainer> Search(String departure,String arrival,int seat,int cost) {
+        List<FlightContainer> flights = null;
+        List<FlightContainer> detached = new ArrayList<FlightContainer>();
+        PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx = pm.currentTransaction();
+        try {
+            tx.begin();
+            Query q = pm.newQuery(FlightContainer.class);
+            q.declareParameters("String departure,String arrival, int seat,int cost");
+            q.setFilter("flight.departure == departure && flight.arrival==arrival && flight.seat>=seat && flight.cost<=cost");
+            flights = (List<FlightContainer>) q.executeWithArray((new Object[]{departure, arrival,seat,cost}));
+            for(int i=0; i<flights.size(); i++) {
+				flights.get(i).getFlight().getPassengers();
+			}
+            detached = (List<FlightContainer>) pm.detachCopyAll(flights);
+            tx.commit();
+            if (detached.size()==0) {
+
+                return null;
+            }
+            else {    
+                return detached;
+                
+            }
+        } finally {
+            if (tx.isActive()) {
+                tx.rollback();
+            }
+            pm.close();
+        }
+    }
+	
+	@SuppressWarnings("unchecked")
+	public List<FlightContainer> Search(String departure, String arrival, int seat, int cost, int cost1) {
+		List<FlightContainer> flights = null;
+        List<FlightContainer> detached = new ArrayList<FlightContainer>();
+        PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx = pm.currentTransaction();
+        try {
+            tx.begin();
+            Query q = pm.newQuery(FlightContainer.class);
+            q.declareParameters("String departure,String arrival, int seat,int cost, int cost1");
+            q.setFilter("flight.departure == departure && flight.arrival==arrival && flight.seat>=seat && cost<=flight.cost && flight.cost<=cost1");
+            flights = (List<FlightContainer>) q.executeWithArray((new Object[]{departure, arrival,seat,cost,cost1}));
+            for(int i=0; i<flights.size(); i++) {
+				flights.get(i).getFlight().getPassengers();
+			}
+            detached = (List<FlightContainer>) pm.detachCopyAll(flights);
+            tx.commit();
+            if (detached.size()==0) {
+
+
+                return null;
+            }
+            else {    
+
+                return detached;
+                
+            }
+        } finally {
+            if (tx.isActive()) {
+                tx.rollback();
+            }
+            pm.close();
+        }
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<FlightContainer> Search(String departure,String arrival,int seat,int cost,int cost1,String d1,String d2){
+		List<FlightContainer> flights = null;
+        List<FlightContainer> detached = new ArrayList<FlightContainer>();
+        PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx = pm.currentTransaction();
+        try {
+            tx.begin();
+            Query q = pm.newQuery(FlightContainer.class);
+            q.declareParameters("String departure,String arrival, int seat,int cost, int cost1,java.sql.Date date1, java.sql.Date date2");
+            q.setFilter("flight.departure == departure && flight.arrival==arrival && flight.seat>=seat && cost<=flight.cost && flight.cost<=cost1 && date1<=flight.date && flight.date<=date2");
+            
+            //transforme les string en date 
+            Date date1 =Date.valueOf(d1);
+            Date date2 =Date.valueOf(d2);
+            
+            flights = (List<FlightContainer>) q.executeWithArray((new Object[]{departure, arrival,seat,cost,cost1,date1,date2}));
+            for(int i=0; i<flights.size(); i++) {
+				flights.get(i).getFlight().getPassengers();
+			}
+            detached = (List<FlightContainer>) pm.detachCopyAll(flights);
+            tx.commit();
+            if (detached.size()==0) {
+
+                return null;
+            }
+            else {    
+                return detached;
+                
+            }
+        } finally {
+            if (tx.isActive()) {
+                tx.rollback();
+            }
+            pm.close();
+        }
+	}
+
+
+	
+	@SuppressWarnings("unchecked")
+	public List<FlightContainer> Searchspecial(String cas, String word) {
 		List<FlightContainer> flights = null;
 		List<FlightContainer> detached = new ArrayList<FlightContainer>();
 		PersistenceManager pm = pmf.getPersistenceManager();
@@ -125,259 +470,39 @@ public class FlightDaoImp implements FlightDAO{
 	}
 	
 	// Renvoie les flight rechercher sinon null 
-	@SuppressWarnings("unchecked")
-	public List<FlightContainer> Search(String departure,String arrival,int seat) {
-		List<FlightContainer> flights = null;
-		List<FlightContainer> detached = new ArrayList<FlightContainer>();
-		PersistenceManager pm = pmf.getPersistenceManager();
-		Transaction tx = pm.currentTransaction();
-		try {
-			tx.begin();
-			Query q = pm.newQuery(FlightContainer.class);
-			q.declareParameters("String departure,String arrival,int seat");
-			q.setFilter("flight.departure == departure && flight.arrival==arrival && flight.seat>=seat");
-			flights = (List<FlightContainer>) q.execute(departure,arrival,seat);
-			for(int i=0; i<flights.size(); i++) {
-				flights.get(i).getFlight().getPassengers();
+		@SuppressWarnings("unchecked")
+		public List<FlightContainer> Search(String departure,String arrival,int seat) {
+			List<FlightContainer> flights = null;
+			List<FlightContainer> detached = new ArrayList<FlightContainer>();
+			PersistenceManager pm = pmf.getPersistenceManager();
+			Transaction tx = pm.currentTransaction();
+			try {
+				tx.begin();
+				Query q = pm.newQuery(FlightContainer.class);
+				q.declareParameters("String departure,String arrival,int seat");
+				q.setFilter("flight.departure == departure && flight.arrival==arrival && flight.seat>=seat");
+				flights = (List<FlightContainer>) q.execute(departure,arrival,seat);
+				for(int i=0; i<flights.size(); i++) {
+					flights.get(i).getFlight().getPassengers();
+				}
+				detached = (List<FlightContainer>) pm.detachCopyAll(flights);
+				tx.commit();
+				if (detached.size()==0) {
+
+					return null;
+				}
+				else {	
+
+					return detached;
+					
+				}
+			} finally {
+				if (tx.isActive()) {
+					tx.rollback();
+				}
+				pm.close();
 			}
-			detached = (List<FlightContainer>) pm.detachCopyAll(flights);
-			tx.commit();
-			if (detached.size()==0) {
-				System.out.println("ZERO");
-
-				return null;
-			}
-			else {	
-				System.out.println("OK");
-				return detached;
-				
-			}
-		} finally {
-			if (tx.isActive()) {
-				tx.rollback();
-			}
-			pm.close();
-		}
-	}
-	
-	@SuppressWarnings("unchecked")
-	public List<FlightContainer> Search(String departure,String d1,String d2){
-		List<FlightContainer> flights = null;
-        List<FlightContainer> detached = new ArrayList<FlightContainer>();
-        PersistenceManager pm = pmf.getPersistenceManager();
-        Transaction tx = pm.currentTransaction();
-        try {
-            tx.begin();
-            Query q = pm.newQuery(FlightContainer.class);
-            q.declareParameters("String departure,java.sql.Date date1, java.sql.Date date2");
-            q.setFilter("flight.departure == departure && date1<=flight.date && flight.date<=date2");
-            
-            //transforme les string en date 
-            Date date1 =Date.valueOf(d1);
-            Date date2 =Date.valueOf(d2);
-            
-            flights = (List<FlightContainer>) q.executeWithArray((new Object[]{departure,date1,date2}));
-            for(int i=0; i<flights.size(); i++) {
-				flights.get(i).getFlight().getPassengers();
-			}
-            detached = (List<FlightContainer>) pm.detachCopyAll(flights);
-            tx.commit();
-            if (detached.size()==0) {
-                System.out.println("ZERO");
-
-                return null;
-            }
-            else {    
-                System.out.println("OK1");
-                return detached;
-                
-            }
-        } finally {
-            if (tx.isActive()) {
-                tx.rollback();
-            }
-            pm.close();
-        }
-	}
-	
-	//ne fonctionne pas
-	@SuppressWarnings("unchecked")
-	public List<FlightContainer> Search(String departure,String arrival,int seat,int cost) {
-        List<FlightContainer> flights = null;
-        List<FlightContainer> detached = new ArrayList<FlightContainer>();
-        PersistenceManager pm = pmf.getPersistenceManager();
-        Transaction tx = pm.currentTransaction();
-        try {
-            tx.begin();
-            Query q = pm.newQuery(FlightContainer.class);
-            q.declareParameters("String departure,String arrival, int seat,int cost");
-            q.setFilter("flight.departure == departure && flight.arrival==arrival && flight.seat>=seat && flight.cost<=cost");
-            flights = (List<FlightContainer>) q.executeWithArray((new Object[]{departure, arrival,seat,cost}));
-            for(int i=0; i<flights.size(); i++) {
-				flights.get(i).getFlight().getPassengers();
-			}
-            detached = (List<FlightContainer>) pm.detachCopyAll(flights);
-            tx.commit();
-            if (detached.size()==0) {
-                System.out.println("ZERO");
-
-                return null;
-            }
-            else {    
-                System.out.println("OK");
-                return detached;
-                
-            }
-        } finally {
-            if (tx.isActive()) {
-                tx.rollback();
-            }
-            pm.close();
-        }
-    }
-	
-	@SuppressWarnings("unchecked")
-	public List<FlightContainer> Search(String departure, String arrival, int seat, int cost, int cost1) {
-		List<FlightContainer> flights = null;
-        List<FlightContainer> detached = new ArrayList<FlightContainer>();
-        PersistenceManager pm = pmf.getPersistenceManager();
-        Transaction tx = pm.currentTransaction();
-        try {
-            tx.begin();
-            Query q = pm.newQuery(FlightContainer.class);
-            q.declareParameters("String departure,String arrival, int seat,int cost, int cost1");
-            q.setFilter("flight.departure == departure && flight.arrival==arrival && flight.seat>=seat && cost<=flight.cost && flight.cost<=cost1");
-            flights = (List<FlightContainer>) q.executeWithArray((new Object[]{departure, arrival,seat,cost,cost1}));
-            for(int i=0; i<flights.size(); i++) {
-				flights.get(i).getFlight().getPassengers();
-			}
-            detached = (List<FlightContainer>) pm.detachCopyAll(flights);
-            tx.commit();
-            if (detached.size()==0) {
-                System.out.println("ZERO");
-
-                return null;
-            }
-            else {    
-                System.out.println("OK1");
-                return detached;
-                
-            }
-        } finally {
-            if (tx.isActive()) {
-                tx.rollback();
-            }
-            pm.close();
-        }
-	}
-	
-	@SuppressWarnings("unchecked")
-	public List<FlightContainer> Search(String departure,String arrival,int seat,int cost,int cost1,String d1,String d2){
-		List<FlightContainer> flights = null;
-        List<FlightContainer> detached = new ArrayList<FlightContainer>();
-        PersistenceManager pm = pmf.getPersistenceManager();
-        Transaction tx = pm.currentTransaction();
-        try {
-            tx.begin();
-            Query q = pm.newQuery(FlightContainer.class);
-            q.declareParameters("String departure,String arrival, int seat,int cost, int cost1,java.sql.Date date1, java.sql.Date date2");
-            q.setFilter("flight.departure == departure && flight.arrival==arrival && flight.seat>=seat && cost<=flight.cost && flight.cost<=cost1 && date1<=flight.date && flight.date<=date2");
-            
-            //transforme les string en date 
-            Date date1 =Date.valueOf(d1);
-            Date date2 =Date.valueOf(d2);
-            
-            flights = (List<FlightContainer>) q.executeWithArray((new Object[]{departure, arrival,seat,cost,cost1,date1,date2}));
-            for(int i=0; i<flights.size(); i++) {
-				flights.get(i).getFlight().getPassengers();
-			}
-            detached = (List<FlightContainer>) pm.detachCopyAll(flights);
-            tx.commit();
-            if (detached.size()==0) {
-                System.out.println("ZERO");
-
-                return null;
-            }
-            else {    
-                System.out.println("OK1");
-                return detached;
-                
-            }
-        } finally {
-            if (tx.isActive()) {
-                tx.rollback();
-            }
-            pm.close();
-        }
-	}
-
-	//pas besoin a supprimer
-	public void addFlight(Flight flight) {
-		PersistenceManager pm = pmf.getPersistenceManager();
-		Transaction tx = pm.currentTransaction();
-		try {
-			tx.begin();
-
-			pm.makePersistent(flight);
-
-			tx.commit();
-		} finally {
-			if (tx.isActive()) {
-				tx.rollback();
-			}
-			pm.close();
-		}
-	}
-
-	public FlightContainer getFlightContainer(int id) {
-		PersistenceManager pm = pmf.getPersistenceManager();
-
-		try {
-			FlightContainer container = pm.getObjectById(FlightContainer.class, id);
-			
-			container.getFlight().getPassengers();
-			FlightContainer detached = pm.detachCopy(container);
-			/*int test = 
-			for(int i=0;i<container.getFlights().size();i++){
-			    System.out.println(container.getFlights().get(i));
-			}*/
-			return detached;
-		} catch (JDOObjectNotFoundException e) {
-			return null;
-		} finally {
-			pm.close();
 		}
 
-	}
-
-	public int addFlightContainer(FlightContainer container) {
-		PersistenceManager pm = pmf.getPersistenceManager();
-
-		container = pm.makePersistent(container);
-		int containerId = container.getId();
-		pm.close();
-		
-		
-		return containerId;
-	}
-
-
-	public void deleteFlightContainer(int id) {
-		PersistenceManager pm = pmf.getPersistenceManager();
-		FlightContainer container = pm.getObjectById(FlightContainer.class, id);
-		System.out.println(container);
-		pm.deletePersistent(container);
-		
-		pm.flush();
-		pm.close();
-	}
-
-	public void BookFlight(int id_flight,int id_passager) {
-		PersistenceManager pm = pmf.getPersistenceManager();
-		FlightContainer container = pm.getObjectById(FlightContainer.class, id_flight);
-
-		container.getFlight().setaPassenger(id_passager);
-		pm.close();
-	}
 	
 }
