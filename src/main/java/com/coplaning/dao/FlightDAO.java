@@ -40,4 +40,7 @@ public interface FlightDAO {
 	void BookFlight(int id_flight, int id_passager);
 
 	void BookFlightSeat(int id_flight,int seat);
+
+	
+	void BookPilot(int id_flight,int id_pilot);
 }

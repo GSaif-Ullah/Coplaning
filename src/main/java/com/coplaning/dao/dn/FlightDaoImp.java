@@ -27,14 +27,14 @@ public class FlightDaoImp implements FlightDAO{
 	//Create a Flight database
 	@SuppressWarnings("deprecation")
 	public void initiateFlights() {
-		FlightContainer F1=new FlightContainer(new Flight("CDG", "Orly","H160","aircraft1",new Date(121,4,8), 4, 52,"images/aircraft1.jpg"));
+		FlightContainer F1=new FlightContainer(new Flight("CDG", "Orly","H160","aircraft1",new Date(121,4,8), 4, 52,"images/aircraft1.jpg",0));
 	    FlightContainer F2=new FlightContainer(new Flight("Orly", "CDG","FGZPA","aircraft2",new Date(121,4,10), 2, 74,"images/aircraft2.jpg"));
 	    FlightContainer F3=new FlightContainer(new Flight("Meaux", "Pontoise", "FGYPG","aircraft3",new Date(121,4,8), 7, 45,"images/aircraft3.jpg"));
 	    FlightContainer F4=new FlightContainer(new Flight("Lognes", "Etampes", "FGHLY","aircraft4",new Date(121,4,7), 2, 112,"images/aircraft4.jpg"));
 	    FlightContainer F5=new FlightContainer(new Flight("Meaux", "Pontoise", "FG536","aircraft3",new Date(121,4,8), 1, 65,"images/aircraft5.jpg"));
 	    FlightContainer F6=new FlightContainer(new Flight("Meaux", "Lognes", "FGCIX","aircraft1",new Date(121,4,9), 8, 57,"images/aircraft6.jpg"));
 	    FlightContainer F7=new FlightContainer(new Flight("Pontoise", "Pontoise", "AB346","aircraft2",new Date(121,4,10), 7, 39,"images/aircraft7.jpg"));
-	    FlightContainer F8=new FlightContainer(new Flight("Lognes", "Meaux", "AB586","aircraft1",new Date(121,4,6), 4, 107,"images/aircraft8.jpg"));
+	    FlightContainer F8=new FlightContainer(new Flight("Lognes", "Meaux", "AB586","aircraft1",new Date(121,4,5), 4, 107,"images/aircraft8.jpg"));
 	    FlightContainer F9=new FlightContainer(new Flight("Pontoise", "Meaux", "AB516","aircraft3",new Date(121,4,14), 3, 86,"images/aircraft9.jpg"));
 	    FlightContainer F10=new FlightContainer(new Flight("Etampes", "Pontoise", "HBYSH","aircraft4",new Date(121,4,7), 5, 63,"images/aircraft10.jpg"));
 	    FlightContainer F11=new FlightContainer(new Flight("Etampes", "Meaux", "IDUEK","aircraft1",new Date(121,4,8), 5, 43,"images/aircraft11.jpg"));
@@ -103,6 +103,14 @@ public class FlightDaoImp implements FlightDAO{
 		container.getFlight().DecSeat(seat);
 		pm.close();
 	}
+
+	public void BookPilot(int id_flight,int id_pilot) {
+		PersistenceManager pm = pmf.getPersistenceManager();
+		FlightContainer container = pm.getObjectById(FlightContainer.class, id_flight);
+
+		container.getFlight().setId_pilot(id_pilot);
+		pm.close();
+
 	@SuppressWarnings("unchecked")
 	public List<FlightContainer> getFlights() {
 		List<FlightContainer> flights = null;

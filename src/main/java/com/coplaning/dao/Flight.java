@@ -19,6 +19,8 @@ public class Flight {
 	protected int seat;
 	protected int cost;
 	protected String image;
+	protected String description;
+	protected Integer id_pilot;
 	
 	@Persistent
 	protected List<Integer> passengers;
@@ -26,6 +28,7 @@ public class Flight {
 	public Flight() {
 		super();
 		this.passengers= new ArrayList<Integer>();
+		this.description="Description ici";
 	}
 
 	public Flight(String departure, String arrival, int seat) {
@@ -34,12 +37,14 @@ public class Flight {
 		this.arrival = arrival;
 		this.seat = seat;
 		this.passengers= new ArrayList<Integer>();
+		this.description="Description ici";
 	}
 
 	public Flight(String id_flight) {
 		super();
 		this.id_flight = id_flight;
 		this.passengers= new ArrayList<Integer>();
+		this.description="Description ici";
 	}
 
 	public Flight(String departure, String arrival, String id_flight) {
@@ -48,6 +53,7 @@ public class Flight {
 		this.arrival = arrival;
 		this.id_flight = id_flight;
 		this.passengers= new ArrayList<Integer>();
+		this.description="Description ici";
 	}
 
 	public Flight(String departure, String arrival, int seat, int cost) {
@@ -57,6 +63,7 @@ public class Flight {
 		this.seat = seat;
 		this.cost = cost;
 		this.passengers= new ArrayList<Integer>();
+		this.description="Description ici";
 	}
 
 	public Flight(String departure, String arrival, String id_flight, String plane, Date date, int seat, int cost) {
@@ -69,6 +76,7 @@ public class Flight {
 		this.seat = seat;
 		this.cost = cost;
 		this.passengers= new ArrayList<Integer>();
+		this.description="Description ici";
 	}
 
 	public Flight(String departure, String arrival, String id_flight, String plane, Date date, int seat, int cost,
@@ -83,8 +91,23 @@ public class Flight {
 		this.cost = cost;
 		this.image = image;
 		this.passengers= new ArrayList<Integer>();
+		this.description="Description ici";
 	}
-
+	public Flight(String departure, String arrival, String id_flight, String plane, Date date, int seat, int cost,
+			String image,int id_pilot) {
+		super();
+		this.departure = departure;
+		this.arrival = arrival;
+		this.id_flight = id_flight;
+		this.plane = plane;
+		this.date = date;
+		this.seat = seat;
+		this.cost = cost;
+		this.image = image;
+		this.passengers= new ArrayList<Integer>();
+		this.description="Description ici";
+		this.id_pilot = id_pilot;
+	}
 	public String getImage() {
 		return image;
 	}
@@ -162,9 +185,29 @@ public class Flight {
 		this.passengers.add(passenger);
 		System.out.println(this.passengers.get(0));
 	}
+  
 	public void DecSeat(int seat) {
 		this.seat=this.seat-seat;
 	}
+
+	
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	
+	public Integer getId_pilot() {
+		return id_pilot;
+	}
+
+	public void setId_pilot(int id_pilot) {
+		this.id_pilot = id_pilot;
+	}
+
 	@Override
 	public String toString() {
 		String s = "Flight id :"+this.getId_flight()+" |departure : "+this.getDeparture()+" |arrival : "+this.getArrival()+

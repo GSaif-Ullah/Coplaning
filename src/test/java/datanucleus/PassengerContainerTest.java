@@ -1,5 +1,6 @@
 package datanucleus;
 
+import java.sql.Date;
 import javax.jdo.JDOHelper;
 import javax.jdo.PersistenceManager;
 import javax.jdo.PersistenceManagerFactory;
@@ -12,26 +13,24 @@ import com.coplaning.dao.PassengerContainer;
 
 public class PassengerContainerTest {
 
+	@SuppressWarnings("deprecation")
 	@Test
 	public void test() {
 		PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("Example");
-		Long containerId = null;
+		Integer containerId = null;
+		Integer containerId_2 = null;
 
-		// Save a container with 3 passengers
 		{
 			PersistenceManager pm = pmf.getPersistenceManager();
 
-			Passenger passenger1 = new Passenger("Username 1");
-			Passenger passenger2 = new Passenger("Username 2");
-			Passenger passenger3 = new Passenger("Username 3");
 
-			/*PassengerContainer container = new PassengerContainer();
-			container.setPassenger(passenger3);;
-			container.setPassenger(passenger2);
-			container.setPassenger(passenger1);
+			PassengerContainer P1=new PassengerContainer(new Passenger("password1", "maaz@gmail.com", "kathawala", "maaz",new Date(98,1,5),"phone1"));
+			PassengerContainer P2=new PassengerContainer(new Passenger("test", "maaz@outlook.com", "kathawala", "maaz",new Date(98,1,5),"phone1"));
 
-			container = pm.makePersistent(container);
-			containerId = container.getId();*/
+			pm.makePersistent(P1);pm.makePersistent(P2);
+
+			containerId = P1.getId();
+			containerId_2 = P2.getId();
 			pm.close();
 		}
 
@@ -39,10 +38,14 @@ public class PassengerContainerTest {
 		{
 			PersistenceManager pm = pmf.getPersistenceManager();
 
+			//Verification nom du passager1
 			PassengerContainer container = pm.getObjectById(PassengerContainer.class, containerId);
-			//A REFAIRE
-			Assert.assertEquals(3, container.getPassenger());
-
+			Assert.assertEquals("kathawala", container.getPassenger().getName());
+			
+			//Verification password du passager2
+			container = pm.getObjectById(PassengerContainer.class, containerId_2);
+			Assert.assertEquals("test", container.getPassenger().getPassword());
+			
 			pm.close();
 		}
 
