@@ -55,7 +55,10 @@ public class JettyMain {
 
 		// Start server
 		server.start();
-		
+		Mail service = new Mail();
+		service.mail();
+
+
 
 	}
 

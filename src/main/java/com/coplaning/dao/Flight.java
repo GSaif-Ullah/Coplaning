@@ -20,6 +20,7 @@ public class Flight {
 	protected int cost;
 	protected String image;
 	protected String description;
+	protected Integer id_pilot;
 	
 	@Persistent
 	protected List<Integer> passengers;
@@ -92,7 +93,21 @@ public class Flight {
 		this.passengers= new ArrayList<Integer>();
 		this.description="Description ici";
 	}
-
+	public Flight(String departure, String arrival, String id_flight, String plane, Date date, int seat, int cost,
+			String image,int id_pilot) {
+		super();
+		this.departure = departure;
+		this.arrival = arrival;
+		this.id_flight = id_flight;
+		this.plane = plane;
+		this.date = date;
+		this.seat = seat;
+		this.cost = cost;
+		this.image = image;
+		this.passengers= new ArrayList<Integer>();
+		this.description="Description ici";
+		this.id_pilot = id_pilot;
+	}
 	public String getImage() {
 		return image;
 	}
@@ -178,6 +193,15 @@ public class Flight {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	
+	public Integer getId_pilot() {
+		return id_pilot;
+	}
+
+	public void setId_pilot(int id_pilot) {
+		this.id_pilot = id_pilot;
 	}
 
 	@Override
