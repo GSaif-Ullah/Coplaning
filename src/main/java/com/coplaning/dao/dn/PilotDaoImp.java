@@ -32,15 +32,24 @@ public class PilotDaoImp implements PilotDAO {
 	@SuppressWarnings("deprecation")
 	public void initiatePilots() {
 		PassengerContainer container = new PassengerContainer(new Passenger("password1", "jean@gmail.com", "test", "jean",new Date(95,1,5),"phone1"));
-		int i = DAO.getPassengerDao().addPassengerContainer(container);
+		int id_pass = DAO.getPassengerDao().addPassengerContainer(container);
+		FlightContainer F3=new FlightContainer(new Flight("Meaux", "Pontoise", "FGYPG","aircraft3",new Date(121,4,15), 7, 45,"images/aircraft3.jpg"));
+	    int id_fli = DAO.getFlightDao().addFlightContainer(F3);
+		PilotContainer P1=new PilotContainer(new Pilot(id_pass,"password1", "jean@gmail.com", "test", "jean",new Date(95,1,5),"phone1",id_fli));
+		int id_pil = addPilotContainer(P1);
+		DAO.getFlightDao().BookPilot(id_fli, id_pil);
+		DAO.getPassengerDao().BookPilot(id_pass,id_pil);
 		
-	    FlightContainer F3=new FlightContainer(new Flight("Meaux", "Pontoise", "FGYPG","aircraft3",new Date(121,4,15), 7, 45,"images/aircraft3.jpg"));
-	    int j = DAO.getFlightDao().addFlightContainer(F3);
-		PilotContainer P1=new PilotContainer(new Pilot(i,"password1", "jean@gmail.com", "test", "jean",new Date(95,1,5),"phone1",j));
-		System.out.println(P1.getPilot().getFlights());
-		PersistenceManager pm = pmf.getPersistenceManager();
-		pm.makePersistent(P1);
-		pm.close();
+		PassengerContainer P2=new PassengerContainer(new Passenger("password2", "g.saif-ullah@outlook.fr", "ghulam", "saif",new Date(98,7,20),"phone2"));
+		id_pass = DAO.getPassengerDao().addPassengerContainer(P2);
+		FlightContainer F4=new FlightContainer(new Flight("CDG", "Pontoise", "FGYPG","aircraft3",new Date(121,4,6), 7, 124,"images/aircraft3.jpg"));
+	    F4.getFlight().setaPassenger(0);
+		id_fli = DAO.getFlightDao().addFlightContainer(F4);
+		DAO.getPassengerDao().BookFlight(0, id_fli);
+		PilotContainer Pi2=new PilotContainer(new Pilot(id_pass,"password2", "g.saif-ullah@outlook.fr", "ghulam", "saif",new Date(98,7,20),"phone2",id_fli));
+		id_pil = addPilotContainer(Pi2);
+		DAO.getFlightDao().BookPilot(id_fli, id_pil);
+		DAO.getPassengerDao().BookPilot(id_pass,id_pil);
 	}
 		
 	//permet d'ajouter un pilote
@@ -66,6 +75,9 @@ public class PilotDaoImp implements PilotDAO {
 			Query q = pm.newQuery(PilotContainer.class);
 
 			pilots = (List<PilotContainer>) q.execute();
+			for(int i=0; i<pilots.size(); i++) {
+				pilots.get(i).getPilot().getFlights();
+			}
 			detached = (List<PilotContainer>) pm.detachCopyAll(pilots);
 
 			tx.commit();
@@ -124,7 +136,9 @@ public class PilotDaoImp implements PilotDAO {
 				q.setFilter("pilot."+cas+" == word");
 				pilots = (List<PilotContainer>) q.execute(word);
 			}
-			
+			for(int i=0; i<pilots.size(); i++) {
+				pilots.get(i).getPilot().getFlights();
+			}
 			detached = (List<PilotContainer>) pm.detachCopyAll(pilots);
 			tx.commit();
 		} finally {

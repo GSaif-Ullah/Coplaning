@@ -35,4 +35,6 @@ public interface PassengerDAO {
 	void deletePassengerContainer(int id);
 	void setPilot(int id_passenger, int id_pilot);
 
+	void BookPilot(int id_pass, int id_pil);
+
 }

@@ -37,4 +37,6 @@ public interface FlightDAO {
 	void deleteFlightContainer(int id);
 	
 	void BookFlight(int id_flight, int id_passager);
+	
+	void BookPilot(int id_flight,int id_pilot);
 }
