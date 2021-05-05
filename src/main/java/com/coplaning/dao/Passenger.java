@@ -16,7 +16,7 @@ public class Passenger {
 	protected Date birth;
 	protected String phone;
 	protected List<Integer> flights;
-	protected int id_pilot;
+	protected Integer id_pilot;
 
 
 	public Passenger() {
@@ -138,7 +138,7 @@ public class Passenger {
 	}
 	
 	
-	public int getId_pilot() {
+	public Integer getId_pilot() {
 		return id_pilot;
 	}
 
