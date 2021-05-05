@@ -1,6 +1,5 @@
 package com.coplaning;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Properties;
@@ -70,16 +69,16 @@ public class Mail {
 		c.set(Calendar.MINUTE, 57);
 		c.set(Calendar.SECOND, 42);
 		System.out.println("a");
-		int period = 100000;
+		int period = 86400000;
 		Timer timer = new Timer();
 		timer.scheduleAtFixedRate(new TimerTask() {
 			@Override
 			public void run() {
 				System.out.println("b");
 				String obj_pilote = "Pilote Email";
-				String msg_pilote = "Mon gars tu dois pilote demain";
+				String msg_pilote = "Vous devez pilotez demain";
 				String obj_passenger = "passenger Email";
-				String msg_passenger = "Mon gars t'a un vol demain";
+				String msg_passenger = "Vous avez un vol demain";
 				long millis=System.currentTimeMillis()+86400000;  
 				java.sql.Date date=new java.sql.Date(millis);  
 				String currentdate = date.toString();
@@ -87,10 +86,11 @@ public class Mail {
 				
 				for(int i = 0 ; i< flights.size() ; i++) {
 					System.out.println("i"+i);
+					System.out.println(flights.size());
 					PilotContainer container = DAO.getPilotDao().getPilotContainer(flights.get(i).getFlight().getId_pilot());
 					String pilote = container.getPilot().getEmail();
 					test.envoyer(pilote, obj_pilote, msg_pilote);
-					for(int j = 0 ; i< flights.get(i).getFlight().getPassengers().size() ; i++) {
+					for(int j = 0 ; j< flights.get(i).getFlight().getPassengers().size() ; j++) {
 						System.out.println("j"+j);
 						PassengerContainer pcontainer = DAO.getPassengerDao().getPassengerContainer(flights.get(i).getFlight().getPassengers().get(j));
 						String passenger = pcontainer.getPassenger().getEmail();
