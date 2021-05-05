@@ -96,22 +96,22 @@
 
                 </div><br>
                 <div class="form-group">
-                  <label for="bio">Biographie</label>
-                  <textarea class="form-control autosize" id="bio" placeholder="Write something about you" style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 62px;">Etudiant ingénieur dans le domaine des systèmes informatiques embarqués, je suis passionné de foot et de jeux vidéo.</textarea>
+                  <label for="bio">Date de naissance</label>
+                  <input type="date"  class="form-control" id="birth">
                 </div><br>
 
                 <div class="form-group">
                   <label for="phone">Numéro de téléphone</label>
-                  <input type="text" class="form-control" id="phone" placeholder="Entrer votre numéro de téléphone" value="00 00 00 00 00">
+                  <input type="number" class="form-control" id="phone" placeholder="Entrer votre numéro de téléphone" value="00 00 00 00 00">
                 </div><br>
 
                 <div class="form-group">
-                  <label for="location">Adresse</label>
-                  <input type="text" class="form-control" id="location" placeholder="Entrer votre adresse" value="Paris, France">
+                  <label for="location">Adresse mail</label>
+                  <input type="email" class="form-control" id="email" placeholder="Entrer votre adresse" value="Paris, France">
                 </div><br>
 
 
-                <button type="button" class="btn btn-primary">Confirmer</button>
+                <button type="button" class="btn btn-primary" id="buttonInfo">Confirmer</button>
                 <button type="reset" class="btn btn-light">Annuler</button>
               </form>
             </div>
@@ -142,10 +142,10 @@
               <form>
                 <div class="form-group">
                   <label class="d-block">Changer de mot de passe</label><br>
-                  <input type="text" class="form-control" placeholder="Entrer votre mot de passe actuel"><br>
-                  <input type="text" class="form-control mt-1" placeholder="Nouveau mot de passe"><br>
-                  <input type="text" class="form-control mt-1" placeholder="Confirmation du nouveau mot de passe"><br>
-                  <button type="button" class="btn btn-primary">Confirmer</button>
+                  <input type="text" class="form-control" placeholder="Entrer votre mot de passe actuel" id="currentpassword"><br>
+                  <input type="text" class="form-control mt-1" placeholder="Nouveau mot de passe" id="password"><br>
+                  <input type="text" class="form-control mt-1" placeholder="Confirmation du nouveau mot de passe" id="password2"><br>
+                  <button type="button" class="btn btn-primary" id="buttonMdp">Confirmer</button>
                 </div>
 
               </form>
@@ -228,6 +228,7 @@
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<script src="user.js"></script>
 
 </body>
 </html>
