@@ -47,12 +47,30 @@ $(function fonction() {
 	var searchParams=new URLSearchParams(window.location.search)
 	var departure=searchParams.get('Departure')
 	var arrival=searchParams.get('Arrival')
-	var date=searchParams.get('Date')
+	var datedep=searchParams.get('Date1')
+	var datedar=searchParams.get('Date2')
 
-	   	    
-	   getServerData("ws/flight/" + departure +"/"+arrival+"/"+date, function(result){
-	   fillTable2(result);
-	   console.log(result.flight);
+	   if (departure!=null && arrival !=null && datedep != null && datedar !=null){    
+           getServerData("ws/flight/" + departure +"/"+arrival+"/"+date1+"/"+date2, function(result){
+           fillTable2(result)});
+        }
+ 	   if (departure!=null && arrival !=null && datedep != null && datedar ==null){    
+           getServerData("ws/flight/" + departure +"/"+arrival+"/"+datedep, function(result){
+           fillTable2(result)});
+        }
+	   if (departure!=null && arrival ==null && datedep != null && datedar !=null)  {  
+           getServerData("ws/flight/" + departure +"/"+datedep+"/"+datedar, function(result){
+           fillTable2(result)});
+        }
+ 	   if (departure!=null && arrival !=null && datedep == null && datedar ==null){    
+           getServerData("ws/flight/" + departure +"/"+arrival, function(result){
+           fillTable2(result)});
+        }
+ 	   if (departure!=null && arrival ==null && datedep == null && datedar ==null) {   
+           getServerData("ws/flight/" + departure, function(result){
+           fillTable2(result)});
+        }    
+	   /*console.log(result.flight);
 //	   $(function () {
    // $("#buttonBook").click(function () {
         if(localStorage.getItem("Mail") === null){
@@ -65,7 +83,38 @@ $(function fonction() {
             });
         }
 //    });
-//});
-	   });
+//});*/
+	   }); 
 	   
-	  });
+	 // });
+ // Cache les affichages inutiles 
+    if(localStorage.getItem("Mail") === null){
+        document.getElementById("connexion").style.display='initial';
+        document.getElementById("inscription").style.display='initial';        
+        document.getElementById("deconnexion").style.display='none';
+        document.getElementById("inscription_pilote").style.display='initial';
+        document.getElementById("pilote").style.display='none';
+        document.getElementById("user").style.display='none';
+
+
+    }
+    else{ 
+        if (localStorage.getItem("id_pilot")==0){
+            document.getElementById("connexion").style.display='none';
+            document.getElementById("inscription").style.display='none';  
+            document.getElementById("inscription_pilote").style.display='none';
+            document.getElementById("deconnexion").style.display='initial';
+            document.getElementById("pilote").style.display='none';    
+            document.getElementById("user").style.display='initial';    
+
+        }
+        else{
+            document.getElementById("connexion").style.display='none';
+            document.getElementById("inscription").style.display='none';  
+            document.getElementById("inscription_pilote").style.display='none';
+            document.getElementById("deconnexion").style.display='initial';
+            document.getElementById("user").style.display='none';    
+            document.getElementById("pilote").style.display='initial';   
+        }
+
+    }
