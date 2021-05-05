@@ -97,7 +97,7 @@ public class PassengerResource {
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/add/{mail}")
+	@Path("/get/{mail}")
 	public PassengerContainer getPassengerID(@PathParam("mail") String mail) {
 		List<PassengerContainer> container = DAO.getPassengerDao().Search("email", mail);
 		if (container == null) {

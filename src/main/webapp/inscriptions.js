@@ -29,7 +29,6 @@ $(function () {
 	            }                  
         };
         var password2=$("#password2").val();
-        var password2=$("#password2").val();
         var a=data.passenger.firstname=="" ||  data.passenger.name==""  || data.passenger.password==""  || data.passenger.password2=="" || data.passenger.email=="" || data.passenger.phone==""  || data.passenger.birth=="";
         var b=data.passenger.email.indexOf("@")<1 ||data.passenger.email.lastIndexOf(".")<data.passenger.email.indexOf("@")+2;
         var c=data.passenger.password.length<8 ;

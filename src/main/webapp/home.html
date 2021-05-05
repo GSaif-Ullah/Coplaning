@@ -42,8 +42,17 @@
 					<div class="card-body"><div class="form-group" style=""></div>
 					
 					<div class="form-group" style=""><div class="form-group" style=""><div class="form-group" style="">
-						<input type="text" class="form-control" placeholder="Lieu de départ" id="departure"></div><br>
-						<input type="text" class="form-control" placeholder="Lieu d'arrivée" id="arrival"></div><br>
+						<input type="text" class="form-control" placeholder="Lieu de départ" id="departure" list="data1"></div><br>
+						<input type="text" class="form-control" placeholder="Lieu d'arrivée" id="arrival" list="data1"></div><br>
+											                                    <datalist id="data1">
+                                        <option>CDG</option>
+                                        <option>Orly</option>
+                                        <option>Meaux</option>
+                                        <option>Pontoise</option>
+                                        <option>Lognes</option>
+                                        <option>Etampes</option>
+
+									</datalist>
 						<label>Date de départ</label>
 						<input type="date" class="form-control" id="datedep"></div><br>
 						<label>Date d'arrivée </label>
@@ -51,6 +60,7 @@
 					</div></div>
 				</div>
 					<button type="button" class="btn btn-outline-dark" id="buttonSearch">Rechercher</button></div>
+
 
 				<footer class="pt-4 my-md-5 pt-md-5 border-top">
 					<div class="row">

@@ -185,7 +185,11 @@ public class Flight {
 		this.passengers.add(passenger);
 		System.out.println(this.passengers.get(0));
 	}
-	
+  
+	public void DecSeat(int seat) {
+		this.seat=this.seat-seat;
+	}
+
 	
 	public String getDescription() {
 		return description;

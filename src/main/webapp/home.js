@@ -35,7 +35,7 @@ $(function () {
 	   var datedep=$("#datedep").val();
        var datedar=$("#datedar").val();
        	
-       	if (datedep>datedar){
+       	if (datedep.length>0 && datedar.length>0 && datedep>datedar){
        		alert("Erreur votre date de départ et d'arrivée ne sont valide");
 			location.reload();   	
        	}
@@ -55,7 +55,9 @@ $(function () {
         if(departure.length > 0 && arrival.length==0 && datedep.length==0 && datedar.length==0)  {
 		      document.location.href='recherche.html?Departure='+departure;		
 		}
-        if (departure.length==0){
+        if(departure.length > 0 && arrival.length==0 && datedep.length>0 && datedar.length==0)  {
+		      document.location.href='recherche.html?Departure='+departure+ '&Date1='+datedep;		
+		}        if (departure.length==0){
             alert("Veuillez renseigner un aérodrome de départ")
         }
         if (departure.length!=0 && arrival.length==0 && datedep.length==0 && datedar.length>0) {

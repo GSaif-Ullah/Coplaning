@@ -23,7 +23,8 @@ public interface FlightDAO {
 	
 	//recherche avec depart et une arrivee entre deux dates
 	List<FlightContainer> Search(String departure,String arrival,String d1,String d2);
-	
+	List<FlightContainer> Search(String departure,String arrival,int sea,String d1,String d2);
+
 	
 	List<FlightContainer> Search(String departure,String arrival,int seat);
 	List<FlightContainer> Search(String departure,String arrival,int seat,int cost);
@@ -37,6 +38,9 @@ public interface FlightDAO {
 	void deleteFlightContainer(int id);
 	
 	void BookFlight(int id_flight, int id_passager);
+
+	void BookFlightSeat(int id_flight,int seat);
+
 	
 	void BookPilot(int id_flight,int id_pilot);
 }

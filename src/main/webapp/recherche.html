@@ -55,19 +55,30 @@
 									<label><input type="checkbox" class="icheck"> Aller simple </label>
 								</div><br>
 								<!-- END FILTER BY CATEGORY -->
-
+								<select class="form-select" style="display: block; width: 300px; left: auto; right: auto; float: left;" id="nbpassager">
+									<option selected value=0>Nombre de passagers</option>
+									<option value="1">1 passager</option>
+									<option value="2">2 passagers</option>
+									<option value="3">3 passagers</option>
+									<option value="4">4 passagers</option>
+									<option value="5">5 passagers</option>
+									<option value="6">6 passagers</option>
+									<option value="6">7 passagers</option>
+									<option value="6">8 passagers</option>
+									<option value="6">9 passagers</option>
+								</select>
 								<div class="padding"></div>
 
 								<!-- BEGIN FILTER BY DATE -->
 								<h4>Par date:</h4>
-								Aller
-								<div class="input-group date form_date">
-									<input type="datetime-local" class="form-control">
+								Du
+								<div class="input-group date form_date" >
+									<input type="date" class="form-control" id="date1">
 								</div><br>
 
-								Retour
+								Au
 								<div class="input-group date form_date">
-									<input type="datetime-local" class="form-control">
+									<input type="date" class="form-control"id="date2">
 								</div><br>
 
 								<!-- END FILTER BY DATE -->
@@ -78,12 +89,12 @@
 								<h4>Par prix:</h4>
 								Minimum
 								<div class="input-group date form_date">
-									<input type="number" class="form-control">
+									<input type="number" class="form-control" id="cost1">
 								</div><br>
 
 								Maximum
 								<div class="input-group date form_date">
-									<input type="number" class="form-control">
+									<input type="number" class="form-control" id="cost2">
 								</div>
 								<!-- END FILTER BY PRICE -->
 							</div>
@@ -94,9 +105,18 @@
 								<hr>
 								<!-- BEGIN SEARCH INPUT -->
 								<div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Lieu de départ">
-                                    <input type="text" class="form-control" placeholder="Lieu d'arrivée">
-                                    <button class="btn btn-primary" type="button">Rechercher</button>
+                                    <input type="text" class="form-control" placeholder="Lieu de départ" id="departure" list="data1">
+                                    <datalist id="data1">
+                                        <option>CDG</option>
+                                        <option>Orly</option>
+                                        <option>Meaux</option>
+                                        <option>Pontoise</option>
+                                        <option>Lognes</option>
+                                        <option>Etampes</option>
+
+									</datalist>
+                                    <input type="text" class="form-control" placeholder="Lieu d'arrivée" id="arrival" list="data1">
+                                    <button class="btn btn-primary" type="button" id="buttonSearch">Rechercher</button>
                                 </div><br>
 								
 							
@@ -128,11 +148,16 @@
 											<tbody><tr>
 												<td class="number text-center"></td>
 												<td class="image"><img src=<%= flight.image %> alt="" height="300" width="400"></td>
-												<td class="product"><strong>Vol</strong><br>Lieu de départ :  <%= flight.departure %> <br> Lieu d'arrivée : <%= flight.arrival %><br> This is the product description.</td>
+												<td class="product"><strong>Vol</strong><br>Lieu de départ :  <%= flight.departure %> <br> Lieu d'arrivée : <%= flight.arrival %><br> Places restantes : <%= flight.seat %><br> Vol le : <%= flight.date %><br> This is the product description.</td>
 												<td class="rate text-right"><span><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></span></td>
 												<td class="price text-right">Prix : <%= flight.cost %>€</td>
-												<td><button type="button" class="btn btn-dark" id="buttonBook">Reserver</button></td>
-
+												<td><button type="button" class="btn btn-dark" id="buttonBook" onclick='tdclick();' value= <%= id %> >Reserver</button></td>
+												<td> 								<select id="seatbook" class="form-select" style="display: block; width: 130px; left: auto; right: auto; float: left;" >
+									<option selected value="1">1 passager</option>
+									<option value="2">2 passager</option>
+									<option value="3">3 passagers</option>
+									<option value="4">4 passagers</option>
+									</select> </td>
 											</tr> 
 										</script>
 										</tbody></table>
@@ -185,9 +210,8 @@
 		</footer>
 	</div>
 	
-	<script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+	<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <script src="recherche.js"></script>
 </body>
