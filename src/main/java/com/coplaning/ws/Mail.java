@@ -18,7 +18,7 @@ public class Mail {
 	private String password = "Genielogiciel123!";
 
 	public void envoyer(String Destinataire, String Objet, String Msg) {
-// Etape 1 : Création de la session
+// Etape 1 : Creation de la session
 		Properties props = new Properties();
 		props.put("mail.smtp.auth", "true");
 		props.put("mail.smtp.starttls.enable", "true");
@@ -31,7 +31,7 @@ public class Mail {
 			}
 		});
 		try {
-// Etape 2 : Création de l'objet Message
+// Etape 2 : Creation de l'objet Message
 			Message message = new MimeMessage(session);
 			message.setFrom(new InternetAddress("coplaning.noreply@gmail.com"));
 			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(Destinataire));
@@ -45,7 +45,7 @@ public class Mail {
 		}
 	}
 
-//Etape 4 : Tester la méthode
+//Etape 4 : Tester la methode
 	public static void main(String[] args) {
 		final String des = "fabriceguignard93@hotmail.fr";
 		final String obj = "Test Email";
