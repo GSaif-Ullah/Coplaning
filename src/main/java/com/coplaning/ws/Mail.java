@@ -1,6 +1,9 @@
 package com.coplaning.ws;
 
+import java.util.Calendar;
 import java.util.Properties;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -30,7 +33,7 @@ public class Mail {
 		try {
 // Etape 2 : Création de l'objet Message
 			Message message = new MimeMessage(session);
-			message.setFrom(new InternetAddress("coplaning@outlook.fr"));
+			message.setFrom(new InternetAddress("coplaning.noreply@gmail.com"));
 			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(Destinataire));
 			message.setSubject(Objet);
 			message.setText(Msg);
@@ -44,10 +47,28 @@ public class Mail {
 
 //Etape 4 : Tester la méthode
 	public static void main(String[] args) {
-		String des = "fabriceguignard93@hotmail.fr";
-		String obj = "Test Email";
-		String msg = "Le message est bien envoyé";
-		Mail test = new Mail();
-		test.envoyer(des, obj, msg);
+		final String des = "fabriceguignard93@hotmail.fr";
+		final String obj = "Test Email";
+		final String msg = "Le message est bien envoyé";
+		final Mail test = new Mail();
+		Calendar c = Calendar.getInstance();
+		// Year, Month, Day
+		// c.set(2021, 5, 5);
+		c.set(Calendar.HOUR_OF_DAY, 02);
+		c.set(Calendar.MINUTE, 52);
+		c.set(Calendar.SECOND, 40);
+
+		Timer timer = new Timer();
+		timer.schedule(new TimerTask() {
+			@Override
+			public void run() {
+				// Call your method here
+				// setEmail(emailContent, subject);
+				test.envoyer(des, obj, msg);
+				return;
+
+			}
+		}, c.getTime(), 86400000);
+
 	}
 }
